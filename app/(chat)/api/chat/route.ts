@@ -17,6 +17,7 @@ import { createDocument } from "@/lib/ai/tools/create-document";
 import { getWeather } from "@/lib/ai/tools/get-weather";
 import { requestSuggestions } from "@/lib/ai/tools/request-suggestions";
 import { updateDocument } from "@/lib/ai/tools/update-document";
+import { searchLocalProducts } from "@/lib/ai/tools/search-local-products";
 import { isProductionEnvironment } from "@/lib/constants";
 import {
   createStreamId,
@@ -139,44 +140,54 @@ export async function POST(request: Request) {
     const stream = createUIMessageStream({
       originalMessages: isToolApprovalFlow ? uiMessages : undefined,
       execute: async ({ writer: dataStream }) => {
-        const result = streamText({
-          model: getLanguageModel(selectedChatModel),
-          system: systemPrompt({ selectedChatModel, requestHints }),
-          messages: modelMessages,
-          stopWhen: stepCountIs(5),
-          experimental_activeTools: isReasoningModel
-            ? []
-            : [
-                "getWeather",
-                "createDocument",
-                "updateDocument",
-                "requestSuggestions",
-              ],
-          providerOptions: isReasoningModel
-            ? {
-                anthropic: {
-                  thinking: { type: "enabled", budgetTokens: 10_000 },
-                },
-              }
-            : undefined,
-          tools: {
-            getWeather,
-            createDocument: createDocument({ session, dataStream }),
-            updateDocument: updateDocument({ session, dataStream }),
-            requestSuggestions: requestSuggestions({ session, dataStream }),
-          },
-          experimental_telemetry: {
-            isEnabled: isProductionEnvironment,
-            functionId: "stream-text",
-          },
-        });
+        try {
+          const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
+          const response = await fetch(`${backendUrl}/chat`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message: message?.role === "user" ? message.parts.map(p => p.type === 'text' ? p.text : '').join(' ') : (messages as any)?.[0]?.parts.map((p: any) => p.type === 'text' ? p.text : '').join(' ') }),
+          });
 
-        dataStream.merge(result.toUIMessageStream({ sendReasoning: true }));
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || "Failed to connect to backend");
+          }
 
-        if (titlePromise) {
-          const title = await titlePromise;
-          dataStream.write({ type: "data-chat-title", data: title });
-          updateChatTitleById({ chatId: id, title });
+          const data = await response.json();
+          const resultText = data.response;
+          const messageId = generateId();
+
+          // Stream the result text as if it were coming from an LLM
+          dataStream.write({
+            type: "text-start",
+            id: messageId,
+          });
+
+          dataStream.write({
+            type: "text-delta",
+            delta: resultText,
+            id: messageId,
+          });
+
+          if (titlePromise) {
+            const title = await titlePromise;
+            dataStream.write({ type: "data-chat-title", data: title });
+            updateChatTitleById({ chatId: id, title });
+          }
+        } catch (error: any) {
+          console.error("Error calling Python backend:", error);
+          const messageId = generateId();
+          dataStream.write({
+            type: "text-start",
+            id: messageId,
+          });
+          dataStream.write({
+            type: "text-delta",
+            delta: `Error: ${error.message || "Failed to get response from local AI backend."}`,
+            id: messageId,
+          });
         }
       },
       generateId: generateUUID,
@@ -194,7 +205,7 @@ export async function POST(request: Request) {
                 messages: [
                   {
                     id: finishedMsg.id,
-                    role: finishedMsg.role,
+                    role: finishedMsg.role as any,
                     parts: finishedMsg.parts,
                     createdAt: new Date(),
                     attachments: [],
@@ -205,16 +216,23 @@ export async function POST(request: Request) {
             }
           }
         } else if (finishedMessages.length > 0) {
-          await saveMessages({
-            messages: finishedMessages.map((currentMessage) => ({
-              id: currentMessage.id,
-              role: currentMessage.role,
-              parts: currentMessage.parts,
-              createdAt: new Date(),
-              attachments: [],
-              chatId: id,
-            })),
-          });
+          // Only save the last message (the assistant's response)
+          // The user message was already saved earlier in the POST function
+          const lastMessage = finishedMessages[finishedMessages.length - 1];
+          if (lastMessage.role === "assistant") {
+            await saveMessages({
+              messages: [
+                {
+                  id: lastMessage.id,
+                  role: lastMessage.role,
+                  parts: lastMessage.parts,
+                  createdAt: new Date(),
+                  attachments: [],
+                  chatId: id,
+                },
+              ],
+            });
+          }
         }
       },
       onError: () => "Oops, an error occurred!",
