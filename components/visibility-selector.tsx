@@ -17,6 +17,8 @@ import {
   LockIcon,
 } from "./icons";
 
+import { IngestionUI } from "./ingestion-ui";
+
 export type VisibilityType = "private" | "public";
 
 const visibilities: Array<{
@@ -25,19 +27,19 @@ const visibilities: Array<{
   description: string;
   icon: ReactNode;
 }> = [
-  {
-    id: "private",
-    label: "Private",
-    description: "Only you can access this chat",
-    icon: <LockIcon />,
-  },
-  {
-    id: "public",
-    label: "Public",
-    description: "Anyone with the link can access this chat",
-    icon: <GlobeIcon />,
-  },
-];
+    {
+      id: "private",
+      label: "Private",
+      description: "Only you can access this chat",
+      icon: <LockIcon />,
+    },
+    {
+      id: "public",
+      label: "Public",
+      description: "Anyone with the link can access this chat",
+      icon: <GlobeIcon />,
+    },
+  ];
 
 export function VisibilitySelector({
   chatId,
@@ -79,7 +81,7 @@ export function VisibilitySelector({
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="start" className="min-w-[300px]">
+      <DropdownMenuContent align="start" className="min-w-[340px]">
         {visibilities.map((visibility) => (
           <DropdownMenuItem
             className="group/item flex flex-row items-center justify-between gap-4"
@@ -104,6 +106,8 @@ export function VisibilitySelector({
             </div>
           </DropdownMenuItem>
         ))}
+
+        <IngestionUI />
       </DropdownMenuContent>
     </DropdownMenu>
   );
