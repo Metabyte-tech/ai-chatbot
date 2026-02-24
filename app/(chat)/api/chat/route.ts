@@ -142,13 +142,22 @@ export async function POST(request: Request) {
       execute: async ({ writer: dataStream }) => {
         try {
           const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
-          const response = await fetch(`${backendUrl}/chat`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ message: message?.role === "user" ? message.parts.map(p => p.type === 'text' ? p.text : '').join(' ') : (messages as any)?.[0]?.parts.map((p: any) => p.type === 'text' ? p.text : '').join(' ') }),
-          });
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 seconds timeout
+
+          let response;
+          try {
+            response = await fetch(`${backendUrl}/chat`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ message: message?.role === "user" ? message.parts.map(p => p.type === 'text' ? p.text : '').join(' ') : (messages as any)?.[0]?.parts.map((p: any) => p.type === 'text' ? p.text : '').join(' ') }),
+              signal: controller.signal
+            });
+          } finally {
+            clearTimeout(timeoutId);
+          }
 
           if (!response.ok) {
             const errorData = await response.json();
