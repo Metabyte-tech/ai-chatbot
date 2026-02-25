@@ -81,66 +81,101 @@ export function VisibilitySelector({
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="start" className="min-w-[340px] p-2">
-        <div className="flex flex-col gap-1.5">
+      <DropdownMenuContent
+        align="start"
+        className="min-w-[320px] rounded-2xl border border-white/10 bg-[#111318]/95 p-3 shadow-2xl backdrop-blur-xl"
+      >
+        {/* Section label */}
+        <p className="mb-2 px-1 text-[10px] font-semibold uppercase tracking-widest text-white/30">
+          Chat Visibility
+        </p>
+
+        <div className="flex flex-col gap-2">
           {visibilities.map((visibility) => {
             const isActive = visibility.id === visibilityType;
-            const gradientClass =
-              visibility.id === "private"
-                ? isActive
-                  ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-500/30"
-                  : "border border-purple-500/40 text-purple-400 hover:bg-purple-500/10"
-                : isActive
-                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/30"
-                  : "border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/10";
+            const isPrivate = visibility.id === "private";
 
             return (
               <DropdownMenuItem
-                className={cn(
-                  "group/item flex flex-row items-center justify-between gap-4 rounded-lg px-3 py-2.5 cursor-pointer transition-all duration-200",
-                  gradientClass
-                )}
+                key={visibility.id}
                 data-active={isActive}
                 data-testid={`visibility-selector-item-${visibility.id}`}
-                key={visibility.id}
                 onSelect={() => {
                   setVisibilityType(visibility.id);
                   setOpen(false);
                 }}
+                className={cn(
+                  "group/item relative flex cursor-pointer select-none flex-row items-center justify-between gap-3 rounded-xl px-3 py-3 outline-none transition-all duration-200 focus:outline-none",
+                  isActive
+                    ? isPrivate
+                      ? [
+                        "bg-violet-500/15",
+                        "ring-1 ring-violet-400/40",
+                        "shadow-[0_0_18px_-4px_rgba(139,92,246,0.45)]",
+                      ]
+                      : [
+                        "bg-sky-500/15",
+                        "ring-1 ring-sky-400/40",
+                        "shadow-[0_0_18px_-4px_rgba(56,189,248,0.45)]",
+                      ]
+                    : isPrivate
+                      ? "hover:bg-violet-500/8 ring-1 ring-white/5 hover:ring-violet-400/20"
+                      : "hover:bg-sky-500/8 ring-1 ring-white/5 hover:ring-sky-400/20"
+                )}
               >
+                {/* Left: icon + text */}
                 <div className="flex items-center gap-3">
+                  {/* Icon bubble */}
                   <span
                     className={cn(
-                      "flex h-7 w-7 items-center justify-center rounded-full text-sm",
+                      "flex h-9 w-9 items-center justify-center rounded-xl text-base transition-all duration-200",
                       isActive
-                        ? "bg-white/20"
-                        : visibility.id === "private"
-                          ? "bg-purple-500/15"
-                          : "bg-cyan-500/15"
+                        ? isPrivate
+                          ? "bg-violet-500/30 text-violet-200"
+                          : "bg-sky-500/30 text-sky-200"
+                        : isPrivate
+                          ? "bg-white/5 text-violet-400"
+                          : "bg-white/5 text-sky-400"
                     )}
                   >
                     {visibility.icon}
                   </span>
-                  <div className="flex flex-col items-start gap-0.5">
-                    <span className="text-sm font-semibold leading-none">
+
+                  <div className="flex flex-col gap-0.5">
+                    <span
+                      className={cn(
+                        "text-sm font-semibold leading-none tracking-tight",
+                        isActive
+                          ? isPrivate
+                            ? "text-violet-100"
+                            : "text-sky-100"
+                          : "text-white/80"
+                      )}
+                    >
                       {visibility.label}
                     </span>
                     {visibility.description && (
-                      <span
-                        className={cn(
-                          "text-xs leading-none",
-                          isActive ? "text-white/75" : "text-muted-foreground"
-                        )}
-                      >
+                      <span className="text-[11px] leading-none text-white/35">
                         {visibility.description}
                       </span>
                     )}
                   </div>
                 </div>
-                {isActive && (
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/25 text-white">
+
+                {/* Right: active badge */}
+                {isActive ? (
+                  <span
+                    className={cn(
+                      "flex h-5 w-5 items-center justify-center rounded-full text-[10px]",
+                      isPrivate
+                        ? "bg-violet-400/30 text-violet-200"
+                        : "bg-sky-400/30 text-sky-200"
+                    )}
+                  >
                     <CheckCircleFillIcon />
                   </span>
+                ) : (
+                  <span className="h-5 w-5 rounded-full border border-white/10" />
                 )}
               </DropdownMenuItem>
             );
