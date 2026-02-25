@@ -81,31 +81,71 @@ export function VisibilitySelector({
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="start" className="min-w-[340px]">
-        {visibilities.map((visibility) => (
-          <DropdownMenuItem
-            className="group/item flex flex-row items-center justify-between gap-4"
-            data-active={visibility.id === visibilityType}
-            data-testid={`visibility-selector-item-${visibility.id}`}
-            key={visibility.id}
-            onSelect={() => {
-              setVisibilityType(visibility.id);
-              setOpen(false);
-            }}
-          >
-            <div className="flex flex-col items-start gap-1">
-              {visibility.label}
-              {visibility.description && (
-                <div className="text-muted-foreground text-xs">
-                  {visibility.description}
+      <DropdownMenuContent align="start" className="min-w-[340px] p-2">
+        <div className="flex flex-col gap-1.5">
+          {visibilities.map((visibility) => {
+            const isActive = visibility.id === visibilityType;
+            const gradientClass =
+              visibility.id === "private"
+                ? isActive
+                  ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-500/30"
+                  : "border border-purple-500/40 text-purple-400 hover:bg-purple-500/10"
+                : isActive
+                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/30"
+                  : "border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/10";
+
+            return (
+              <DropdownMenuItem
+                className={cn(
+                  "group/item flex flex-row items-center justify-between gap-4 rounded-lg px-3 py-2.5 cursor-pointer transition-all duration-200",
+                  gradientClass
+                )}
+                data-active={isActive}
+                data-testid={`visibility-selector-item-${visibility.id}`}
+                key={visibility.id}
+                onSelect={() => {
+                  setVisibilityType(visibility.id);
+                  setOpen(false);
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    className={cn(
+                      "flex h-7 w-7 items-center justify-center rounded-full text-sm",
+                      isActive
+                        ? "bg-white/20"
+                        : visibility.id === "private"
+                          ? "bg-purple-500/15"
+                          : "bg-cyan-500/15"
+                    )}
+                  >
+                    {visibility.icon}
+                  </span>
+                  <div className="flex flex-col items-start gap-0.5">
+                    <span className="text-sm font-semibold leading-none">
+                      {visibility.label}
+                    </span>
+                    {visibility.description && (
+                      <span
+                        className={cn(
+                          "text-xs leading-none",
+                          isActive ? "text-white/75" : "text-muted-foreground"
+                        )}
+                      >
+                        {visibility.description}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              )}
-            </div>
-            <div className="text-foreground opacity-0 group-data-[active=true]/item:opacity-100 dark:text-foreground">
-              <CheckCircleFillIcon />
-            </div>
-          </DropdownMenuItem>
-        ))}
+                {isActive && (
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/25 text-white">
+                    <CheckCircleFillIcon />
+                  </span>
+                )}
+              </DropdownMenuItem>
+            );
+          })}
+        </div>
 
         <IngestionUI />
       </DropdownMenuContent>
