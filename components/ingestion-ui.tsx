@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 export function IngestionUI() {
     const [url, setUrl] = useState("");
@@ -59,20 +60,38 @@ export function IngestionUI() {
                 />
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex gap-3">
                 <Button
                     onClick={() => handleIngest(false)}
                     disabled={isLoading}
-                    className="flex-1 bg-gradient-to-r from-orange-500 to-pink-600 hover:opacity-90 text-white border-0 transition-opacity"
+                    className={cn(
+                        "flex-1 relative h-10 rounded-xl font-semibold transition-all duration-300",
+                        "bg-orange-500/10 text-orange-400 border border-orange-500/30",
+                        "hover:bg-orange-500/20 hover:border-orange-500/50 hover:shadow-[0_0_15px_-3px_rgba(249,115,22,0.3)]",
+                        "disabled:opacity-50 disabled:cursor-not-allowed"
+                    )}
                 >
-                    {isLoading ? "Ingesting..." : "Ingest Site"}
+                    <span className="relative z-10">
+                        {isLoading ? "Ingesting..." : "Ingest Site"}
+                    </span>
+                    {/* Subtle inner glow */}
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Button>
                 <Button
                     onClick={() => handleIngest(true)}
                     disabled={isLoading}
-                    className="flex-1 bg-gradient-to-r from-indigo-500 to-purple-600 hover:opacity-90 text-white border-0 transition-opacity"
+                    className={cn(
+                        "flex-1 relative h-10 rounded-xl font-semibold transition-all duration-300",
+                        "bg-purple-500/10 text-purple-400 border border-purple-500/30",
+                        "hover:bg-purple-500/20 hover:border-purple-500/50 hover:shadow-[0_0_15px_-3px_rgba(168,85,247,0.3)]",
+                        "disabled:opacity-50 disabled:cursor-not-allowed"
+                    )}
                 >
-                    {isLoading ? "Crawl..." : "Deep Ingest"}
+                    <span className="relative z-10">
+                        {isLoading ? "Crawl..." : "Deep Ingest"}
+                    </span>
+                    {/* Subtle inner glow */}
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Button>
             </div>
         </div>
