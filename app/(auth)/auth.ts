@@ -3,6 +3,7 @@ import NextAuth, { type DefaultSession } from "next-auth";
 import type { DefaultJWT } from "next-auth/jwt";
 import Credentials from "next-auth/providers/credentials";
 import { DUMMY_PASSWORD } from "@/lib/constants";
+import { isDevelopmentEnvironment } from "@/lib/constants";
 import { createGuestUser, getUser } from "@/lib/db/queries";
 import { authConfig } from "./auth.config";
 
@@ -30,6 +31,14 @@ declare module "next-auth/jwt" {
   }
 }
 
+const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || process.env.SECRET;
+
+if (!secret && !isDevelopmentEnvironment) {
+  console.warn("[Auth Diagnostics] No authentication secret detected at runtime. This will cause a 'MissingSecret' error.");
+} else if (secret) {
+  console.info("[Auth Diagnostics] Authentication secret detected successfully.");
+}
+
 export const {
   handlers: { GET, POST },
   auth,
@@ -37,7 +46,7 @@ export const {
   signOut,
 } = NextAuth({
   ...authConfig,
-  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || process.env.SECRET,
+  secret,
   providers: [
     Credentials({
       credentials: {},
