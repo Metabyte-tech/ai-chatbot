@@ -24,10 +24,20 @@ export async function proxy(request: NextRequest) {
   });
 
   if (!token) {
-    const redirectUrl = encodeURIComponent(request.url);
+    // AWS Amplify routes via an internal localhost proxy.
+    // We must manually construct the absolute URL using headers or ENV.
+    const protocol = request.headers.get("x-forwarded-proto") || "https";
+    const host =
+      request.headers.get("x-forwarded-host") ||
+      request.headers.get("host") ||
+      process.env.BACKEND_URL?.replace(/^https?:\/\//, "") ||
+      "localhost:3000";
+
+    const absoluteUrl = `${protocol}://${host}${pathname}${request.nextUrl.search}`;
+    const redirectUrl = encodeURIComponent(absoluteUrl);
 
     return NextResponse.redirect(
-      new URL(`/api/auth/guest?redirectUrl=${redirectUrl}`, request.url)
+      new URL(`/api/auth/guest?redirectUrl=${redirectUrl}`, `${protocol}://${host}`)
     );
   }
 
