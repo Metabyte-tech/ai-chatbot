@@ -11,5 +11,4 @@ export const authConfig = {
   ],
   callbacks: {},
   trustHost: true,
-  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || process.env.SECRET,
 } satisfies NextAuthConfig;
