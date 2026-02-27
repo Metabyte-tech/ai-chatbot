@@ -33,10 +33,20 @@ declare module "next-auth/jwt" {
 
 const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || process.env.SECRET;
 
-if (!secret && !isDevelopmentEnvironment) {
-  console.warn("[Auth Diagnostics] No authentication secret detected at runtime. This will cause a 'MissingSecret' error.");
-} else if (secret) {
-  console.info("[Auth Diagnostics] Authentication secret detected successfully.");
+if (!isDevelopmentEnvironment) {
+  console.info("[Auth Diagnostics] Checking environment variables...");
+  console.info(`[Auth Diagnostics] AUTH_SECRET present: ${Boolean(process.env.AUTH_SECRET)}`);
+  console.info(`[Auth Diagnostics] NEXTAUTH_SECRET present: ${Boolean(process.env.NEXTAUTH_SECRET)}`);
+  console.info(`[Auth Diagnostics] SECRET present: ${Boolean(process.env.SECRET)}`);
+  console.info(`[Auth Diagnostics] AUTH_TRUST_HOST: ${process.env.AUTH_TRUST_HOST}`);
+  console.info(`[Auth Diagnostics] BACKEND_URL present: ${Boolean(process.env.BACKEND_URL)}`);
+  console.info(`[Auth Diagnostics] NODE_ENV: ${process.env.NODE_ENV}`);
+
+  if (!secret) {
+    console.warn("[Auth Diagnostics] CRITICAL: No authentication secret detected at runtime. This will cause a 'MissingSecret' error.");
+  } else {
+    console.info("[Auth Diagnostics] Authentication secret detected successfully.");
+  }
 }
 
 export const {
