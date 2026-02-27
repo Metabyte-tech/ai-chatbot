@@ -40,6 +40,7 @@ if (!isDevelopmentEnvironment) {
   console.info(`[Auth Diagnostics] SECRET present: ${Boolean(process.env.SECRET)}`);
   console.info(`[Auth Diagnostics] AUTH_TRUST_HOST: ${process.env.AUTH_TRUST_HOST}`);
   console.info(`[Auth Diagnostics] BACKEND_URL present: ${Boolean(process.env.BACKEND_URL)}`);
+  console.info(`[Auth Diagnostics] POSTGRES_URL present: ${Boolean(process.env.POSTGRES_URL)}`);
   console.info(`[Auth Diagnostics] NODE_ENV: ${process.env.NODE_ENV}`);
 
   if (!secret) {
