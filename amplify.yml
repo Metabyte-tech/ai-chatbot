@@ -1,0 +1,27 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm install -g pnpm@9.12.3
+        - pnpm install
+    build:
+      commands:
+        - # Hard-bake environment variables into .env for runtime persistence on AWS Amplify
+        - echo "AUTH_SECRET=${AUTH_SECRET}" >> .env
+        - echo "POSTGRES_URL=${POSTGRES_URL}" >> .env
+        - echo "AUTH_TRUST_HOST=true" >> .env
+        - echo "AI_GATEWAY_API_KEY=${AI_GATEWAY_API_KEY}" >> .env
+        - echo "BLOB_READ_WRITE_TOKEN=${BLOB_READ_WRITE_TOKEN}" >> .env
+        - echo "REDIS_URL=${REDIS_URL}" >> .env
+        - echo "BACKEND_URL=${BACKEND_URL}" >> .env
+        - # Run migrations and build
+        - pnpm build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .next/cache/**/*
+      - node_modules/**/*
