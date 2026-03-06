@@ -7,21 +7,10 @@ frontend:
         - pnpm install
     build:
       commands:
-        - # Create the .env file from Console variables for runtime persistence
-        - printf "AUTH_SECRET=%s\n" "$AUTH_SECRET" > .env
-        - printf "NEXTAUTH_SECRET=%s\n" "$NEXTAUTH_SECRET" >> .env
-        - printf "POSTGRES_URL=%s\n" "$POSTGRES_URL" >> .env
-        - printf "AUTH_TRUST_HOST=true\n" >> .env
-        - printf "AI_GATEWAY_API_KEY=%s\n" "$AI_GATEWAY_API_KEY" >> .env
-        - printf "BLOB_READ_WRITE_TOKEN=%s\n" "$BLOB_READ_WRITE_TOKEN" >> .env
-        - printf "REDIS_URL=%s\n" "$REDIS_URL" >> .env
-        - printf "BACKEND_URL=%s\n" "$BACKEND_URL" >> .env
-        - cp .env .env.production
-        - # Run migrations and build
-        - pnpm build
-        - # IMPORTANT: Copy the env file into the artifact directory so it's included in the Lambda bundle
-        - cp .env.production .next/.env.production
-        - ls -la .next/.env.production
+        - # Bake environment variables for runtime
+        - echo "AUTH_SECRET=$AUTH_SECRET" >> .env.production
+        - echo "POSTGRES_URL=$POSTGRES_URL" >> .env.production
+        - pnpm run build
   artifacts:
     baseDirectory: .next
     files:
