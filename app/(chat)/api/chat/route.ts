@@ -186,9 +186,14 @@ export async function POST(request: Request) {
           });
 
           if (titlePromise) {
-            const title = await titlePromise;
-            dataStream.write({ type: "data-chat-title", data: title });
-            updateChatTitleById({ chatId: id, title });
+            titlePromise
+              .then((title) => {
+                dataStream.write({ type: "data-chat-title", data: title });
+                updateChatTitleById({ chatId: id, title });
+              })
+              .catch((err) => {
+                console.error("[Chat API] Title generation failed:", err);
+              });
           }
         } catch (error: any) {
           console.error("Error calling Python backend:", error);

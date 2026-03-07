@@ -17,16 +17,17 @@ export function IngestionUI() {
         }
 
         setIsLoading(true);
-        const endpoint = isDeep ? "/crawl/deep" : "/crawl";
-        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+        // Call our local Next.js proxy instead of the backend directly
+        // to avoid Mixed Content (HTTP/HTTPS) issues.
+        const endpoint = "/api/crawl";
 
         try {
-            const response = await fetch(`${backendUrl}${endpoint}`, {
+            const response = await fetch(endpoint, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ url }),
+                body: JSON.stringify({ url, isDeep }),
             });
 
             const data = await response.json();
@@ -39,7 +40,7 @@ export function IngestionUI() {
             }
         } catch (error) {
             console.error("Ingestion error:", error);
-            toast.error("Could not connect to the ingestion server");
+            toast.error("Could not connect to the ingestion server proxy");
         } finally {
             setIsLoading(false);
         }
