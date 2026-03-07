@@ -1,14 +1,9 @@
 import { config } from "dotenv";
 import { defineConfig } from "drizzle-kit";
 
-import { existsSync } from "node:fs";
-
-// .env.local for local dev, .env for Amplify/CI
-if (existsSync(".env.local")) {
-  config({ path: ".env.local" });
-} else if (existsSync(".env")) {
-  config({ path: ".env" });
-}
+config({
+  path: ".env.production",
+});
 
 export default defineConfig({
   schema: "./lib/db/schema.ts",
