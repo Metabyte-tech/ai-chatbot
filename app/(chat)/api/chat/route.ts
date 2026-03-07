@@ -65,7 +65,13 @@ export async function POST(request: Request) {
 
     const session = await auth();
 
+    console.log(`[Chat API] Session status: ${session ? "Authenticated" : "Unauthenticated"}`, {
+      userId: session?.user?.id,
+      userType: session?.user?.type,
+    });
+
     if (!session?.user) {
+      console.warn("[Chat API] Unauthorized access attempt.");
       return new ChatSDKError("unauthorized:chat").toResponse();
     }
 
@@ -143,7 +149,10 @@ export async function POST(request: Request) {
         try {
           const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
           const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 seconds timeout
+          const timeoutId = setTimeout(() => {
+            console.error(`[Chat API] Backend request timed out after 90 seconds. URL: ${backendUrl}/chat`);
+            controller.abort();
+          }, 90000); // 90 seconds timeout
 
           console.log(`[Chat API] Calling backend: ${backendUrl}/chat`);
           let response;
@@ -156,16 +165,29 @@ export async function POST(request: Request) {
               body: JSON.stringify({ message: message?.role === "user" ? message.parts.map(p => p.type === 'text' ? p.text : '').join(' ') : (messages as any)?.[0]?.parts.map((p: any) => p.type === 'text' ? p.text : '').join(' ') }),
               signal: controller.signal
             });
+          } catch (fetchError: any) {
+            console.error(`[Chat API] Fetch error: ${fetchError.name} - ${fetchError.message}`, {
+              url: `${backendUrl}/chat`,
+              cause: fetchError.cause
+            });
+            throw fetchError;
           } finally {
             clearTimeout(timeoutId);
           }
 
-          console.log(`[Chat API] Backend response status: ${response.status}`);
+          console.log(`[Chat API] Backend response status: ${response.status} ${response.statusText}`);
 
           if (!response.ok) {
-            const errorData = await response.json();
-            console.error(`[Chat API] Backend error:`, errorData);
-            throw new Error(errorData.detail || "Failed to connect to backend");
+            let errorText = "Unknown error";
+            try {
+              const errorData = await response.json();
+              errorText = JSON.stringify(errorData);
+              console.error(`[Chat API] Backend error details:`, errorData);
+            } catch (jsonError) {
+              errorText = await response.text();
+              console.error(`[Chat API] Backend error (non-JSON):`, errorText);
+            }
+            throw new Error(errorText || `Backend returned status ${response.status}`);
           }
 
           const data = await response.json();

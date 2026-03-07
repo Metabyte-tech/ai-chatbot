@@ -32,21 +32,22 @@ declare module "next-auth/jwt" {
 }
 
 const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || process.env.SECRET;
+const mask = (s: string | undefined) => s ? `${s.substring(0, 4)}...${s.substring(s.length - 4)} (length: ${s.length})` : "missing";
 
 if (!isDevelopmentEnvironment) {
   console.info("[Auth Diagnostics] Checking environment variables...");
-  console.info(`[Auth Diagnostics] AUTH_SECRET present: ${Boolean(process.env.AUTH_SECRET)}`);
-  console.info(`[Auth Diagnostics] NEXTAUTH_SECRET present: ${Boolean(process.env.NEXTAUTH_SECRET)}`);
-  console.info(`[Auth Diagnostics] SECRET present: ${Boolean(process.env.SECRET)}`);
+  console.info(`[Auth Diagnostics] AUTH_SECRET: ${mask(process.env.AUTH_SECRET)}`);
+  console.info(`[Auth Diagnostics] NEXTAUTH_SECRET: ${mask(process.env.NEXTAUTH_SECRET)}`);
+  console.info(`[Auth Diagnostics] SECRET: ${mask(process.env.SECRET)}`);
   console.info(`[Auth Diagnostics] AUTH_TRUST_HOST: ${process.env.AUTH_TRUST_HOST}`);
-  console.info(`[Auth Diagnostics] BACKEND_URL present: ${Boolean(process.env.BACKEND_URL)}`);
-  console.info(`[Auth Diagnostics] POSTGRES_URL present: ${Boolean(process.env.POSTGRES_URL)}`);
+  console.info(`[Auth Diagnostics] BACKEND_URL: ${process.env.BACKEND_URL || "not set"}`);
+  console.info(`[Auth Diagnostics] POSTGRES_URL: ${process.env.POSTGRES_URL ? "present (masked)" : "not set"}`);
   console.info(`[Auth Diagnostics] NODE_ENV: ${process.env.NODE_ENV}`);
 
   if (!secret) {
     console.warn("[Auth Diagnostics] CRITICAL: No authentication secret detected at runtime. This will cause a 'MissingSecret' error.");
   } else {
-    console.info("[Auth Diagnostics] Authentication secret detected successfully.");
+    console.info(`[Auth Diagnostics] Effective secret being used: ${mask(secret)}`);
   }
 }
 
