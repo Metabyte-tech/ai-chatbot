@@ -145,6 +145,7 @@ export async function POST(request: Request) {
           const controller = new AbortController();
           const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 seconds timeout
 
+          console.log(`[Chat API] Calling backend: ${backendUrl}/chat`);
           let response;
           try {
             response = await fetch(`${backendUrl}/chat`, {
@@ -159,12 +160,16 @@ export async function POST(request: Request) {
             clearTimeout(timeoutId);
           }
 
+          console.log(`[Chat API] Backend response status: ${response.status}`);
+
           if (!response.ok) {
             const errorData = await response.json();
+            console.error(`[Chat API] Backend error:`, errorData);
             throw new Error(errorData.detail || "Failed to connect to backend");
           }
 
           const data = await response.json();
+          console.log(`[Chat API] Backend data received:`, JSON.stringify(data).substring(0, 100) + "...");
           const resultText = data.response;
           const messageId = generateId();
 
