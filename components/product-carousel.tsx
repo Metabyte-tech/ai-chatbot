@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -45,6 +46,21 @@ function sanitizeUrl(url: string, isImage: boolean = false) {
     return trimmed;
 }
 
+function ProductImage({ src, alt }: { src: string; alt: string }) {
+    const [imgSrc, setImgSrc] = useState(src);
+    return (
+        <Image
+            src={imgSrc}
+            alt={alt}
+            fill
+            unoptimized
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            onError={() => setImgSrc("https://placehold.co/600x600?text=No+Image")}
+        />
+    );
+}
+
 export function ProductCarousel({ products }: ProductCarouselProps) {
     if (!products || products.length === 0) return null;
 
@@ -65,13 +81,9 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                             <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all group h-full">
                                 <CardContent className="p-0 flex flex-col h-full">
                                     <div className="relative aspect-square w-full overflow-hidden bg-muted">
-                                        <Image
+                                        <ProductImage
                                             src={sanitizeUrl(product.image_url, true)}
                                             alt={product.name}
-                                            fill
-                                            unoptimized
-                                            className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         />
                                         <div className="absolute top-2 right-2">
                                             <Badge variant="secondary" className="font-bold text-sm shadow-sm bg-background/80 backdrop-blur-sm">
