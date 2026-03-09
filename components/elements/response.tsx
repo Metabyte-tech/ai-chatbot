@@ -34,13 +34,32 @@ export function Response({ className, children, ...props }: ResponseProps) {
       const content = match[1].trim();
       let products: Product[] = [];
 
+      // Helper to try and fix common JSON issues from LLMs
+      const cleanAndParseJSON = (str: string) => {
+        try {
+          // Attempt 1: Direct parse
+          return JSON.parse(str);
+        } catch (e) {
+          try {
+            // Attempt 2: Remove potential trailing commas or markdown artifacts
+            let cleaned = str.trim();
+            if (cleaned.endsWith(',')) cleaned = cleaned.slice(0, -1);
+            // Handle some common LLM escaping errors in URLs
+            cleaned = cleaned.replace(/\\&/g, '&').replace(/\\_/g, '_');
+            return JSON.parse(cleaned);
+          } catch (e2) {
+            console.error("JSON Fix failed:", e2);
+            throw e2;
+          }
+        }
+      };
+
       if (content.startsWith("[") || content.startsWith("{")) {
-        products = JSON.parse(content);
+        products = cleanAndParseJSON(content);
         if (!Array.isArray(products)) products = [products];
       } else {
         // Smart Fallback: AI sent plain text instead of JSON
-        // Example: "Product: Nike Shoes. Brand: Nike. Price: ₹ 1000..."
-        // Split by newlines, periods followed by space, or double spaces
+        // ... (rest of the existing fallback logic)
         const entries = content.split(/\n|\.\s+/);
         const product: any = {};
         entries.forEach(entry => {
@@ -57,21 +76,19 @@ export function Response({ className, children, ...props }: ResponseProps) {
           }
         });
 
-        // Ensure image_url has a fallback if missing
         if (product.name && !product.image_url) {
           product.image_url = "https://placehold.co/600x600?text=No+Image";
         }
-
         if (product.name) products = [product as Product];
       }
 
       if (products.length > 0) {
         parts.push(<ProductCarousel key={`carousel-${match.index}`} products={products} />);
       } else {
-        parts.push(match[0]); // Fallback to raw text if no name found
+        parts.push(match[0]);
       }
     } catch (e) {
-      // Quietly fallback instead of logging a loud error
+      console.error("Carousel parsing error:", e);
       parts.push(match[0]);
     }
 
