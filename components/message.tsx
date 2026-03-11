@@ -140,7 +140,7 @@ const PurePreviewMessage = ({
                           : undefined
                       }
                     >
-                      <Response>{sanitizeText(part.text)}</Response>
+                      <Response key={`resp-${message.id}-${index}-${isLoading ? 'loading' : 'done'}`}>{sanitizeText(part.text)}</Response>
                     </MessageContent>
                   </div>
                 );
@@ -224,8 +224,8 @@ const PurePreviewMessage = ({
                     <ToolContent>
                       {(state === "input-available" ||
                         state === "approval-requested") && (
-                        <ToolInput input={part.input} />
-                      )}
+                          <ToolInput input={part.input} />
+                        )}
                       {state === "approval-requested" && approvalId && (
                         <div className="flex items-center justify-end gap-2 border-t px-4 py-3">
                           <button

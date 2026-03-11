@@ -16,13 +16,18 @@ export function Response({ className, children, ...props }: ResponseProps) {
     );
   }
 
-  // Regex to find <product_carousel>[JSON]</product_carousel>
-  const carouselRegex = /<product_carousel>([\s\S]*?)<\/product_carousel>/g;
+  // Regex to find <product_carousel>[JSON]</product_carousel> (handles LLM spacing quirks)
+  const carouselRegex = /<\s*product_carousel\s*>([\s\S]*?)<\/\s*product_carousel\s*>/gi;
   const parts = [];
   let lastIndex = 0;
   let match;
 
+  console.log("====== RESPONSE RENDER ======");
+  console.log("Children snippet:", children.substring(0, 200) + (children.length > 200 ? "..." : ""));
+  console.log("Includes <product_carousel>:", children.includes("<product_carousel>"));
+
   while ((match = carouselRegex.exec(children)) !== null) {
+    console.log("Matched carousel!", match[0].substring(0, 50));
     // Push text before the tag
     if (match.index > lastIndex) {
       parts.push(children.substring(lastIndex, match.index));
@@ -49,6 +54,16 @@ export function Response({ className, children, ...props }: ResponseProps) {
             if (cleaned.endsWith(',')) cleaned = cleaned.slice(0, -1);
             // Handle some common LLM escaping errors in URLs
             cleaned = cleaned.replace(/\\&/g, '&').replace(/\\_/g, '_');
+
+            // Attempt 3: If it looks like comma-separated JSON objects { ... }, { ... } but missing array brackets
+            if (cleaned.startsWith('{') && cleaned.endsWith('}') && !cleaned.startsWith('[') && cleaned.includes('},{') || cleaned.includes('}, {') || cleaned.includes('},\n{')) {
+              try {
+                return JSON.parse(`[${cleaned}]`);
+              } catch (e3) {
+                // If it still fails, fall through to the direct parse attempt
+              }
+            }
+
             return JSON.parse(cleaned);
           } catch (e2) {
             console.error("JSON Fix failed:", e2);
