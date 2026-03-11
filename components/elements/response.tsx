@@ -31,7 +31,10 @@ export function Response({ className, children, ...props }: ResponseProps) {
     // Parse JSON and push Carousel component
     try {
       console.log("Response component parsing carousel tag...");
-      const content = match[1].trim();
+      // Remove any surrounding markdown code blocks (e.g. ```json \n ... \n ```) hallucinaged by the LLM
+      let content = match[1].trim();
+      content = content.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+
       let products: Product[] = [];
 
       // Helper to try and fix common JSON issues from LLMs
