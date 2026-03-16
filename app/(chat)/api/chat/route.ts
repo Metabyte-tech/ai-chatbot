@@ -37,7 +37,7 @@ import { convertToUIMessages, generateUUID } from "@/lib/utils";
 import { generateTitleFromUserMessage } from "../../actions";
 import { type PostRequestBody, postRequestBodySchema } from "./schema";
 
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 function getStreamContext() {
   try {
@@ -150,9 +150,9 @@ export async function POST(request: Request) {
           const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
           const controller = new AbortController();
           const timeoutId = setTimeout(() => {
-            console.error(`[Chat API] Backend request timed out after 90 seconds. URL: ${backendUrl}/chat`);
+            console.error(`[Chat API] Backend request timed out after 295 seconds. URL: ${backendUrl}/chat`);
             controller.abort();
-          }, 90000); // 90 seconds timeout
+          }, 295000); // 295 seconds timeout (just under maxDuration=300)
 
           console.log(`[Chat API] Calling backend: ${backendUrl}/chat`);
           let response;
@@ -226,7 +226,7 @@ export async function POST(request: Request) {
           });
           dataStream.write({
             type: "text-delta",
-            delta: `Error: ${error.message || "Failed to get response from local AI backend."}`,
+            delta: `Error: ${error.name === 'AbortError' ? "The AI backend is taking too long to respond (timed out after 5 minutes). This usually happens during intensive product searches. Please try again or refine your query." : (error.message || "Failed to get response from local AI backend.")}`,
             id: messageId,
           });
         }
