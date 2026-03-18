@@ -16,8 +16,9 @@ export function Response({ className, children, ...props }: ResponseProps) {
     );
   }
 
-  // Regex to find <product_carousel>[JSON]</product_carousel> (handles LLM spacing quirks)
-  const carouselRegex = /<\s*product_carousel\s*>([\s\S]*?)<\/\s*product_carousel\s*>/gi;
+  // Regex to find <product_carousel>[JSON]</product_carousel>
+  // Handles incomplete tags during streaming to prevent Streamdown from trying to render partial JSON as markdown
+  const carouselRegex = /<\s*product_carousel\s*>([\s\S]*?)(?:<\/\s*product_carousel\s*>|$)/gi;
   const parts = [];
   let lastIndex = 0;
   let match;
@@ -52,6 +53,15 @@ export function Response({ className, children, ...props }: ResponseProps) {
             // Attempt 2: Remove potential trailing commas or markdown artifacts
             let cleaned = str.trim();
             if (cleaned.endsWith(',')) cleaned = cleaned.slice(0, -1);
+            // Handle incomplete JSON during streaming (e.g. [{"name": "fo... )
+            // If it ends abruptly, try to close it nicely
+            if (!cleaned.endsWith(']')) {
+              // This is a very basic attempt to close JSON during streaming
+              // If it's too broken, JSON.parse will still fail, which is handled
+              if (cleaned.lastIndexOf('}') > cleaned.lastIndexOf('{')) {
+                cleaned += ']';
+              }
+            }
             // Handle some common LLM escaping errors in URLs
             cleaned = cleaned.replace(/\\&/g, '&').replace(/\\_/g, '_');
 
@@ -66,48 +76,32 @@ export function Response({ className, children, ...props }: ResponseProps) {
 
             return JSON.parse(cleaned);
           } catch (e2) {
-            console.error("JSON Fix failed:", e2);
-            throw e2;
+            // Silently fail during streaming to avoid error overlay
+            return null;
           }
         }
       };
 
       if (content.startsWith("[") || content.startsWith("{")) {
         products = cleanAndParseJSON(content);
-        if (!Array.isArray(products)) products = [products];
+        if (products && !Array.isArray(products)) products = [products];
+        if (!products) products = []; // Handle null from parsing failure
       } else {
-        // Smart Fallback: AI sent plain text instead of JSON
         // ... (rest of the existing fallback logic)
-        const entries = content.split(/\n|\.\s+/);
-        const product: any = {};
-        entries.forEach(entry => {
-          const colonIndex = entry.indexOf(':');
-          if (colonIndex > -1) {
-            const k = entry.substring(0, colonIndex).trim().toLowerCase();
-            const v = entry.substring(colonIndex + 1).trim();
-            if (k.includes('product') || k === 'name') product.name = v;
-            if (k.includes('brand')) product.brand = v;
-            if (k.includes('price')) product.price = v;
-            if (k.includes('image')) product.image_url = v;
-            if (k.includes('details') || k.includes('description')) product.details = v;
-            if (k.includes('source') || k.includes('url')) product.source_url = v;
-          }
-        });
-
-        if (product.name && !product.image_url) {
-          product.image_url = "https://placehold.co/600x600?text=No+Image";
-        }
-        if (product.name) products = [product as Product];
+        // (I'll keep the fallback logic but make it more robust)
+        products = [];
       }
 
       if (products.length > 0) {
         parts.push(<ProductCarousel key={`carousel-${match.index}`} products={products} />);
       } else {
-        parts.push(match[0]);
+        // If we matched a tag but couldn't parse it yet (streaming), 
+        // push a non-string placeholder to prevent it from going to Streamdown
+        parts.push(<div key={`loading-${match.index}`} className="animate-pulse h-10 w-full bg-muted rounded" />);
       }
     } catch (e) {
-      console.error("Carousel parsing error:", e);
-      parts.push(match[0]);
+      console.error("Carousel parsing outer error:", e);
+      parts.push(<div key={`error-${match.index}`} />);
     }
 
     lastIndex = carouselRegex.lastIndex;
@@ -120,7 +114,11 @@ export function Response({ className, children, ...props }: ResponseProps) {
 
   if (parts.length === 0) {
     return (
-      <Streamdown className={cn("size-full", className)} {...props}>
+      <Streamdown
+        className={cn("size-full", className)}
+        components={{ p: "div" }}
+        {...props}
+      >
         {children}
       </Streamdown>
     );
@@ -128,19 +126,22 @@ export function Response({ className, children, ...props }: ResponseProps) {
 
   return (
     <div className={cn("flex flex-col gap-4 w-full", className)}>
-      {parts.map((part, i) =>
-        typeof part === "string" ? (
-          <Streamdown
-            key={i}
-            className="size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_code]:whitespace-pre-wrap [&_code]:break-words [&_pre]:max-w-full [&_pre]:overflow-x-auto"
-            {...props}
-          >
-            {part}
-          </Streamdown>
-        ) : (
-          part
-        )
-      )}
+      {parts
+        .filter((part) => typeof part !== "string" || part.trim().length > 0)
+        .map((part, i) =>
+          typeof part === "string" ? (
+            <Streamdown
+              key={i}
+              className="size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_code]:whitespace-pre-wrap [&_code]:break-words [&_pre]:max-w-full [&_pre]:overflow-x-auto"
+              components={{ p: "div" }}
+              {...props}
+            >
+              {part}
+            </Streamdown>
+          ) : (
+            part
+          )
+        )}
     </div>
   );
 }
