@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -56,15 +56,44 @@ function ProductImage({ src, alt }: { src: string; alt: string }) {
             unoptimized
             className="object-cover group-hover:scale-105 transition-transform duration-300"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            onError={() => setImgSrc("https://placehold.co/600x600?text=No+Image")}
+            onError={() => {
+                setImgSrc("https://placehold.co/600x600?text=No+Image");
+                if (window.dispatchEvent) {
+                    window.dispatchEvent(new CustomEvent('productImageFailed', { detail: { src } }));
+                }
+            }}
         />
     );
 }
 
 export function ProductCarousel({ products }: ProductCarouselProps) {
+    const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+
+    useEffect(() => {
+        const handleImageFailure = (e: any) => {
+            setFailedImages(prev => {
+                const newSet = new Set(prev);
+                newSet.add(e.detail.src);
+                return newSet;
+            });
+        };
+
+        window.addEventListener('productImageFailed', handleImageFailure);
+        return () => {
+            window.removeEventListener('productImageFailed', handleImageFailure);
+        };
+    }, []);
+
     if (!products || products.length === 0) return null;
 
-    console.log("Rendering Carousel with Products:", products);
+    // Sort products: those that haven't failed first, those that have failed last
+    const sortedProducts = [...products].sort((a, b) => {
+        const aFailed = failedImages.has(sanitizeUrl(a.image_url, true));
+        const bFailed = failedImages.has(sanitizeUrl(b.image_url, true));
+        if (aFailed && !bFailed) return 1;
+        if (!aFailed && bFailed) return -1;
+        return 0;
+    });
 
     return (
         <div className="w-full relative px-10 py-4">
@@ -76,8 +105,8 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                 className="w-full"
             >
                 <CarouselContent className="-ml-2 md:-ml-4">
-                    {products.map((product, index) => (
-                        <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                    {sortedProducts.map((product, index) => (
+                        <CarouselItem key={`${product.name}-${index}`} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                             <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all group h-full">
                                 <CardContent className="p-0 flex flex-col h-full">
                                     <div className="relative aspect-square w-full overflow-hidden bg-muted">

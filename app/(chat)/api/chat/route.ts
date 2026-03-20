@@ -162,7 +162,7 @@ export async function POST(request: Request) {
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ message: message?.role === "user" ? message.parts.map(p => p.type === 'text' ? p.text : '').join(' ') : (messages as any)?.[0]?.parts.map((p: any) => p.type === 'text' ? p.text : '').join(' ') }),
+              body: JSON.stringify({ message: message?.role === "user" ? message.parts.map(p => p.type === 'text' ? p.text : '').join(' ') : (messages as any)?.[(messages as any).length - 1]?.parts.map((p: any) => p.type === 'text' ? p.text : '').join(' ') }),
               signal: controller.signal
             });
           } catch (fetchError: any) {
