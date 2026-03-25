@@ -3,7 +3,7 @@
 import type { UseChatHelpers } from "@ai-sdk/react";
 import type { UIMessage } from "ai";
 import equal from "fast-deep-equal";
-import { CheckIcon } from "lucide-react";
+import { Briefcase, CheckIcon, ChevronDown, Zap } from "lucide-react";
 import {
   type ChangeEvent,
   type Dispatch,
@@ -15,7 +15,9 @@ import {
   useState,
 } from "react";
 import { toast } from "sonner";
+import { toast as accioToast } from "@/components/toast";
 import { useLocalStorage, useWindowSize } from "usehooks-ts";
+import { useSession } from "next-auth/react";
 import {
   ModelSelector,
   ModelSelectorContent,
@@ -68,6 +70,7 @@ function PureMultimodalInput({
   selectedVisibilityType,
   selectedModelId,
   onModelChange,
+  onShowLogin,
 }: {
   chatId: string;
   input: string;
@@ -83,7 +86,9 @@ function PureMultimodalInput({
   selectedVisibilityType: VisibilityType;
   selectedModelId: string;
   onModelChange?: (modelId: string) => void;
+  onShowLogin?: () => void;
 }) {
+  const { data: session } = useSession();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { width } = useWindowSize();
 
@@ -145,6 +150,15 @@ function PureMultimodalInput({
   const [uploadQueue, setUploadQueue] = useState<string[]>([]);
 
   const submitForm = useCallback(() => {
+    if (!session?.user || (session.user as any).type === "guest") {
+      if (onShowLogin) {
+        onShowLogin();
+      } else {
+        accioToast({ type: "error", description: "Sign in or sign up to use Accio search" });
+      }
+      return;
+    }
+
     window.history.pushState({}, "", `/chat/${chatId}`);
 
     sendMessage({
@@ -181,6 +195,7 @@ function PureMultimodalInput({
     width,
     chatId,
     resetHeight,
+    session?.user,
   ]);
 
   const uploadFile = useCallback(async (file: File) => {
@@ -297,7 +312,8 @@ function PureMultimodalInput({
 
   return (
     <div className={cn("relative flex w-full flex-col gap-4", className)}>
-      {messages.length === 0 &&
+      {/* Redundant suggested actions hidden in favor of chat.tsx implementation */}
+      {/* {messages.length === 0 &&
         attachments.length === 0 &&
         uploadQueue.length === 0 && (
           <SuggestedActions
@@ -305,7 +321,7 @@ function PureMultimodalInput({
             selectedVisibilityType={selectedVisibilityType}
             sendMessage={sendMessage}
           />
-        )}
+        )} */}
 
       <input
         className="pointer-events-none fixed -top-4 -left-4 size-0.5 opacity-0"
@@ -317,7 +333,10 @@ function PureMultimodalInput({
       />
 
       <PromptInput
-        className="rounded-xl border border-border bg-background p-3 shadow-xs transition-all duration-200 focus-within:border-border hover:border-muted-foreground/50"
+        className={cn(
+          "rounded-3xl border border-border bg-background p-4 shadow-sm transition-all duration-300 focus-within:border-accent/40 hover:border-accent/20",
+          messages.length === 0 && "bg-search-glow shadow-xl"
+        )}
         onSubmit={(event) => {
           event.preventDefault();
           if (!input.trim() && attachments.length === 0) {
@@ -332,7 +351,7 @@ function PureMultimodalInput({
       >
         {(attachments.length > 0 || uploadQueue.length > 0) && (
           <div
-            className="flex flex-row items-end gap-2 overflow-x-scroll"
+            className="mb-4 flex flex-row items-end gap-2 overflow-x-auto pb-2"
             data-testid="attachments-preview"
           >
             {attachments.map((attachment) => (
@@ -363,46 +382,76 @@ function PureMultimodalInput({
             ))}
           </div>
         )}
-        <div className="flex flex-row items-start gap-1 sm:gap-2">
+        <div className="flex flex-col gap-2">
           <PromptInputTextarea
-            className="grow resize-none border-0! border-none! bg-transparent p-2 text-base outline-none ring-0 [-ms-overflow-style:none] [scrollbar-width:none] placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 [&::-webkit-scrollbar]:hidden"
+            className="min-h-[60px] w-full resize-none border-0 bg-transparent p-0 text-lg outline-none ring-0 placeholder:text-muted-foreground/60 focus-visible:ring-0"
             data-testid="multimodal-input"
             disableAutoResize={true}
-            maxHeight={200}
-            minHeight={44}
+            maxHeight={300}
+            minHeight={60}
             onChange={handleInput}
-            placeholder="Send a message..."
+            placeholder="Describe your needs..."
             ref={textareaRef}
             rows={1}
             value={input}
           />
-        </div>
-        <PromptInputToolbar className="border-top-0! border-t-0! p-0 shadow-none dark:border-0 dark:border-transparent!">
-          <PromptInputTools className="gap-0 sm:gap-0.5">
-            <AttachmentsButton
-              fileInputRef={fileInputRef}
-              selectedModelId={selectedModelId}
-              status={status}
-            />
-            <ModelSelectorCompact
-              onModelChange={onModelChange}
-              selectedModelId={selectedModelId}
-            />
-          </PromptInputTools>
 
-          {status === "submitted" ? (
-            <StopButton setMessages={setMessages} stop={stop} />
-          ) : (
-            <PromptInputSubmit
-              className="size-8 rounded-full bg-primary text-primary-foreground transition-colors duration-200 hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground"
-              data-testid="send-button"
-              disabled={!input.trim() || uploadQueue.length > 0}
-              status={status}
-            >
-              <ArrowUpIcon size={14} />
-            </PromptInputSubmit>
-          )}
-        </PromptInputToolbar>
+          <PromptInputToolbar className="flex items-center justify-between border-t-0 p-0 pt-2">
+            <div className="flex items-center gap-3">
+              <AttachmentsButton
+                fileInputRef={fileInputRef}
+                selectedModelId={selectedModelId}
+                status={status}
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-9 w-9 rounded-xl text-muted-foreground transition-colors hover:bg-accent/10 hover:text-accent"
+                onClick={() => toast.info("Image search is coming soon!")}
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                  <circle cx="12" cy="13" r="4" />
+                </svg>
+              </Button>
+
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-9 w-9 rounded-xl text-muted-foreground transition-colors hover:bg-accent/10 hover:text-accent"
+              >
+                <Briefcase size={20} strokeWidth={1.5} />
+              </Button>
+
+              <div className="mx-2 h-4 w-px bg-border" />
+
+              <div className="flex items-center gap-1 cursor-pointer rounded-full px-2 py-1 text-sm font-medium text-muted-foreground transition-all hover:bg-secondary">
+                <Zap size={14} className="text-accent fill-accent" />
+                <span>Fast</span>
+                <ChevronDown size={14} />
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <ModelSelectorCompact
+                onModelChange={onModelChange}
+                selectedModelId={selectedModelId}
+              />
+              {status === "submitted" || status === "streaming" ? (
+                <StopButton setMessages={setMessages} stop={stop} />
+              ) : (
+                <PromptInputSubmit
+                  className="h-10 w-10 rounded-xl bg-accent text-accent-foreground shadow-sm transition-all hover:scale-105 hover:bg-accent/90 disabled:bg-muted disabled:text-muted-foreground disabled:hover:scale-100"
+                  data-testid="send-button"
+                  disabled={!input.trim() || uploadQueue.length > 0}
+                  status={status}
+                >
+                  <ArrowUpIcon size={20} className="text-white" />
+                </PromptInputSubmit>
+              )}
+            </div>
+          </PromptInputToolbar>
+        </div>
       </PromptInput>
     </div>
   );
@@ -424,6 +473,9 @@ export const MultimodalInput = memo(
       return false;
     }
     if (prevProps.selectedModelId !== nextProps.selectedModelId) {
+      return false;
+    }
+    if (prevProps.onShowLogin !== nextProps.onShowLogin) {
       return false;
     }
 

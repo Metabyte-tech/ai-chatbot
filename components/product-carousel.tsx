@@ -12,7 +12,7 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon, StarIcon, BookmarkIcon, HeartIcon } from "lucide-react";
 
 export type Product = {
     name: string;
@@ -21,6 +21,9 @@ export type Product = {
     image_url: string;
     source_url: string;
     details: string;
+    rating?: string;
+    offers?: string;
+    source?: string;
 };
 
 interface ProductCarouselProps {
@@ -48,6 +51,8 @@ function sanitizeUrl(url: string, isImage: boolean = false) {
 
 function ProductImage({ src, alt }: { src: string; alt: string }) {
     const [imgSrc, setImgSrc] = useState(src);
+    const [hasFallbackTried, setHasFallbackTried] = useState(false);
+
     return (
         <Image
             src={imgSrc}
@@ -57,9 +62,17 @@ function ProductImage({ src, alt }: { src: string; alt: string }) {
             className="object-cover group-hover:scale-105 transition-transform duration-300"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onError={() => {
-                setImgSrc("https://placehold.co/600x600?text=No+Image");
+                if (!hasFallbackTried && src && !src.includes("placehold.co")) {
+                    // Try proxy fallback (weserv.nl is reliable and fast)
+                    const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(src)}&default=https://placehold.co/600x600?text=No+Image`;
+                    setImgSrc(proxyUrl);
+                    setHasFallbackTried(true);
+                } else {
+                    setImgSrc("https://placehold.co/600x600?text=No+Image");
+                }
+
                 if (window.dispatchEvent) {
-                    window.dispatchEvent(new CustomEvent('productImageFailed', { detail: { src } }));
+                    window.dispatchEvent(new CustomEvent('productImageFailed', { detail: { src, hasFallbackTried } }));
                 }
             }}
         />
@@ -96,7 +109,7 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
     });
 
     return (
-        <div className="w-full relative px-10 py-4">
+        <div className="w-full relative px-6 py-8">
             <Carousel
                 opts={{
                     align: "start",
@@ -104,39 +117,54 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                 }}
                 className="w-full"
             >
-                <CarouselContent className="-ml-2 md:-ml-4">
+                <CarouselContent className="-ml-4">
                     {sortedProducts.map((product, index) => (
-                        <CarouselItem key={`${product.name}-${index}`} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                            <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all group h-full">
+                        <CarouselItem key={`${product.name}-${index}`} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                            <Card className="overflow-hidden border border-border bg-background transition-all duration-300 group h-full rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1">
                                 <CardContent className="p-0 flex flex-col h-full">
-                                    <div className="relative aspect-square w-full overflow-hidden bg-muted">
+                                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-secondary/30">
                                         <ProductImage
                                             src={sanitizeUrl(product.image_url, true)}
                                             alt={product.name}
                                         />
-                                        <div className="absolute top-2 right-2">
-                                            <Badge variant="secondary" className="font-bold text-sm shadow-sm bg-background/80 backdrop-blur-sm">
-                                                {product.price}
-                                            </Badge>
+                                        <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <button className="p-2 rounded-full bg-background/80 blur-0 backdrop-blur-md shadow-sm hover:bg-background transition-colors">
+                                                <HeartIcon size={16} className="text-foreground" />
+                                            </button>
                                         </div>
+                                        {product.offers && (
+                                            <div className="absolute bottom-3 left-3">
+                                                <Badge className="bg-accent text-accent-foreground text-[10px] font-bold h-6 px-2 border-0 shadow-sm">
+                                                    {product.offers}
+                                                </Badge>
+                                            </div>
+                                        )}
                                     </div>
-                                    <div className="p-4 flex flex-col flex-1 gap-2">
+                                    <div className="p-5 flex flex-col flex-1 gap-3">
                                         <div className="flex flex-col gap-1">
-                                            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                                                {product.brand}
-                                            </span>
-                                            <h3 className="font-bold text-base line-clamp-1 leading-tight">
+                                            <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/70">
+                                                {product.source || "Supplier"}
+                                            </p>
+                                            <h3 className="font-semibold text-base line-clamp-2 leading-tight group-hover:text-accent transition-colors">
+                                                {product.brand && <span className="opacity-70 mr-1.5">{product.brand}</span>}
                                                 {product.name}
                                             </h3>
                                         </div>
-                                        <p className="text-xs text-muted-foreground line-clamp-2 min-h-[2rem]">
-                                            {product.details}
-                                        </p>
-                                        <div className="mt-auto pt-2">
-                                            <Button asChild className="w-full gap-2 font-semibold" size="sm">
+
+                                        <div className="mt-auto flex items-center justify-between">
+                                            <div className="flex flex-col">
+                                                <span className="font-bold text-xl text-foreground">{product.price}</span>
+                                                {product.rating && (
+                                                    <div className="flex items-center gap-1 text-[11px] font-bold text-muted-foreground mt-0.5">
+                                                        <StarIcon size={12} className="fill-yellow-400 text-yellow-400" />
+                                                        <span>{product.rating}</span>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <Button asChild className="h-10 w-10 px-0 rounded-xl bg-accent text-accent-foreground shadow-sm transition-all hover:bg-accent/90" size="sm">
                                                 <a href={sanitizeUrl(product.source_url)} target="_blank" rel="noopener">
-                                                    View Dealing
-                                                    <ExternalLinkIcon size={14} />
+                                                    <ExternalLinkIcon size={16} />
                                                 </a>
                                             </Button>
                                         </div>
@@ -146,8 +174,8 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="-left-8 border-2" />
-                <CarouselNext className="-right-8 border-2" />
+                <CarouselPrevious className="-left-4 h-10 w-10 border border-border bg-background shadow-md hover:bg-secondary" />
+                <CarouselNext className="-right-4 h-10 w-10 border border-border bg-background shadow-md hover:bg-secondary" />
             </Carousel>
         </div>
     );

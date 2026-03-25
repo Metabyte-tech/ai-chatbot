@@ -98,7 +98,7 @@ export function getChatHistoryPaginationKey(
 }
 
 export function SidebarHistory({ user }: { user: User | undefined }) {
-  const { setOpenMobile } = useSidebar();
+  const { state, setOpenMobile } = useSidebar();
   const pathname = usePathname();
   const id = pathname?.startsWith("/chat/") ? pathname.split("/")[2] : null;
 
@@ -159,6 +159,8 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
     });
   };
 
+  if (state === "collapsed") return null;
+
   if (!user) {
     return (
       <SidebarGroup>
@@ -213,7 +215,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
   }
 
   return (
-    <>
+    <div className="group-data-[state=collapsed]:hidden">
       <SidebarGroup>
         <SidebarGroupContent>
           <SidebarMenu>
@@ -371,6 +373,6 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </>
+    </div>
   );
 }

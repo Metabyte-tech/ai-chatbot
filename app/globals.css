@@ -14,40 +14,44 @@
 /* define design tokens (light mode) */
 :root {
   --background: hsl(0 0% 100%);
-  --foreground: hsl(240 10% 3.9%);
+  --foreground: hsl(240 10% 4%);
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(240 10% 3.9%);
+  --card-foreground: hsl(240 10% 4%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(240 10% 3.9%);
+  --popover-foreground: hsl(240 10% 4%);
   --primary: hsl(240 5.9% 10%);
   --primary-foreground: hsl(0 0% 98%);
-  --secondary: hsl(240 4.8% 95.9%);
+  --secondary: hsl(240 4.8% 97%);
+  /* Very light gray for backgrounds */
   --secondary-foreground: hsl(240 5.9% 10%);
-  --muted: hsl(240 4.8% 95.9%);
-  --muted-foreground: hsl(240 3.8% 46.1%);
-  --accent: hsl(240 4.8% 95.9%);
-  --accent-foreground: hsl(240 5.9% 10%);
-  --destructive: hsl(0 84.2% 60.2%);
+  --muted: hsl(240 4.8% 97%);
+  --muted-foreground: hsl(240 3.8% 46%);
+  --accent: hsl(154 70% 40%);
+  /* Accio Green */
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 84.2% 60%);
   --destructive-foreground: hsl(0 0% 98%);
-  --border: hsl(240 5.9% 90%);
-  --input: hsl(240 5.9% 90%);
-  --ring: hsl(240 10% 3.9%);
+  --border: hsl(240 5.9% 92%);
+  --input: hsl(240 5.9% 92%);
+  --ring: hsl(154 70% 40%);
+  /* Ring uses accent color */
   --chart-1: hsl(12 76% 61%);
   --chart-2: hsl(173 58% 39%);
   --chart-3: hsl(197 37% 24%);
   --chart-4: hsl(43 74% 66%);
   --chart-5: hsl(27 87% 67%);
-  --sidebar-background: hsl(0 0% 98%);
+  --sidebar-background: hsl(0 0% 97%);
+  /* Light gray sidebar */
   --sidebar-foreground: hsl(240 5.3% 26.1%);
-  --sidebar-primary: hsl(240 5.9% 10%);
+  --sidebar-primary: hsl(154 70% 40%);
   --sidebar-primary-foreground: hsl(0 0% 98%);
-  --sidebar-accent: hsl(240 4.8% 95.9%);
+  --sidebar-accent: hsl(0 0% 94%);
   --sidebar-accent-foreground: hsl(240 5.9% 10%);
-  --sidebar-border: hsl(220 13% 91%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
-  /* border radius unit */
-  --radius: 0.5rem;
-  --sidebar: hsl(0 0% 98%);
+  --sidebar-border: hsl(220 13% 94%);
+  --sidebar-ring: hsl(154 70% 40%);
+  /* border radius unit - Accio uses ~16px */
+  --radius: 1rem;
+  --sidebar: hsl(0 0% 97%);
 }
 
 /* define design tokens (dark mode) */
@@ -151,6 +155,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -174,6 +179,23 @@
 
 @utility overscroll-behavior-contain {
   overscroll-behavior: contain;
+}
+
+@utility bg-hero-glow {
+  background: radial-gradient(circle at center,
+      rgba(30, 173, 111, 0.05) 0%,
+      rgba(30, 173, 111, 0.02) 40%,
+      transparent 70%);
+}
+
+@utility bg-search-glow {
+  box-shadow: 0 0 40px 10px rgba(30, 173, 111, 0.15);
+}
+
+@utility bg-viewport-glow {
+  background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at top right, rgba(30, 173, 111, 0.02) 0%, transparent 30%);
 }
 
 @layer utilities {
@@ -210,7 +232,7 @@
 
 .skeleton {
   * {
-    pointer-events: none !important;
+    pointer-events: none important;
   }
 
   *[class^="text-"] {
@@ -233,22 +255,22 @@
 
 .cm-editor,
 .cm-gutters {
-  @apply bg-background! dark:bg-zinc-800! outline-hidden! selection:bg-zinc-900!;
+  @apply bg-background  dark:bg-zinc-800  outline-hidden  selection:bg-zinc-900 ;
 }
 
-.ͼo.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground,
+.ͼo.cm-focused>.cm-scroller>.cm-selectionLayer .cm-selectionBackground,
 .ͼo.cm-selectionBackground,
 .ͼo.cm-content::selection {
-  @apply bg-zinc-200! dark:bg-zinc-900!;
+  @apply bg-zinc-200  dark:bg-zinc-900 ;
 }
 
 .cm-activeLine,
 .cm-activeLineGutter {
-  @apply bg-transparent!;
+  @apply bg-transparent ;
 }
 
 .cm-activeLine {
-  @apply rounded-r-sm!;
+  @apply rounded-r-sm ;
 }
 
 .cm-lineNumbers {
@@ -260,7 +282,7 @@
 }
 
 .cm-lineNumbers .cm-activeLineGutter {
-  @apply rounded-l-sm!;
+  @apply rounded-l-sm ;
 }
 
 .suggestion-highlight {
@@ -312,6 +334,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

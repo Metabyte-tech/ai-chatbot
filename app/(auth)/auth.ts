@@ -2,6 +2,8 @@ import { compare } from "bcrypt-ts";
 import NextAuth, { type DefaultSession } from "next-auth";
 import type { DefaultJWT } from "next-auth/jwt";
 import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
+import MicrosoftEntraId from "next-auth/providers/microsoft-entra-id";
 import { DUMMY_PASSWORD } from "@/lib/constants";
 import { isDevelopmentEnvironment } from "@/lib/constants";
 import { createGuestUser, getUser } from "@/lib/db/queries";
@@ -92,6 +94,32 @@ export const {
       async authorize() {
         const [guestUser] = await createGuestUser();
         return { ...guestUser, type: "guest" };
+      },
+    }),
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+          type: "regular" as const,
+        };
+      },
+    }),
+    MicrosoftEntraId({
+      clientId: process.env.AUTH_MICROSOFT_ENTRA_ID_ID,
+      clientSecret: process.env.AUTH_MICROSOFT_ENTRA_ID_SECRET,
+      profile(profile) {
+        return {
+          id: profile.oid ?? profile.sub,
+          name: profile.name,
+          email: profile.preferred_username ?? profile.email,
+          image: null,
+          type: "regular" as const,
+        };
       },
     }),
   ],

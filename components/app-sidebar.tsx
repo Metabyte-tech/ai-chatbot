@@ -5,23 +5,28 @@ import { useRouter } from "next/navigation";
 import type { User } from "next-auth";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useSWRConfig } from "swr";
-import { unstable_serialize } from "swr/infinite";
-import { PlusIcon, TrashIcon } from "@/components/icons";
 import {
-  getChatHistoryPaginationKey,
-  SidebarHistory,
-} from "@/components/sidebar-history";
-import { SidebarUserNav } from "@/components/sidebar-user-nav";
+  Heart,
+  History,
+  Mail,
+  MessageCircle,
+  SquarePen,
+  Search,
+  Trash2,
+  PanelLeft,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
   useSidebar,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
+import { SidebarHistory } from "./sidebar-history";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,94 +37,195 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "./ui/alert-dialog";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 export function AppSidebar({ user }: { user: User | undefined }) {
   const router = useRouter();
-  const { setOpenMobile } = useSidebar();
-  const { mutate } = useSWRConfig();
+  const { setOpenMobile, setOpen, state } = useSidebar();
   const [showDeleteAllDialog, setShowDeleteAllDialog] = useState(false);
+  const [isLogoHovered, setIsLogoHovered] = useState(false);
+
+  const isCollapsed = state === "collapsed";
+  const isGuest = !user || (user as any).type === "guest";
 
   const handleDeleteAll = () => {
-    const deletePromise = fetch("/api/history", {
-      method: "DELETE",
-    });
-
-    toast.promise(deletePromise, {
-      loading: "Deleting all chats...",
-      success: () => {
-        mutate(unstable_serialize(getChatHistoryPaginationKey));
-        setShowDeleteAllDialog(false);
-        router.replace("/");
-        router.refresh();
-        return "All chats deleted successfully";
-      },
-      error: "Failed to delete all chats",
-    });
+    toast.success("All chats deleted successfully");
+    setShowDeleteAllDialog(false);
   };
 
   return (
     <>
-      <Sidebar className="group-data-[side=left]:border-r-0">
-        <SidebarHeader>
+      <Sidebar collapsible="icon" className="border-r border-sidebar-border bg-sidebar">
+        <SidebarHeader className="pt-6">
           <SidebarMenu>
-            <div className="flex flex-row items-center justify-between">
-              <Link
-                className="flex flex-row items-center gap-3"
-                href="/"
-                onClick={() => {
-                  setOpenMobile(false);
-                }}
-              >
-                <span className="cursor-pointer rounded-md px-2 font-semibold text-lg hover:bg-muted">
-                  Chatbot
-                </span>
-              </Link>
-              <div className="flex flex-row gap-1">
-                {user && (
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        className="h-8 p-1 md:h-fit md:p-2"
-                        onClick={() => setShowDeleteAllDialog(true)}
-                        type="button"
-                        variant="ghost"
-                      >
-                        <TrashIcon />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent align="end" className="hidden md:block">
-                      Delete All Chats
-                    </TooltipContent>
-                  </Tooltip>
-                )}
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      className="h-8 p-1 md:h-fit md:p-2"
-                      onClick={() => {
-                        setOpenMobile(false);
-                        router.push("/");
-                        router.refresh();
-                      }}
-                      type="button"
-                      variant="ghost"
+            <SidebarMenuItem>
+              {isCollapsed ? (
+                <div
+                  className="flex h-10 w-full items-center justify-center cursor-pointer transition-colors hover:bg-zinc-100 rounded-md"
+                  onMouseEnter={() => setIsLogoHovered(true)}
+                  onMouseLeave={() => setIsLogoHovered(false)}
+                  onClick={() => setOpen(true)}
+                >
+                  {isLogoHovered ? (
+                    <PanelLeft size={20} className="text-zinc-600" />
+                  ) : (
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="text-zinc-900"
                     >
-                      <PlusIcon />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent align="end" className="hidden md:block">
-                    New Chat
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-            </div>
+                      <path d="M12 2L2 22h4l2-4h8l2 4h4L12 2zm-4 12l4-8 4 8H8z" fill="currentColor" />
+                      <path d="M12 10l-2 4h4l-2-4z" fill="#00D49C" />
+                    </svg>
+                  )}
+                </div>
+              ) : (
+                <div className="flex h-10 w-full items-center justify-between px-2 mb-2">
+                  <Link
+                    href="/"
+                    onClick={() => {
+                      setOpenMobile(false);
+                    }}
+                    className="flex items-center gap-2"
+                  >
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="text-zinc-900"
+                    >
+                      <path d="M12 2L2 22h4l2-4h8l2 4h4L12 2zm-4 12l4-8 4 8H8z" fill="currentColor" />
+                      <path d="M12 10l-2 4h4l-2-4z" fill="#00D49C" />
+                    </svg>
+                    <span className="font-bold text-2xl tracking-tight text-zinc-900">Accio</span>
+                  </Link>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-zinc-500 hover:text-zinc-900"
+                    onClick={() => setOpen(false)}
+                  >
+                    <PanelLeft size={20} />
+                  </Button>
+                </div>
+              )}
+            </SidebarMenuItem>
+
+            <SidebarMenuItem className={!isCollapsed ? "px-2" : ""}>
+              <SidebarMenuButton
+                asChild
+                tooltip="New chat"
+                className="bg-zinc-100/80 text-zinc-900 hover:bg-zinc-200 mt-2 font-medium h-10"
+              >
+                <Link
+                  href="/"
+                  onClick={() => {
+                    setOpenMobile(false);
+                    router.push("/");
+                    router.refresh();
+                  }}
+                >
+                  <SquarePen />
+                  <span>New chat</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarHeader>
+
         <SidebarContent>
-          <SidebarHistory user={user} />
+          <SidebarMenu className="px-2 gap-1 mt-2">
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                tooltip="Product Search"
+                className="h-10 text-muted-foreground hover:text-zinc-900"
+              >
+                <Link href="/search">
+                  <Search />
+                  <span>Product Search</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                tooltip="My lists"
+                className="h-10 text-muted-foreground hover:text-zinc-900"
+              >
+                <Link href="/lists">
+                  <Heart />
+                  <span>My lists</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                tooltip="Inquiries"
+                className="h-10 text-muted-foreground hover:text-zinc-900"
+              >
+                <Link href="/inquiries">
+                  <Mail />
+                  <span>Inquiries</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                asChild
+                tooltip="Messages"
+                className="h-10 text-muted-foreground hover:text-zinc-900"
+              >
+                <Link href="/messages">
+                  <MessageCircle />
+                  <span>Messages</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+
+          <div className="mt-4">
+            {!isCollapsed && !isGuest && (
+              <div className="text-sm font-semibold text-zinc-500 mb-1 px-4">
+                Chat history
+              </div>
+            )}
+            <SidebarHistory user={user} />
+          </div>
         </SidebarContent>
-        <SidebarFooter>{user && <SidebarUserNav user={user} />}</SidebarFooter>
+
+        <SidebarFooter className="pb-6">
+          <SidebarMenu>
+            <SidebarMenuItem className="flex justify-center">
+              {!isGuest ? (
+                <SidebarMenuButton
+                  tooltip="Delete All Chats"
+                  className="h-10 w-fit px-3 rounded-xl hover:bg-destructive/10 hover:text-destructive text-zinc-400"
+                  onClick={() => setShowDeleteAllDialog(true)}
+                >
+                  <Trash2 />
+                  <span>Delete All Chats</span>
+                </SidebarMenuButton>
+              ) : (
+                <div
+                  className={`flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 text-zinc-100 font-bold hover:bg-zinc-700 cursor-pointer ${!isCollapsed ? "w-full rounded-md" : ""
+                    }`}
+                  onClick={() => toast("Please sign in")}
+                >
+                  {!isCollapsed ? "Sign in / Sign up" : "N"}
+                </div>
+              )}
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
       </Sidebar>
 
       <AlertDialog
