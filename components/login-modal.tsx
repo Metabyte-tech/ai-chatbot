@@ -79,13 +79,13 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
                     <div className="flex items-center gap-2 z-10">
                         <span className="text-sm font-medium text-white/60">Welcome to</span>
-                        <span className="font-bold text-lg tracking-tight text-white">Accio</span>
+                        <span className="font-bold text-lg tracking-tight text-white">Retails Store</span>
                     </div>
 
                     <div className="z-10 flex flex-col gap-6 pb-4">
                         <h2 className="text-3xl font-extrabold leading-tight">
                             100 things you<br />can do with<br />
-                            <span className="text-emerald-400">Accio</span>
+                            <span className="text-emerald-400">Retails Store</span>
                         </h2>
                         <div className="relative h-36 w-56">
                             <div className="absolute bottom-0 left-0 h-28 w-32 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-[10px] text-white/50 shadow-lg px-3 text-center">
@@ -109,7 +109,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 {/* Right panel – sign in form */}
                 <div className="flex flex-1 flex-col bg-white px-8 py-10 md:px-10">
                     <h1 className="text-xl font-bold text-zinc-900">Sign in or sign up for AI sourcing</h1>
-                    <p className="mt-1.5 text-sm text-zinc-500">Join Accio for daily agent tasks and start your free trial</p>
+                    <p className="mt-1.5 text-sm text-zinc-500">Join Retails Store for daily agent tasks and start your free trial</p>
 
                     <div className="mt-8 flex flex-col gap-3">
                         <button
@@ -166,7 +166,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                     </form>
 
                     <p className="mt-5 text-[11px] text-zinc-400 leading-relaxed">
-                        By signing up using your third-party external account you agree to Accio&apos;s{" "}
+                        By signing up using your third-party external account you agree to Retails Store&apos;s{" "}
                         <a href="#" className="underline hover:text-zinc-600">Terms of use</a>{" "}
                         and{" "}
                         <a href="#" className="underline hover:text-zinc-600">Privacy Policy</a>.

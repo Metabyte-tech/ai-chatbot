@@ -23,17 +23,10 @@ export async function generateTitleFromUserMessage({
   message: UIMessage;
 }) {
   try {
-    const { text } = await generateText({
-      model: getTitleModel(),
-      system: titlePrompt,
-      prompt: getTextFromMessage(message),
-    });
-    return text
-      .replace(/^[#*"\s]+/, "")
-      .replace(/["]+$/, "")
-      .trim();
+    const text = getTextFromMessage(message);
+    return text.length > 40 ? text.substring(0, 40) + "..." : text;
   } catch (error) {
-    console.error("Error generating title:", error);
+    console.error("Error formatting title:", error);
     return "New Chat";
   }
 }

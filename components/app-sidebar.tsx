@@ -43,6 +43,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
   const { setOpenMobile, setOpen, state } = useSidebar();
   const [showDeleteAllDialog, setShowDeleteAllDialog] = useState(false);
   const [isLogoHovered, setIsLogoHovered] = useState(false);
+  const [isHistoryHovered, setIsHistoryHovered] = useState(false);
 
   const isCollapsed = state === "collapsed";
   const isGuest = !user || (user as any).type === "guest";
@@ -101,7 +102,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                       <path d="M12 2L2 22h4l2-4h8l2 4h4L12 2zm-4 12l4-8 4 8H8z" fill="currentColor" />
                       <path d="M12 10l-2 4h4l-2-4z" fill="#00D49C" />
                     </svg>
-                    <span className="font-bold text-2xl tracking-tight text-zinc-900">Accio</span>
+                    <span className="font-bold text-2xl tracking-tight text-zinc-900">Retails Store</span>
                   </Link>
                   <Button
                     variant="ghost"
@@ -176,6 +177,37 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                   <span>Inquiries</span>
                 </Link>
               </SidebarMenuButton>
+            </SidebarMenuItem>
+
+            <SidebarMenuItem className="relative group/history">
+              <SidebarMenuButton
+                asChild
+                tooltip={isCollapsed ? undefined : "History"}
+                className="h-10 text-muted-foreground hover:text-zinc-900"
+                onMouseEnter={() => isCollapsed && setIsHistoryHovered(true)}
+                onMouseLeave={() => isCollapsed && setIsHistoryHovered(false)}
+              >
+                <div className="flex items-center gap-2 cursor-pointer w-full">
+                  <History />
+                  <span>History</span>
+                </div>
+              </SidebarMenuButton>
+
+              {/* Hover Panel for History (only in collapsed state) */}
+              {isCollapsed && isHistoryHovered && (
+                <div
+                  className="fixed left-[70px] top-10 z-[100] w-72 rounded-2xl bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-zinc-100 py-4 animate-in fade-in slide-in-from-left-2 duration-200 text-zinc-900"
+                  onMouseEnter={() => setIsHistoryHovered(true)}
+                  onMouseLeave={() => setIsHistoryHovered(false)}
+                >
+                  <div className="px-5 pb-4 border-b border-zinc-50 mb-2">
+                    <h3 className="font-bold text-zinc-900 text-sm">Recent history</h3>
+                  </div>
+                  <div className="max-h-[70vh] overflow-y-auto px-1 custom-scrollbar">
+                    <SidebarHistory user={user} forceDisplay={true} />
+                  </div>
+                </div>
+              )}
             </SidebarMenuItem>
 
             <SidebarMenuItem>

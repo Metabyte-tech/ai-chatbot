@@ -17,7 +17,6 @@ import {
   LockIcon,
 } from "./icons";
 
-import { IngestionUI } from "./ingestion-ui";
 
 export type VisibilityType = "private" | "public";
 
@@ -181,8 +180,6 @@ export function VisibilitySelector({
             );
           })}
         </div>
-
-        <IngestionUI />
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -95,13 +95,13 @@ export default function Page() {
 
           <div className="flex items-center gap-2 z-10">
             <span className="text-sm font-medium text-white/60">Welcome to</span>
-            <span className="font-bold text-lg tracking-tight text-white">Accio</span>
+            <span className="font-bold text-lg tracking-tight text-white">Retails Store</span>
           </div>
 
           <div className="z-10 flex flex-col gap-6 pb-4">
             <h2 className="text-3xl font-extrabold leading-tight">
               100 things you<br />can do with<br />
-              <span className="text-emerald-400">Accio</span>
+              <span className="text-emerald-400">Retails Store</span>
             </h2>
             {/* Decorative product card stack */}
             <div className="relative h-36 w-56">
@@ -126,7 +126,7 @@ export default function Page() {
         {/* Right panel – sign in form */}
         <div className="flex flex-1 flex-col bg-white px-8 py-10 md:px-10 rounded-r-2xl">
           <h1 className="text-xl font-bold text-zinc-900">Sign in or sign up for AI sourcing</h1>
-          <p className="mt-1.5 text-sm text-zinc-500">Join Accio for daily agent tasks and start your free trial</p>
+          <p className="mt-1.5 text-sm text-zinc-500">Join Retails Store for daily agent tasks and start your free trial</p>
 
           <div className="mt-8 flex flex-col gap-3">
             {/* Google */}
@@ -190,10 +190,10 @@ export default function Page() {
 
           {/* TOS */}
           <p className="mt-5 text-[11px] text-zinc-400 leading-relaxed">
-            By signing up using your third-party external account you agree to Accio&apos;s{" "}
-            <a href="https://terms.accio.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-zinc-600">Terms of use</a>{" "}
+            By signing up using your third-party external account you agree to Retails Store&apos;s{" "}
+            <a href="https://terms.retailsstore.ai" target="_blank" rel="noopener noreferrer" className="underline hover:text-zinc-600">Terms of use</a>{" "}
             and{" "}
-            <a href="https://terms.accio.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-zinc-600">Privacy Policy</a>.
+            <a href="https://terms.retailsstore.ai" target="_blank" rel="noopener noreferrer" className="underline hover:text-zinc-600">Privacy Policy</a>.
           </p>
 
           <p className="mt-6 text-center text-xs text-zinc-400">Partnered with Alibaba.com</p>

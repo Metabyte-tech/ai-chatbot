@@ -97,7 +97,13 @@ export function getChatHistoryPaginationKey(
   return `/api/history?ending_before=${firstChatFromPage.id}&limit=${PAGE_SIZE}`;
 }
 
-export function SidebarHistory({ user }: { user: User | undefined }) {
+export function SidebarHistory({
+  user,
+  forceDisplay = false
+}: {
+  user: User | undefined;
+  forceDisplay?: boolean;
+}) {
   const { state, setOpenMobile } = useSidebar();
   const pathname = usePathname();
   const id = pathname?.startsWith("/chat/") ? pathname.split("/")[2] : null;
@@ -159,7 +165,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
     });
   };
 
-  if (state === "collapsed") return null;
+  if (state === "collapsed" && !forceDisplay) return null;
 
   if (!user) {
     return (
@@ -176,7 +182,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
   if (isLoading) {
     return (
       <SidebarGroup>
-        <div className="px-2 py-1 text-sidebar-foreground/50 text-xs">
+        <div className="px-2 py-1 text-zinc-500 text-xs font-medium">
           Today
         </div>
         <SidebarGroupContent>
@@ -215,7 +221,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
   }
 
   return (
-    <div className="group-data-[state=collapsed]:hidden">
+    <div className={forceDisplay ? "block" : "group-data-[state=collapsed]:hidden"}>
       <SidebarGroup>
         <SidebarGroupContent>
           <SidebarMenu>
@@ -231,7 +237,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
                   <div className="flex flex-col gap-6">
                     {groupedChats.today.length > 0 && (
                       <div>
-                        <div className="px-2 py-1 text-sidebar-foreground/50 text-xs">
+                        <div className="px-2 py-1 text-zinc-500 text-xs font-medium">
                           Today
                         </div>
                         {groupedChats.today.map((chat) => (
@@ -244,6 +250,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
                               setShowDeleteDialog(true);
                             }}
                             setOpenMobile={setOpenMobile}
+                            forceDisplay={forceDisplay}
                           />
                         ))}
                       </div>
@@ -251,7 +258,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
 
                     {groupedChats.yesterday.length > 0 && (
                       <div>
-                        <div className="px-2 py-1 text-sidebar-foreground/50 text-xs">
+                        <div className="px-2 py-1 text-zinc-500 text-xs font-medium">
                           Yesterday
                         </div>
                         {groupedChats.yesterday.map((chat) => (
@@ -264,6 +271,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
                               setShowDeleteDialog(true);
                             }}
                             setOpenMobile={setOpenMobile}
+                            forceDisplay={forceDisplay}
                           />
                         ))}
                       </div>
@@ -271,7 +279,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
 
                     {groupedChats.lastWeek.length > 0 && (
                       <div>
-                        <div className="px-2 py-1 text-sidebar-foreground/50 text-xs">
+                        <div className="px-2 py-1 text-zinc-500 text-xs font-medium">
                           Last 7 days
                         </div>
                         {groupedChats.lastWeek.map((chat) => (
@@ -284,6 +292,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
                               setShowDeleteDialog(true);
                             }}
                             setOpenMobile={setOpenMobile}
+                            forceDisplay={forceDisplay}
                           />
                         ))}
                       </div>
@@ -291,7 +300,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
 
                     {groupedChats.lastMonth.length > 0 && (
                       <div>
-                        <div className="px-2 py-1 text-sidebar-foreground/50 text-xs">
+                        <div className="px-2 py-1 text-zinc-500 text-xs font-medium">
                           Last 30 days
                         </div>
                         {groupedChats.lastMonth.map((chat) => (
@@ -304,6 +313,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
                               setShowDeleteDialog(true);
                             }}
                             setOpenMobile={setOpenMobile}
+                            forceDisplay={forceDisplay}
                           />
                         ))}
                       </div>
@@ -311,7 +321,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
 
                     {groupedChats.older.length > 0 && (
                       <div>
-                        <div className="px-2 py-1 text-sidebar-foreground/50 text-xs">
+                        <div className="px-2 py-1 text-zinc-500 text-xs font-medium">
                           Older than last month
                         </div>
                         {groupedChats.older.map((chat) => (

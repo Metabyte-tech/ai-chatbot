@@ -46,8 +46,8 @@ const PurePreviewMessage = ({
 }) => {
   const [mode, setMode] = useState<"view" | "edit">("view");
 
-  const attachmentsFromMessage = message.parts.filter(
-    (part) => part.type === "file"
+  const attachmentsFromMessage = (message.parts ?? []).filter(
+    (part) => part && part.type === "file"
   );
 
   useDataStream();
@@ -72,15 +72,16 @@ const PurePreviewMessage = ({
 
         <div
           className={cn("flex flex-col", {
-            "gap-2 md:gap-4": message.parts?.some(
-              (p) => p.type === "text" && p.text?.trim()
-            ),
+            "gap-2 md:gap-4": ((message.parts ?? []).some(
+              (p) => p && p.type === "text" && (p as any).text?.trim()
+            )) || (message.content?.trim()),
             "w-full":
               (message.role === "assistant" &&
-                (message.parts?.some(
-                  (p) => p.type === "text" && p.text?.trim()
+                ((message.parts ?? []).some(
+                  (p) => p && p.type === "text" && (p as any).text?.trim()
                 ) ||
-                  message.parts?.some((p) => p.type.startsWith("tool-")))) ||
+                  (message.parts ?? []).some((p) => p && p.type.startsWith("tool-")) ||
+                  message.content?.trim())) ||
               mode === "edit",
             "max-w-[calc(100%-2.5rem)] sm:max-w-[min(fit-content,80%)]":
               message.role === "user" && mode !== "edit",
@@ -104,7 +105,25 @@ const PurePreviewMessage = ({
             </div>
           )}
 
-          {message.parts?.map((part, index) => {
+          {(!(message.parts ?? []).length) && message.content ? (
+            <MessageContent
+              className={cn({
+                "wrap-break-word w-fit rounded-2xl px-3 py-2 text-right text-white":
+                  message.role === "user",
+                "bg-transparent px-0 py-0 text-left":
+                  message.role === "assistant",
+              })}
+              data-testid="message-content"
+              style={
+                message.role === "user"
+                  ? { backgroundColor: "#006cff" }
+                  : undefined
+              }
+            >
+              <Response key={`resp-${message.id}-${isLoading ? 'loading' : 'done'}`}>{sanitizeText(message.content)}</Response>
+            </MessageContent>
+          ) : message.parts?.map((part, index) => {
+            if (!part) return null;
             const { type } = part;
             const key = `message-${message.id}-part-${index}`;
 
@@ -343,7 +362,7 @@ const PurePreviewMessage = ({
             }
 
             return null;
-          })}
+          }).filter((part) => part !== null)}
 
           {!isReadonly && (
             <MessageActions

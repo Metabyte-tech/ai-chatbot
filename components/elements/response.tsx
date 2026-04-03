@@ -24,8 +24,12 @@ export function Response({ className, children, ...props }: ResponseProps) {
   let match;
 
   console.log("====== RESPONSE RENDER ======");
-  console.log("Children snippet:", children.substring(0, 200) + (children.length > 200 ? "..." : ""));
+  console.log("Children Raw:", children);
+  console.log("Children Length:", children.length);
   console.log("Includes <product_carousel>:", children.includes("<product_carousel>"));
+  if (typeof window !== "undefined") {
+    (window as any).__DEBUG_LAST_RESPONSE = children;
+  }
 
   while ((match = carouselRegex.exec(children)) !== null) {
     console.log("Matched carousel!", match[0].substring(0, 50));

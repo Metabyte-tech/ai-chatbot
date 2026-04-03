@@ -31,11 +31,13 @@ const PureChatItem = ({
   isActive,
   onDelete,
   setOpenMobile,
+  forceDisplay,
 }: {
   chat: Chat;
   isActive: boolean;
   onDelete: (chatId: string) => void;
   setOpenMobile: (open: boolean) => void;
+  forceDisplay?: boolean;
 }) => {
   const { visibilityType, setVisibilityType } = useChatVisibility({
     chatId: chat.id,
@@ -44,7 +46,7 @@ const PureChatItem = ({
 
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={isActive}>
+      <SidebarMenuButton asChild isActive={isActive} className={forceDisplay ? "text-zinc-700 hover:text-zinc-900" : ""}>
         <Link href={`/chat/${chat.id}`} onClick={() => setOpenMobile(false)}>
           <span>{chat.title}</span>
         </Link>
@@ -113,7 +115,10 @@ const PureChatItem = ({
 };
 
 export const ChatItem = memo(PureChatItem, (prevProps, nextProps) => {
-  if (prevProps.isActive !== nextProps.isActive) {
+  if (
+    prevProps.isActive !== nextProps.isActive ||
+    prevProps.forceDisplay !== nextProps.forceDisplay
+  ) {
     return false;
   }
   return true;

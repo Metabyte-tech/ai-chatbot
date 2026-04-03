@@ -64,6 +64,17 @@ export async function createUser(email: string, password: string) {
   }
 }
 
+export async function ensureUserExists(id: string, email: string) {
+  try {
+    const existing = await db.select().from(user).where(eq(user.id, id));
+    if (existing.length === 0) {
+      await db.insert(user).values({ id, email, password: "dummy" });
+    }
+  } catch (e) {
+    console.error("ensureUserExists error", e);
+  }
+}
+
 export async function createGuestUser() {
   const email = `guest-${Date.now()}`;
   const password = generateHashedPassword(generateUUID());
@@ -101,6 +112,7 @@ export async function saveChat({
       visibility,
     });
   } catch (_error) {
+    console.error("saveChat actual error:", _error);
     throw new ChatSDKError("bad_request:database", "Failed to save chat");
   }
 }

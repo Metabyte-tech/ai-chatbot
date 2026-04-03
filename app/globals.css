@@ -27,7 +27,7 @@
   --muted: hsl(240 4.8% 97%);
   --muted-foreground: hsl(240 3.8% 46%);
   --accent: hsl(154 70% 40%);
-  /* Accio Green */
+  /* Retails Store Green */
   --accent-foreground: hsl(0 0% 100%);
   --destructive: hsl(0 84.2% 60%);
   --destructive-foreground: hsl(0 0% 98%);
@@ -49,7 +49,7 @@
   --sidebar-accent-foreground: hsl(240 5.9% 10%);
   --sidebar-border: hsl(220 13% 94%);
   --sidebar-ring: hsl(154 70% 40%);
-  /* border radius unit - Accio uses ~16px */
+  /* border radius unit - Retails Store uses ~16px */
   --radius: 1rem;
   --sidebar: hsl(0 0% 97%);
 }
@@ -255,22 +255,22 @@
 
 .cm-editor,
 .cm-gutters {
-  @apply bg-background  dark:bg-zinc-800  outline-hidden  selection:bg-zinc-900 ;
+  @apply bg-background dark:bg-zinc-800 outline-hidden selection:bg-zinc-900;
 }
 
 .ͼo.cm-focused>.cm-scroller>.cm-selectionLayer .cm-selectionBackground,
 .ͼo.cm-selectionBackground,
 .ͼo.cm-content::selection {
-  @apply bg-zinc-200  dark:bg-zinc-900 ;
+  @apply bg-zinc-200 dark:bg-zinc-900;
 }
 
 .cm-activeLine,
 .cm-activeLineGutter {
-  @apply bg-transparent ;
+  @apply bg-transparent;
 }
 
 .cm-activeLine {
-  @apply rounded-r-sm ;
+  @apply rounded-r-sm;
 }
 
 .cm-lineNumbers {
@@ -282,7 +282,7 @@
 }
 
 .cm-lineNumbers .cm-activeLineGutter {
-  @apply rounded-l-sm ;
+  @apply rounded-l-sm;
 }
 
 .suggestion-highlight {

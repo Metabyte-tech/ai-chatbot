@@ -22,6 +22,7 @@ import { isProductionEnvironment } from "@/lib/constants";
 import {
   createStreamId,
   deleteChatById,
+  ensureUserExists,
   getChatById,
   getMessageCountByUserId,
   getMessagesByChatId,
@@ -55,7 +56,8 @@ export async function POST(request: Request) {
   try {
     const json = await request.json();
     requestBody = postRequestBodySchema.parse(json);
-  } catch (_) {
+  } catch (error: any) {
+    console.error("[Chat API Schema Error]:", error);
     return new ChatSDKError("bad_request:api").toResponse();
   }
 
@@ -99,18 +101,40 @@ export async function POST(request: Request) {
       if (!isToolApprovalFlow) {
         messagesFromDb = await getMessagesByChatId({ id });
       }
-    } else if (message?.role === "user") {
+    } else if (message?.role === "user" || (messages && messages.length > 0)) {
+      // Create empty chat explicitly for template bypassing
+      await ensureUserExists(session.user.id, session.user.email || "guest@localhost");
       await saveChat({
         id,
         userId: session.user.id,
         title: "New chat",
-        visibility: selectedVisibilityType,
+        visibility: selectedVisibilityType || "private",
       });
-      titlePromise = generateTitleFromUserMessage({ message });
+
+      // If we have pre-populated messages (like the template welcome), save them now
+      if (messages && messages.length > 0) {
+        await saveMessages({
+          messages: (messages as ChatMessage[]).map((msg) => ({
+            id: msg.id,
+            chatId: id,
+            role: msg.role as any,
+            parts: msg.parts,
+            attachments: [],
+            createdAt: new Date(),
+          })),
+        });
+      }
+
+      if (message?.role === "user") {
+        titlePromise = generateTitleFromUserMessage({ message });
+      } else if (messages && messages.length > 0) {
+        // Fallback for title gen if message is empty
+        titlePromise = generateTitleFromUserMessage({ message: (messages as ChatMessage[])[messages.length - 1] });
+      }
     }
 
     const uiMessages = isToolApprovalFlow
-      ? (messages as ChatMessage[])
+      ? (message ? [...(messages as ChatMessage[]), message as ChatMessage] : (messages as ChatMessage[]))
       : [...convertToUIMessages(messagesFromDb), message as ChatMessage];
 
     const { longitude, latitude, city, country } = geolocation(request);
@@ -137,9 +161,11 @@ export async function POST(request: Request) {
       });
     }
 
+    const modelId = selectedChatModel || DEFAULT_CHAT_MODEL;
+
     const isReasoningModel =
-      selectedChatModel.includes("reasoning") ||
-      selectedChatModel.includes("thinking");
+      modelId.includes("reasoning") ||
+      modelId.includes("thinking");
 
     const modelMessages = await convertToModelMessages(uiMessages);
 
@@ -150,24 +176,28 @@ export async function POST(request: Request) {
           const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
           const controller = new AbortController();
           const timeoutId = setTimeout(() => {
-            console.error(`[Chat API] Backend request timed out after 295 seconds. URL: ${backendUrl}/chat`);
+            console.error(`[Chat API] Backend request timed out after 295 seconds. URL: ${backendUrl}/api/chat`);
             controller.abort();
           }, 295000); // 295 seconds timeout (just under maxDuration=300)
 
-          console.log(`[Chat API] Calling backend: ${backendUrl}/chat`);
+          console.log(`[Chat API] Calling backend: ${backendUrl}/api/chat`);
           let response;
           try {
-            response = await fetch(`${backendUrl}/chat`, {
+            response = await fetch(`${backendUrl}/api/chat`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ message: message?.role === "user" ? message.parts.map(p => p.type === 'text' ? p.text : '').join(' ') : (messages as any)?.[(messages as any).length - 1]?.parts.map((p: any) => p.type === 'text' ? p.text : '').join(' ') }),
+              body: JSON.stringify({
+                message: message?.role === "user" ? message.parts.map(p => p && p.type === 'text' ? (p as any).text : '').join(' ') : (messages as any)?.[(messages as any).length - 1]?.parts.map((p: any) => p && p.type === 'text' ? p.text : '').join(' '),
+                template_id: requestBody.template_id, // Forward template_id
+                subject: requestBody.subject // Forward specific search topic
+              }),
               signal: controller.signal
             });
           } catch (fetchError: any) {
             console.error(`[Chat API] Fetch error: ${fetchError.name} - ${fetchError.message}`, {
-              url: `${backendUrl}/chat`,
+              url: `${backendUrl}/api/chat`,
               cause: fetchError.cause
             });
             throw fetchError;

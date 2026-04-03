@@ -32,8 +32,9 @@ export const postRequestBodySchema = z.object({
   // Either a single new message or all messages (for tool approvals)
   message: userMessageSchema.optional(),
   messages: z.array(messageSchema).optional(),
-  selectedChatModel: z.string(),
-  selectedVisibilityType: z.enum(["public", "private"]),
+  selectedChatModel: z.string().optional(),
+  selectedVisibilityType: z.enum(["public", "private"]).optional(),
+  template_id: z.string().optional(),
 });
 
 export type PostRequestBody = z.infer<typeof postRequestBodySchema>;

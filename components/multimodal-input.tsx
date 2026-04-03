@@ -15,7 +15,7 @@ import {
   useState,
 } from "react";
 import { toast } from "sonner";
-import { toast as accioToast } from "@/components/toast";
+import { toast as retailsStoreToast } from "@/components/toast";
 import { useLocalStorage, useWindowSize } from "usehooks-ts";
 import { useSession } from "next-auth/react";
 import {
@@ -151,12 +151,12 @@ function PureMultimodalInput({
 
   const submitForm = useCallback(() => {
     if (!session?.user || (session.user as any).type === "guest") {
-      if (onShowLogin) {
-        onShowLogin();
-      } else {
-        accioToast({ type: "error", description: "Sign in or sign up to use Accio search" });
-      }
-      return;
+      // if (onShowLogin) {
+      //   onShowLogin();
+      // } else {
+      //   retailsStoreToast({ type: "error", description: "Sign in or sign up to use Retails Store search" });
+      // }
+      // return;
     }
 
     window.history.pushState({}, "", `/chat/${chatId}`);
