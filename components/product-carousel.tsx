@@ -45,18 +45,21 @@ function sanitizeUrl(url: string, isImage: boolean = false) {
     if (!url) return isImage ? "https://placehold.co/600x600?text=No+Image" : "";
     let trimmed = url.trim();
 
-    // Force HTTPS for Ajio and others to avoid redirect blocks
-    if (trimmed.includes("ajio.com") && !trimmed.startsWith("https://")) {
-        trimmed = trimmed.replace(/^http:\/\//, "");
-        trimmed = "https://" + (trimmed.startsWith("www.") ? "" : "www.") + trimmed;
+    if (isImage) {
+        // Don't proxy S3, data and local URLs
+        const isInternal = trimmed.includes("amazonaws.com") ||
+            trimmed.startsWith("data:") ||
+            trimmed.startsWith("/") ||
+            trimmed.includes("placehold.co");
+
+        if (!isInternal && trimmed.startsWith("http")) {
+            return `/api/proxy/image?url=${encodeURIComponent(trimmed)}`;
+        }
     }
 
     if (trimmed.startsWith("http")) return trimmed;
     if (trimmed.startsWith("//")) return `https:${trimmed}`;
-
-    if (trimmed.includes(".") && !trimmed.includes(" ")) {
-        return `https://${trimmed}`;
-    }
+    if (trimmed.includes(".") && !trimmed.includes(" ")) return `https://${trimmed}`;
     return trimmed;
 }
 
@@ -72,9 +75,6 @@ function ProductImage({ src, alt, className = "" }: { src: string; alt: string; 
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onError={() => {
                 setImgSrc("https://placehold.co/600x600?text=No+Image");
-                if (window.dispatchEvent) {
-                    window.dispatchEvent(new CustomEvent('productImageFailed', { detail: { src } }));
-                }
             }}
         />
     );

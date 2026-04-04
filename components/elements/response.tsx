@@ -4,6 +4,7 @@ import type { ComponentProps } from "react";
 import { Streamdown } from "streamdown";
 import { cn } from "@/lib/utils";
 import { ProductCarousel, type Product } from "../product-carousel";
+import { ProductGrid } from "../product-grid";
 
 type ResponseProps = ComponentProps<typeof Streamdown>;
 
@@ -111,12 +112,67 @@ export function Response({ className, children, ...props }: ResponseProps) {
     lastIndex = carouselRegex.lastIndex;
   }
 
-  // Push remaining text
+  // Push remaining text to parts before processing grid
   if (lastIndex < children.length) {
     parts.push(children.substring(lastIndex));
   }
 
-  if (parts.length === 0) {
+  // Regex to find <product_grid>[JSON]</product_grid>
+  const gridRegex = /<\s*product_grid\s*>([\s\S]*?)(?:<\/\s*product_grid\s*>|$)/gi;
+  let gridParts: any[] = [];
+  lastIndex = 0;
+
+  // Re-process parts that are strings for grid tags
+  const processedParts = [];
+  for (const part of parts) {
+    if (typeof part !== "string") {
+      processedParts.push(part);
+      continue;
+    }
+
+    let innerLastIndex = 0;
+    let gridMatch;
+    gridRegex.lastIndex = 0; // Reset for each part
+    while ((gridMatch = gridRegex.exec(part)) !== null) {
+      if (gridMatch.index > innerLastIndex) {
+        processedParts.push(part.substring(innerLastIndex, gridMatch.index));
+      }
+
+      try {
+        let content = gridMatch[1].trim();
+        content = content.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+
+        let products: Product[] = [];
+        if (content.startsWith("[") || content.startsWith("{")) {
+          // Re-use the same cleaning logic (defined above as a helper if I move it, 
+          // but for now I'll just use a simplified version or move the helper)
+          try {
+            products = JSON.parse(content);
+            if (products && !Array.isArray(products)) products = [products];
+          } catch (e) {
+            products = [];
+          }
+        }
+
+        if (products.length > 0) {
+          processedParts.push(<ProductGrid key={`grid-${gridMatch.index}`} products={products} />);
+        } else {
+          processedParts.push(<div key={`loading-grid-${gridMatch.index}`} className="animate-pulse h-40 w-full bg-muted rounded-xl" />);
+        }
+      } catch (e) {
+        processedParts.push(<div key={`error-grid-${gridMatch.index}`} />);
+      }
+      innerLastIndex = gridRegex.lastIndex;
+    }
+
+    if (innerLastIndex < part.length) {
+      processedParts.push(part.substring(innerLastIndex));
+    }
+  }
+
+  // All parts processed into processedParts
+
+  if (processedParts.length === 0) {
     return (
       <Streamdown
         className={cn("size-full", className)}
@@ -130,7 +186,7 @@ export function Response({ className, children, ...props }: ResponseProps) {
 
   return (
     <div className={cn("flex flex-col gap-4 w-full", className)}>
-      {parts
+      {processedParts
         .filter((part) => typeof part !== "string" || part.trim().length > 0)
         .map((part, i) =>
           typeof part === "string" ? (

@@ -129,7 +129,7 @@ const PurePreviewMessage = ({
 
             if (type === "reasoning") {
               const hasContent = part.text?.trim().length > 0;
-              const isStreaming = "state" in part && part.state === "streaming";
+              const isStreaming = part && "state" in part && (part as any).state === "streaming";
               if (hasContent || isStreaming) {
                 return (
                   <MessageReasoning
@@ -187,13 +187,13 @@ const PurePreviewMessage = ({
             }
 
             if (type === "tool-getWeather") {
-              const { toolCallId, state } = part;
+              const state = (part as any)?.state;
               const approvalId = (part as { approval?: { id: string } })
-                .approval?.id;
+                ?.approval?.id;
               const isDenied =
                 state === "output-denied" ||
                 (state === "approval-responded" &&
-                  (part as { approval?: { approved?: boolean } }).approval
+                  (part as { approval?: { approved?: boolean } })?.approval
                     ?.approved === false);
               const widthClass = "w-[min(100%,450px)]";
 
@@ -329,7 +329,7 @@ const PurePreviewMessage = ({
             }
 
             if (type === "tool-requestSuggestions") {
-              const { toolCallId, state } = part;
+              const state = (part as any)?.state;
 
               return (
                 <Tool defaultOpen={true} key={toolCallId}>

@@ -8,14 +8,14 @@ import type { ChatMessage } from "@/lib/types";
 export type UseAutoResumeParams = {
   autoResume: boolean;
   initialMessages: ChatMessage[];
-  resumeStream: UseChatHelpers<ChatMessage>["resumeStream"];
+  reload: UseChatHelpers<ChatMessage>["reload"];
   setMessages: UseChatHelpers<ChatMessage>["setMessages"];
 };
 
 export function useAutoResume({
   autoResume,
   initialMessages,
-  resumeStream,
+  reload,
   setMessages,
 }: UseAutoResumeParams) {
   const { dataStream } = useDataStream();
@@ -27,13 +27,13 @@ export function useAutoResume({
 
     const mostRecentMessage = initialMessages.at(-1);
 
-    if (mostRecentMessage?.role === "user") {
-      resumeStream();
+    if (mostRecentMessage?.role === "user" && typeof reload === "function") {
+      reload();
     }
 
     // we intentionally run this once
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoResume, initialMessages.at, resumeStream]);
+  }, [autoResume, initialMessages, reload]);
 
   useEffect(() => {
     if (!dataStream) {

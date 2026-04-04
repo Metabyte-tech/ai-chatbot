@@ -159,6 +159,7 @@ export function Chat({
     sendMessage,
     status,
     stop,
+    reload,
     regenerate,
     resumeStream,
     addToolApprovalResponse,
@@ -173,9 +174,8 @@ export function Chat({
           (part) =>
             part &&
             "state" in part &&
-            part.state === "approval-responded" &&
-            "approval" in part &&
-            (part.approval as { approved?: boolean })?.approved === true
+            (part as any).state === "approval-responded" &&
+            (part as { approval?: { approved?: boolean } })?.approval?.approved === true
         ) ?? false;
       return shouldContinue;
     },
@@ -188,7 +188,7 @@ export function Chat({
           lastMessage?.role !== "user" ||
           request.messages.some((msg) =>
             msg.parts?.some((part) => {
-              const state = part && (part as { state?: string }).state;
+              const state = part && typeof part === 'object' && "state" in part ? (part as any).state : undefined;
               return (
                 state === "approval-responded" || state === "output-denied"
               );
@@ -273,7 +273,7 @@ export function Chat({
   useAutoResume({
     autoResume,
     initialMessages,
-    resumeStream,
+    reload,
     setMessages,
   });
 

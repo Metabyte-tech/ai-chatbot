@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
+        const backendUrl = process.env.BACKEND_URL || "http://127.0.0.1:8000";
         const response = await fetch(`${backendUrl}/api/templates`, {
             cache: 'no-store'
         });
