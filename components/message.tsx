@@ -330,6 +330,7 @@ const PurePreviewMessage = ({
             }
 
             if (type === "tool-requestSuggestions") {
+              const { toolCallId } = part as any;
               const state = (part as any)?.state;
 
               return (
@@ -343,14 +344,14 @@ const PurePreviewMessage = ({
                       <ToolOutput
                         errorText={undefined}
                         output={
-                          "error" in part.output ? (
+                          (part as any).output && "error" in (part as any).output ? (
                             <div className="rounded border p-2 text-red-500">
-                              Error: {String(part.output.error)}
+                              Error: {String((part as any).output.error)}
                             </div>
                           ) : (
                             <DocumentToolResult
                               isReadonly={isReadonly}
-                              result={part.output}
+                              result={(part as any).output}
                               type="request-suggestions"
                             />
                           )
