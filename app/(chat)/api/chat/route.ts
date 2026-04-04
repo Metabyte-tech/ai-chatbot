@@ -37,6 +37,7 @@ import type { ChatMessage } from "@/lib/types";
 import { convertToUIMessages, generateUUID } from "@/lib/utils";
 import { generateTitleFromUserMessage } from "../../actions";
 import { type PostRequestBody, postRequestBodySchema } from "./schema";
+import { DEFAULT_CHAT_MODEL } from "@/lib/ai/models";
 
 export const maxDuration = 300;
 

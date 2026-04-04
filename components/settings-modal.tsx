@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useSession, signOut } from "next-auth/react";
 import { IngestionUI } from "./ingestion-ui";
+import { toast } from "sonner";
 
 type SettingsTab = "account" | "subscription" | "settings" | "personalization" | "skills" | "data_sources" | "contact";
 

@@ -8,7 +8,7 @@ import type { ChatMessage } from "@/lib/types";
 export type UseAutoResumeParams = {
   autoResume: boolean;
   initialMessages: ChatMessage[];
-  reload: UseChatHelpers<ChatMessage>["reload"];
+  reload: any;
   setMessages: UseChatHelpers<ChatMessage>["setMessages"];
 };
 

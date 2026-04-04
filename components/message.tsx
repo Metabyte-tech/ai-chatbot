@@ -74,14 +74,14 @@ const PurePreviewMessage = ({
           className={cn("flex flex-col", {
             "gap-2 md:gap-4": ((message.parts ?? []).some(
               (p) => p && p.type === "text" && (p as any).text?.trim()
-            )) || (message.content?.trim()),
+            )) || ((message as any).content?.trim()),
             "w-full":
               (message.role === "assistant" &&
                 ((message.parts ?? []).some(
                   (p) => p && p.type === "text" && (p as any).text?.trim()
                 ) ||
                   (message.parts ?? []).some((p) => p && p.type.startsWith("tool-")) ||
-                  message.content?.trim())) ||
+                  (message as any).content?.trim())) ||
               mode === "edit",
             "max-w-[calc(100%-2.5rem)] sm:max-w-[min(fit-content,80%)]":
               message.role === "user" && mode !== "edit",
@@ -105,7 +105,7 @@ const PurePreviewMessage = ({
             </div>
           )}
 
-          {(!(message.parts ?? []).length) && message.content ? (
+          {(!(message.parts ?? []).length) && (message as any).content ? (
             <MessageContent
               className={cn({
                 "wrap-break-word w-fit rounded-2xl px-3 py-2 text-right text-white":
@@ -120,7 +120,7 @@ const PurePreviewMessage = ({
                   : undefined
               }
             >
-              <Response key={`resp-${message.id}-${isLoading ? 'loading' : 'done'}`}>{sanitizeText(message.content)}</Response>
+              <Response key={`resp-${message.id}-${isLoading ? 'loading' : 'done'}`}>{sanitizeText((message as any).content)}</Response>
             </MessageContent>
           ) : message.parts?.map((part, index) => {
             if (!part) return null;
@@ -187,6 +187,7 @@ const PurePreviewMessage = ({
             }
 
             if (type === "tool-getWeather") {
+              const { toolCallId } = part as any;
               const state = (part as any)?.state;
               const approvalId = (part as { approval?: { id: string } })
                 ?.approval?.id;
