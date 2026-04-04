@@ -153,17 +153,7 @@ export function Chat({
     currentModelIdRef.current = currentModelId;
   }, [currentModelId]);
 
-  const {
-    messages,
-    setMessages,
-    sendMessage,
-    status,
-    stop,
-    reload,
-    regenerate,
-    resumeStream,
-    addToolApprovalResponse,
-  } = useChat<ChatMessage>({
+  const chatHelpers = useChat<ChatMessage>({
     id,
     messages: initialMessages,
     generateId: generateUUID,
@@ -230,6 +220,19 @@ export function Chat({
       }
     },
   });
+
+  const {
+    messages,
+    setMessages,
+    sendMessage,
+    status,
+    stop,
+    regenerate,
+    resumeStream,
+    addToolApprovalResponse,
+  } = chatHelpers;
+
+  const reload = (chatHelpers as any).reload || chatHelpers.regenerate;
 
   const handleSendMessage = async (
     ...args: Parameters<UseChatHelpers<ChatMessage>["sendMessage"]>
