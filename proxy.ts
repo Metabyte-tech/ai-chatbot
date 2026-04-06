@@ -37,7 +37,7 @@ export default async function middleware(request: NextRequest) {
     const redirectUrl = encodeURIComponent(absoluteUrl);
 
     return NextResponse.redirect(
-      new URL(`/api/auth/guest?redirectUrl=${redirectUrl}`, `${protocol}://${host}`)
+      new URL(`/login?redirectUrl=${redirectUrl}`, `${protocol}://${host}`)
     );
   }
 
