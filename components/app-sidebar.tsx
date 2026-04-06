@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import type { User } from "next-auth";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useSWRConfig } from "swr";
 import {
   Heart,
   History,
@@ -48,9 +49,27 @@ export function AppSidebar({ user }: { user: User | undefined }) {
   const isCollapsed = state === "collapsed";
   const isGuest = !user || (user as any).type === "guest";
 
-  const handleDeleteAll = () => {
-    toast.success("All chats deleted successfully");
-    setShowDeleteAllDialog(false);
+  const { mutate } = useSWRConfig();
+  const handleDeleteAll = async () => {
+    const deletePromise = fetch("/api/history", {
+      method: "DELETE",
+    });
+
+    toast.promise(deletePromise, {
+      loading: "Deleting all chats...",
+      success: () => {
+        mutate(
+          (key) => typeof key === "string" && key.startsWith("/api/history"),
+          undefined,
+          { revalidate: true }
+        );
+        setShowDeleteAllDialog(false);
+        router.push("/");
+        router.refresh();
+        return "All chats deleted successfully";
+      },
+      error: "Failed to delete all chats",
+    });
   };
 
   return (

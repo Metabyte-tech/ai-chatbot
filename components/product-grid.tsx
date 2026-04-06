@@ -43,6 +43,8 @@ function sanitizeUrl(url: string, isImage: boolean = false) {
 
 function ProductImage({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
     const [imgSrc, setImgSrc] = useState(src);
+    const [triedRaw, setTriedRaw] = useState(false);
+
     return (
         <Image
             src={imgSrc}
@@ -52,6 +54,19 @@ function ProductImage({ src, alt, className = "" }: { src: string; alt: string; 
             className={`object-cover ${className}`}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onError={() => {
+                if (imgSrc.includes('/api/proxy/image') && !triedRaw) {
+                    try {
+                        const urlParams = new URL(imgSrc, window.location.origin).searchParams;
+                        const originalUrl = urlParams.get('url');
+                        if (originalUrl) {
+                            setTriedRaw(true);
+                            setImgSrc(originalUrl);
+                            return;
+                        }
+                    } catch (e) {
+                        // ignore parsing error
+                    }
+                }
                 setImgSrc("https://placehold.co/600x600?text=No+Image");
             }}
         />
