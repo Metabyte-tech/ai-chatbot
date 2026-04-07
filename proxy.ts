@@ -28,6 +28,9 @@ export default async function middleware(request: NextRequest) {
   });
 
   if (!token) {
+    if (!isDevelopmentEnvironment) {
+      console.info(`[Middleware Debug] No token for ${pathname}. Redirecting to login.`);
+    }
     // AWS Amplify routes via an internal localhost proxy.
     // We must manually construct the absolute URL using headers or ENV.
     const protocol = request.headers.get("x-forwarded-proto") || "https";
@@ -43,6 +46,10 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.redirect(
       new URL(`/login?redirectUrl=${redirectUrl}`, `${protocol}://${host}`)
     );
+  }
+
+  if (!isDevelopmentEnvironment) {
+    console.info(`[Middleware Debug] Token found for ${pathname}: ${token.email?.substring(0, 3)}...`);
   }
 
   const isGuest = guestRegex.test(token?.email ?? "");
