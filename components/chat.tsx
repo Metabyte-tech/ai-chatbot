@@ -262,17 +262,10 @@ export function Chat({
 
       setHasAppendedQuery(true);
 
-      // Proactive Self-Healing: The previous bug corrupted `window.history.state` to `{}`. 
-      // This causes Next.js router to crash asynchronously because `window.history.state.tree` is undefined.
       if (window.history.state && !window.history.state.tree) {
         window.location.replace(`/chat/${id}`);
-        return;
-      }
-
-      try {
-        router.replace(`/chat/${id}`);
-      } catch (e) {
-        window.location.replace(`/chat/${id}`);
+      } else {
+        router.replace(`/chat/${id}`, { scroll: false });
       }
     }
   }, [query, sendMessage, hasAppendedQuery, id, router]);
