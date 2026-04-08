@@ -193,7 +193,7 @@ export function Chat({
               : { message: lastMessage }),
             selectedChatModel: currentModelIdRef.current,
             selectedVisibilityType: visibilityType,
-            template_id: selectedTemplate?.id,
+            template_id: selectedTemplate?.id || searchParams.get("template"),
             ...request.body,
           },
         };
