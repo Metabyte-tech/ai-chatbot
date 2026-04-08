@@ -28,6 +28,11 @@ export default async function middleware(request: NextRequest) {
   });
 
   if (!token) {
+    // If the user has no token but is already trying to access home, login, or register, let them proceed
+    if (["/", "/login", "/register"].includes(pathname)) {
+      return NextResponse.next();
+    }
+
     if (!isDevelopmentEnvironment) {
       console.info(`[Middleware Debug] No token for ${pathname}. Redirecting to login.`);
     }
@@ -43,9 +48,9 @@ export default async function middleware(request: NextRequest) {
     const absoluteUrl = `${protocol}://${host}${pathname}${request.nextUrl.search}`;
     const redirectUrl = encodeURIComponent(absoluteUrl);
 
-    return NextResponse.redirect(
-      new URL(`/login?redirectUrl=${redirectUrl}`, `${protocol}://${host}`)
-    );
+    // Redirect unauthorized attempts directly to the Home page so they can see the app
+    // The frontend will automatically show the login pop-up when they interact
+    return NextResponse.redirect(new URL("/", `${protocol}://${host}`));
   }
 
   if (!isDevelopmentEnvironment) {

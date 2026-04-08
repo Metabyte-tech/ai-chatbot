@@ -151,12 +151,12 @@ function PureMultimodalInput({
 
   const submitForm = useCallback(() => {
     if (!session?.user || (session.user as any).type === "guest") {
-      // if (onShowLogin) {
-      //   onShowLogin();
-      // } else {
-      //   retailsStoreToast({ type: "error", description: "Sign in or sign up to use Retails Store search" });
-      // }
-      // return;
+      if (onShowLogin) {
+        onShowLogin();
+      } else {
+        retailsStoreToast({ type: "error", description: "Sign in or sign up to use Retails Store search" });
+      }
+      return;
     }
 
     window.history.pushState({}, "", `/chat/${chatId}`);

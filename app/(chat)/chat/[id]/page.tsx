@@ -33,11 +33,11 @@ async function ChatPage({ params }: { params: Promise<{ id: string }> }) {
 
   if (chat.visibility === "private") {
     if (!session.user) {
-      return notFound();
+      redirect("/");
     }
 
     if (session.user.id !== chat.userId) {
-      return notFound();
+      redirect("/");
     }
   }
 
