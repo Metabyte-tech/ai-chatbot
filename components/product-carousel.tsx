@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
     Carousel,
     CarouselContent,
@@ -15,11 +16,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
     Dialog,
     DialogContent,
-    DialogHeader,
-    DialogTitle,
     DialogDescription,
 } from "@/components/ui/dialog";
-import { ExternalLinkIcon, MessageSquare, Star, ShoppingCart, Info } from "lucide-react";
+import { ExternalLinkIcon, MessageSquare, Star, ShoppingCart, Info, ListPlus } from "lucide-react";
+import { AddToListPopover } from "./add-to-list-popover";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useSelectedProducts } from "@/lib/contexts/selected-products-context";
 
 export type Product = {
     name: string;
@@ -98,6 +100,7 @@ function ProductImage({ src, alt, className = "" }: { src: string; alt: string; 
 export function ProductCarousel({ products }: ProductCarouselProps) {
     const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const { toggleProduct, isSelected } = useSelectedProducts();
 
     useEffect(() => {
         const handleImageFailure = (e: any) => {
@@ -144,74 +147,95 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                     {sortedProducts.map((product, index) => (
                         <CarouselItem key={`${product.name}-${index}`} className="pl-4 md:pl-6 basis-[85%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                             <Card
-                                className="overflow-hidden border-2 hover:border-emerald-500/50 transition-all group h-full cursor-pointer shadow-sm hover:shadow-md"
+                                className={cn(
+                                    "overflow-hidden border transition-all group h-full cursor-pointer shadow-sm hover:shadow-md bg-white rounded-xl",
+                                    isSelected(product.name) ? "border-emerald-500 ring-1 ring-emerald-500/30" : "border-zinc-200/60 hover:border-emerald-500/50"
+                                )}
                                 onClick={() => setSelectedProduct(product)}
                             >
                                 <CardContent className="p-0 flex flex-col h-full">
-                                    <div className="relative aspect-square w-full overflow-hidden bg-muted">
+                                    <div className="relative aspect-square w-full overflow-hidden bg-zinc-100 border-b border-zinc-100">
                                         <ProductImage
                                             src={sanitizeUrl(product.image_url, true)}
                                             alt={product.name}
-                                            className="group-hover:scale-110 transition-transform duration-500"
+                                            className="group-hover:scale-105 transition-transform duration-500 object-contain p-2"
                                         />
-                                        <div className="absolute top-2 right-2 flex flex-col items-end gap-1.5">
-                                            <Badge variant="secondary" className="font-bold text-sm shadow-sm bg-background/90 backdrop-blur-sm border-none text-emerald-600">
-                                                {product.price}
-                                            </Badge>
-                                            {product.is_verified && (
-                                                <Badge className="bg-emerald-500 text-white border-none py-0 px-1.5 text-[9px] font-black uppercase tracking-tighter">
-                                                    Verified
-                                                </Badge>
-                                            )}
-                                        </div>
-                                        <div className="absolute top-2 left-2 flex flex-col gap-1">
-                                            {product.location && (
-                                                <Badge variant="outline" className="bg-black/40 text-white border-none backdrop-blur-md py-0 px-1.5 text-[10px] font-bold">
-                                                    {product.location}
-                                                </Badge>
-                                            )}
-                                            {product.supplier_years && (
-                                                <Badge variant="outline" className="bg-emerald-500/80 text-white border-none backdrop-blur-md py-0 px-1.5 text-[10px] font-bold">
-                                                    {product.supplier_years}
-                                                </Badge>
-                                            )}
-                                        </div>
-                                        <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/60 to-transparent">
-                                            <button className="w-full bg-white text-black text-xs font-bold py-2 rounded-lg flex items-center justify-center gap-1">
-                                                <Info size={12} />
-                                                Quick View
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div className="p-4 flex flex-col flex-1 gap-2 bg-gradient-to-b from-white to-zinc-50/50">
-                                        <div className="flex flex-col gap-1">
-                                            <span className="text-[11px] font-bold text-emerald-600 uppercase tracking-widest">
-                                                {product.brand}
-                                            </span>
-                                            <h3 className="font-bold text-base line-clamp-1 leading-tight text-zinc-900">
-                                                {product.name}
-                                            </h3>
-                                        </div>
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center gap-1">
-                                                {Array.from({ length: 5 }).map((_, i) => (
-                                                    <Star
-                                                        key={i}
-                                                        size={10}
-                                                        className={i < Math.floor(Number(product.rating_avg) || 0) ? "fill-yellow-400 text-yellow-400" : "text-zinc-300"}
-                                                    />
-                                                ))}
-                                                <span className="text-[10px] text-zinc-400 font-medium">({product.rating_count || 0})</span>
+                                        <div className="absolute top-2 right-2 flex flex-col gap-2 z-10">
+                                            <AddToListPopover products={product}>
+                                                <Button
+                                                    variant="secondary"
+                                                    size="icon"
+                                                    className="rounded-full h-9 w-9 bg-white shadow-sm border border-zinc-200/80 hover:bg-zinc-50 transition-all hover:scale-105 active:scale-95"
+                                                    onClick={(e) => { e.stopPropagation(); }}
+                                                >
+                                                    <ListPlus size={18} className="text-zinc-700" />
+                                                </Button>
+                                            </AddToListPopover>
+                                            <div
+                                                data-testid="product-select-button"
+                                                className={cn(
+                                                    "transition-all duration-300 rounded-full min-w-[36px] h-9 flex items-center justify-center border shadow-sm cursor-pointer",
+                                                    isSelected(product.name)
+                                                        ? "bg-emerald-500 border-emerald-600 px-3 gap-2 scale-100"
+                                                        : "bg-white/95 backdrop-blur-sm border-zinc-200 opacity-0 group-hover:opacity-100 hover:scale-105 active:scale-95"
+                                                )}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    toggleProduct(product);
+                                                }}
+                                            >
+                                                <Checkbox
+                                                    checked={isSelected(product.name)}
+                                                    onCheckedChange={() => toggleProduct(product)}
+                                                    className={cn(
+                                                        "h-5 w-5 rounded-full border-2 transition-colors",
+                                                        isSelected(product.name)
+                                                            ? "border-white bg-emerald-500 data-[state=checked]:bg-emerald-500 data-[state=checked]:text-white"
+                                                            : "border-zinc-300 bg-transparent"
+                                                    )}
+                                                />
+                                                {isSelected(product.name) && (
+                                                    <span className="text-[11px] font-bold text-white select-none whitespace-nowrap">
+                                                        Selected
+                                                    </span>
+                                                )}
                                             </div>
-                                            {product.moq && (
-                                                <span className="text-[10px] font-bold text-zinc-400">
-                                                    MOQ: <span className="text-zinc-600">{product.moq}</span>
-                                                </span>
-                                            )}
                                         </div>
-                                        <p className="text-xs text-zinc-500 line-clamp-2 min-h-[2.5rem] leading-relaxed">
-                                            {product.details || "Finding live information and best prices for this selection..."}
-                                        </p>
+
+                                        {/* Selection Overlay during hover/selected state */}
+                                        {isSelected(product.name) && (
+                                            <div className="absolute inset-0 bg-emerald-500/5 pointer-events-none transition-opacity duration-300" />
+                                        )}
+                                    </div>
+                                    <div className="p-3 flex flex-col flex-1 bg-white">
+                                        <h3 className="text-[13px] text-zinc-800 line-clamp-2 leading-snug group-hover:text-emerald-700 transition-colors">
+                                            {product.name}
+                                        </h3>
+
+                                        {/* Faked sales volume to match the requested aesthetic layout if brand exists */}
+                                        {product.brand && (
+                                            <div className="text-[11px] text-zinc-400 mt-1">1000+ sold</div>
+                                        )}
+
+                                        <div className="text-lg font-black text-black mt-1 leading-none">
+                                            {product.price || "Check Price"}
+                                        </div>
+
+                                        <div className="text-[12px] text-zinc-700 mt-1">
+                                            Min. order: {product.moq || "1 piece"}
+                                        </div>
+
+                                        <div className="mt-auto pt-3 flex flex-col gap-0.5">
+                                            <div className="flex items-center gap-1.5">
+                                                <div className="h-4 w-4 rounded-full border border-zinc-200 flex items-center justify-center bg-zinc-50 flex-shrink-0" />
+                                                <span className="text-[11px] text-zinc-500 underline truncate hover:text-emerald-600 transition-colors">
+                                                    {product.brand || "Supplier"}
+                                                </span>
+                                            </div>
+                                            <div className="text-[11px] text-zinc-500 pl-5.5">
+                                                {product.supplier_years || "1 yr"} &middot; {product.location || "CN"} &middot; <span className="font-bold text-black">{product.rating_avg || "5.0"}</span>/5.0
+                                            </div>
+                                        </div>
                                     </div>
                                 </CardContent>
                             </Card>

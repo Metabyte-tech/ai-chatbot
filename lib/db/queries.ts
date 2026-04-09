@@ -110,7 +110,7 @@ export async function saveChat({
       userId,
       title,
       visibility,
-    });
+    }).onConflictDoNothing();
   } catch (_error) {
     console.error("saveChat actual error:", _error);
     throw new ChatSDKError("bad_request:database", "Failed to save chat");
@@ -258,7 +258,7 @@ export async function getChatById({ id }: { id: string }) {
 
 export async function saveMessages({ messages }: { messages: DBMessage[] }) {
   try {
-    return await db.insert(message).values(messages);
+    return await db.insert(message).values(messages).onConflictDoNothing();
   } catch (_error) {
     throw new ChatSDKError("bad_request:database", "Failed to save messages");
   }
@@ -612,5 +612,54 @@ export async function getStreamIdsByChatId({ chatId }: { chatId: string }) {
       "bad_request:database",
       "Failed to get stream ids by chat id"
     );
+  }
+}
+
+// --- PRODUCT LISTS ---
+import { productList, savedProduct } from "./schema";
+
+export async function createProductList(name: string, userId: string) {
+  try {
+    return await db.insert(productList).values({ name, userId }).returning();
+  } catch (error) {
+    console.error("Failed to create product list", error);
+    throw error;
+  }
+}
+
+export async function getProductListsByUserId(userId: string) {
+  try {
+    return await db.select().from(productList).where(eq(productList.userId, userId)).orderBy(desc(productList.createdAt));
+  } catch (error) {
+    console.error("Failed to fetch product lists", error);
+    throw error;
+  }
+}
+
+export async function addSavedProduct(listId: string, productData: any) {
+  try {
+    return await db.insert(savedProduct).values({ listId, productData }).returning();
+  } catch (error) {
+    console.error("Failed to add saved product", error);
+    throw error;
+  }
+}
+
+export async function getSavedProductsByListId(listId: string) {
+  try {
+    return await db.select().from(savedProduct).where(eq(savedProduct.listId, listId)).orderBy(desc(savedProduct.createdAt));
+  } catch (error) {
+    console.error("Failed to fetch saved products", error);
+    throw error;
+  }
+}
+
+export async function getProductListById(listId: string) {
+  try {
+    const lists = await db.select().from(productList).where(eq(productList.id, listId));
+    return lists[0];
+  } catch (error) {
+    console.error("Failed to get product list", error);
+    throw error;
   }
 }

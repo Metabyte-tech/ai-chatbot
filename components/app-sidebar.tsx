@@ -28,6 +28,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { SidebarHistory } from "./sidebar-history";
+import { ProductSearchModal } from "./product-search-modal";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -160,16 +161,15 @@ export function AppSidebar({ user }: { user: User | undefined }) {
         <SidebarContent>
           <SidebarMenu className="px-2 gap-1 mt-2">
             <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                tooltip="Product Search"
-                className="h-10 text-muted-foreground hover:text-zinc-900"
-              >
-                <Link href="/search">
+              <ProductSearchModal>
+                <SidebarMenuButton
+                  tooltip="Product Search"
+                  className="h-10 text-muted-foreground hover:text-zinc-900"
+                >
                   <Search />
                   <span>Product Search</span>
-                </Link>
-              </SidebarMenuButton>
+                </SidebarMenuButton>
+              </ProductSearchModal>
             </SidebarMenuItem>
 
             <SidebarMenuItem>
