@@ -128,9 +128,9 @@ export function ProductGrid({ products }: ProductGridProps) {
                                 >
                                     <Checkbox
                                         checked={isSelected(product.name)}
-                                        onCheckedChange={() => toggleProduct(product)}
+                                        onCheckedChange={() => { }}
                                         className={cn(
-                                            "h-5 w-5 rounded-full border-2 transition-colors",
+                                            "pointer-events-none h-5 w-5 rounded-full border-2 transition-colors",
                                             isSelected(product.name)
                                                 ? "border-white bg-emerald-500 data-[state=checked]:bg-emerald-500 data-[state=checked]:text-white"
                                                 : "border-zinc-300 bg-transparent"

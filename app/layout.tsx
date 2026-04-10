@@ -74,9 +74,9 @@ export default function RootLayout({
       <body className="antialiased bg-viewport-glow" suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
+          forcedTheme="light"
           disableTransitionOnChange
-          enableSystem
         >
           <Toaster position="top-center" />
           <SessionProvider>{children}</SessionProvider>

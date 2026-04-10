@@ -44,7 +44,7 @@ export function ProductActionBar() {
                             Send inquiry
                         </button>
 
-                        {selectedProducts.length >= 2 && (
+                        {selectedProducts.length >= 2 && selectedProducts.length <= 5 && (
                             <>
                                 <div className="w-px h-4 bg-white/20" />
                                 <button

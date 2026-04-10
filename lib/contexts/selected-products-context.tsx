@@ -19,9 +19,9 @@ export function SelectedProductsProvider({ children }: { children: React.ReactNo
 
     const toggleProduct = useCallback((product: Product) => {
         setSelectedProducts((prev) => {
-            const isAlreadySelected = prev.some((p) => p.title === product.title); // Using title as unique ID if ID is missing
+            const isAlreadySelected = prev.some((p) => p.name === product.name);
             if (isAlreadySelected) {
-                return prev.filter((p) => p.title !== product.title);
+                return prev.filter((p) => p.name !== product.name);
             }
             return [...prev, product];
         });
@@ -32,8 +32,8 @@ export function SelectedProductsProvider({ children }: { children: React.ReactNo
     }, []);
 
     const isSelected = useCallback(
-        (productTitle: string) => {
-            return selectedProducts.some((p) => p.title === productTitle);
+        (productName: string) => {
+            return selectedProducts.some((p) => p.name === productName);
         },
         [selectedProducts]
     );
