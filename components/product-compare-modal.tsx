@@ -22,18 +22,35 @@ export function ProductCompareModal({ open, onOpenChange }: ProductCompareModalP
     const { selectedProducts, toggleProduct } = useSelectedProducts();
 
     const attributes = [
-        { label: "Price", key: "price", category: "Product information" },
-        { label: "Min.order", key: "moq", category: "Product information", default: "1 piece" },
-        { label: "Delivery time", key: "delivery_time", category: "Product information", default: "-" },
-        { label: "Wireless Delay Time", key: "delay", category: "Product attributes", default: "30 Ms" },
-        { label: "Headphone Form Factor", key: "form_factor", category: "Product attributes", default: "Over Ear" },
-        { label: "Feature", key: "feature", category: "Product attributes", default: "High Quality" },
-        { label: "Frequency Range", key: "frequency", category: "Product attributes", default: "2.401-2.480GHz" },
-        { label: "Cord Length", key: "cord", category: "Product attributes", default: "Wireless" },
+        { label: "Price", key: "price", category: "Core Details" },
+        { label: "Brand", key: "brand", category: "Core Details" },
+        { label: "Platform", key: "source", category: "Core Details", default: "Web" },
+        { label: "Rating", key: "rating_avg", category: "Core Details" },
+        { label: "Customer Reviews", key: "rating_count", category: "Core Details", default: "New" },
+        { label: "Details & Specifications", key: "details", category: "Deep Analysis" },
+        { label: "Advantages (Pros)", key: "advantages", category: "Deep Analysis" },
+        { label: "Disadvantages (Cons)", key: "disadvantages", category: "Deep Analysis" },
     ];
 
     // Helper to extract nested info or defaults
     const getAttrValue = (product: any, attr: any) => {
+        if (attr.key === "advantages" || attr.key === "disadvantages") {
+            const arr = product[attr.key];
+            if (Array.isArray(arr) && arr.length > 0) {
+                return (
+                    <ul className="list-disc pl-4 space-y-1 text-zinc-600 font-normal">
+                        {arr.map((item, i) => <li key={i}>{item}</li>)}
+                    </ul>
+                );
+            }
+            return "-";
+        }
+        if (attr.key === "rating_avg") {
+            return product.rating_avg ? `${product.rating_avg} ⭐` : "-";
+        }
+        if (attr.key === "details") {
+            return <span className="font-normal text-zinc-700 whitespace-pre-wrap">{product.details || "-"}</span>;
+        }
         return product[attr.key] || attr.default || "-";
     };
 
@@ -42,14 +59,6 @@ export function ProductCompareModal({ open, onOpenChange }: ProductCompareModalP
             <DialogContent className="max-w-5xl h-[90vh] flex flex-col p-0 overflow-hidden bg-white border-none shadow-2xl rounded-2xl">
                 <DialogHeader className="p-4 border-b flex flex-row items-center justify-between shrink-0">
                     <DialogTitle className="text-sm font-semibold text-zinc-900">Compare Products</DialogTitle>
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 rounded-full"
-                        onClick={() => onOpenChange(false)}
-                    >
-                        <X size={18} />
-                    </Button>
                 </DialogHeader>
 
                 <div className="flex-1 overflow-x-auto overflow-y-auto">
@@ -93,7 +102,7 @@ export function ProductCompareModal({ open, onOpenChange }: ProductCompareModalP
 
                         {/* Comparison Rows */}
                         <div className="flex flex-col gap-10">
-                            {["Product information", "Product attributes"].map((category) => (
+                            {["Core Details", "Deep Analysis"].map((category) => (
                                 <div key={category} className="flex flex-col gap-4">
                                     <h4 className="text-sm font-bold text-zinc-900 border-b border-zinc-100 pb-2">{category}</h4>
                                     <div className="flex flex-col gap-6">

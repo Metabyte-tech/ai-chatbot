@@ -17,6 +17,8 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
+    DialogHeader,
+    DialogTitle,
 } from "@/components/ui/dialog";
 import { ExternalLinkIcon, MessageSquare, Star, ShoppingCart, Info, ListPlus } from "lucide-react";
 import { AddToListPopover } from "./add-to-list-popover";
@@ -37,6 +39,8 @@ export type Product = {
     supplier_years?: string;
     location?: string;
     is_verified?: boolean;
+    advantages?: string[];
+    disadvantages?: string[];
 };
 
 interface ProductCarouselProps {
