@@ -5,66 +5,561 @@
 [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
    ▲ Next.js 16.0.10 (Turbopack, Cache Components)
    - Local:         http://localhost:3000
-   - Network:       http://192.168.1.2:3000
+   - Network:       http://192.168.43.84:3000
    - Environments: .env.local
 
  ✓ Starting...
- ✓ Ready in 8.5s
- ○ Compiling / ...
- GET / 200 in 47s (compile: 41s, proxy.ts: 1197ms, render: 5.3s)
-Error fetching templates: TypeError: fetch failed
-    at async GET (app/(chat)/api/templates/route.ts:6:26)
-  4 |     try {
-  5 |         const backendUrl = process.env.BACKEND_URL || "http://127.0.0.1:8000";
-> 6 |         const response = await fetch(`${backendUrl}/api/templates`, {
-    |                          ^
-  7 |             cache: 'no-store'
-  8 |         });
-  9 | {
-  [cause]: Error: connect ECONNREFUSED 127.0.0.1:8000
-      at <unknown> (Error: connect ECONNREFUSED 127.0.0.1:8000) {
-    errno: -111,
-    code: 'ECONNREFUSED',
-    syscall: 'connect',
-    address: '127.0.0.1',
-    port: 8000
-  }
-}
- GET /api/templates 500 in 3.6s (compile: 1740ms, proxy.ts: 54ms, render: 1778ms)
- ○ Compiling /api/auth/[...nextauth] ...
- GET /api/history?limit=20 200 in 5.4s (compile: 4.4s, proxy.ts: 36ms, render: 1021ms)
- GET /api/history?limit=20 200 in 153ms (compile: 28ms, proxy.ts: 44ms, render: 80ms)
- GET /api/history?ending_before=0a87feb6-2c92-4f81-aaf9-b401407ef51e&limit=20 200 in 140ms (compile: 30ms, proxy.ts: 36ms, render: 74ms)
- GET /api/auth/session 200 in 10.7s (compile: 10.6s, proxy.ts: 25ms, render: 86ms)
- GET /api/auth/session 200 in 552ms (compile: 450ms, proxy.ts: 27ms, render: 75ms)
+ ✓ Ready in 7.1s
  ○ Compiling /chat/[id] ...
 ====== RESPONSE RENDER ======
 Children Raw: kids shoes
 Children Length: 10
 Includes <product_carousel>: false
 ====== RESPONSE RENDER ======
-Children Raw: Error: fetch failed
-Children Length: 19
+Children Raw: <product_grid>[{"name": "adidas kids Grand Court 2.0 Shoes", "brand": "Grand Court", "price": "$21.00", "image_url": "https://i.ebayimg.com/images/g/gMYAAeSwx-Bp1nG5/s-l50.webp", "source_url": "https://www.ebay.com/itm/227292200974?_skw=kids+shoes&itmmeta=01KNYCYNMGQY21KDCW7Y3PYM16&hash=item34ebabc00e%3Ag%3AgMYAAeSwx-Bp1nG5&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xAJ6KZZbEt5UWQiN8DRkbJIf%2B005OQQ%2Flhkk3XbKuAhgGNUrYgWLVWHSYq%2BhBLjH045aAcVQHtcVMzPjC0xOHLPXFNQxg0DlimaCrmUQXg9uDwJhhY560ag72BCY7GdFJs3vmZQZ9jh8yFcK7um%2FPtFhiYkf5OgVIkR%2FFcM5Nkq7vgFNL%2BrVTSNyscnbIvp9DOogCFTWjj%2BNR%2FBWmvJqEJFh5j300SvAAE8w0spVBC5ntMr2iGC%2FC%2BFTKhRHJyCs3U%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "adidas kids Grand Court 2.0 Shoes - $21.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16", "brand": "Nike Air", "price": "$59.95", "image_url": "https://i.ebayimg.com/images/g/ezUAAeSwSYZp1GSF/s-l50.webp", "source_url": "https://www.ebay.com/itm/198260532652?_skw=kids+shoes&itmmeta=01KNYCYNMGZ6CBE47P3WKEG8GQ&hash=item2e293fa5ac%3Ag%3AezUAAeSwSYZp1GSF&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xDViWNgJHXbODIi3L6sX3DJ9lrKjlaaZBNMlXIpQ7svX3Rt64VKzvgdq7a2So54DgKdefHgKVw9NDbd3%2BQ2feB0pe6Aq%2BhYDHDX2wIap%2F0o6q0r2cbSnYxlwC%2BB9lZul2eC6rDmojcSt818hwPDnr7oc2aIXyQeKB%2B2vpMDtsQUXb5DI6ydWt%2BRH9sjjXyNQqoWv4QlhXyy2VGl8lnZcyqEu9cOkavdQXUhD8YgXi2OLw%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16 - $59.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y", "brand": "Jordan Rings", "price": "$90.00", "image_url": "https://i.ebayimg.com/images/g/5yIAAeSwdvpphC1~/s-l300.webp", "source_url": "https://www.ebay.com/itm/177836598602?_skw=kids+shoes&itmmeta=01KNYCYNMGQQKAFA87VMFVAW96&hash=item2967e3254a%3Ag%3A5yIAAeSwdvpphC1%7E&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xBa9x1fLKmTSewEjtc%2FaRPmdre7VIfvqTYVasRAgirEEQI3gRd5f0%2FH0B7n3UbYwFgEk5cbz2P23ZTYoGNNaP1hpr2y8azh71bPHWeHSkwwGFjGvZXlj%2FdFAIsy26lBrRlKpn%2Bqwq91Nyi3ZkP4HZ2IZEFgVH%2B1eL83mJEr9cbIXTF2hwDbYOxe8PV5F3auijY2gAQgYtrOmFsJOlLK4mmkahQu%2BB5ZK4qdukapbCB2dQ%3D%3D%7Ctkp%3ABlBMUMTa-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y - $90.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU", "brand": "Nike Force", "price": "$69.95", "image_url": "https://i.ebayimg.com/images/g/s9YAAeSwr9dp2E5R/s-l300.webp", "source_url": "https://www.ebay.com/itm/178036532604?_skw=kids+shoes&itmmeta=01KNYCYNMG6S5DW246D4JQG5D5&hash=item2973cde57c%3Ag%3As9YAAeSwr9dp2E5R&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xCE2HfvOm9mh1iLZ3lWK%2FulFuMl6e6zluQoFOuuVy7p%2FG0dK2U0RL3psJKSY4l%2Bn5MoZ1I6MTxhKaIMgOtvQp%2F2tCkgeOcBGaYkX1pUWk4Fr%2B%2F3zuK36HGA3sQhMozhZ%2FHRGozmdYx1SKdZbxGvsdxhrVpEmmoC%2F0LkcHZVkKovFYnF%2BrNjcVZ7HZKo4nUtPE11QyYK0mqAaN%2BmBMnfP9NuiRWZPdjmp1zFNgXgHPfW0A%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU - $69.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560-", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/p-gAAeSwICVp1751/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746523001?_skw=kids+shoes&itmmeta=01KNYCYNMGB3KPNBATZDAZE898&hash=item371f314179%3Ag%3Ap-gAAeSwICVp1751&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCkMVozXfERnW8s%2Bb2BF%2F3z8VRuTrEQQG%2FJ9O4YC5kJi3hnHY7qW6pr4ycdDn%2FiKhc3ZxcWTPYCx9ekF%2F6L%2BzKu%2FaOC3ZbIjpjAuI5tVVBQgIFRj%2F0IwiBnoDz%2B2TVi9wlVz9uredUBQYgrPMDthTxTn5zN%2Bezpc8ZNkwl%2FWu%2BP4%2BPtRSFE4RLVYtnF7OtugZTEv9AGm99yuqRRodLZEs%2Fblpq9Kr51%2BLurz0ggw0d2yLH5Noz7sG6TZX5wjHPCmAw%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560- - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/quQAAeSwkxNp17-t/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746527880?_skw=kids+shoes&epid=12061736291&itmmeta=01KNYCYNMG122MCXW050C532TX&hash=item371f315488%3Ag%3AquQAAeSwkxNp17-t&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCOTJZiYiFFMGyVD%2FDbxzWbaeqTpuzui6LOg2%2Bk4pyqwnOWN7c9Lqccl%2F5zbxcg%2FOrcc0YnQkJnyriezdohHjwvepJGSSsDYsJwMECEnxOj%2B%2FrgP2iwq4noQDlAiz2zGSHrOVgDh1FU1qZDqI6IoM18afzpt4LLwN2To%2Fhx9PVzc2%2FAfaKSnt5v%2BavcZNPt%2FAqaMpX9y8SP%2BT0eHtXwHG3G42CmATYZTLEian7JWfyJeQEm2IMHctklNWhPNKK32ZA%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10 - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White)", "brand": "Hoy Shoe", "price": "$10.000", "image_url": "https://i.ebayimg.com/images/g/EXkAAeSwcnFp19f4/s-l50.webp", "source_url": "https://www.ebay.com/itm/178035639787?_skw=kids+shoes&itmmeta=01KNYCYNMG15GZBB4MD39Z9J4B&hash=item2973c045eb%3Ag%3AEXkAAeSwcnFp19f4&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xBaSmUn7nfQDihD6vcTp0jIX4Hi2Bhc7V%2BAXg0qnCkOUR%2BjpiKPfGlkhT2mnv0U5RzrA%2B%2B%2BzYyq464T5jxMFr0MzXOI619s%2FcY6cXsMf2QAVlaTueZgvn3jNDEyrH3yHXgmZY2SdmqGo%2BDnhquwXb7S1EMv0gYwoSkL1MUssu0CBM3b8FoV8javkIuIe5hG8NtZOdWVK3srt0%2Bot1n9Hl3gR%2BSrG36CekeCf%2F1FIJ7Ux5jSuwXKGNlK4%2BfzBv7ub4s5hZ9c5tSLZgdQfPg4FgLq8HaW8pMd0n6LM1dHccnvvw%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White) - $10.000 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb", "brand": "Nike Boys", "price": "$18.990", "image_url": "https://i.ebayimg.com/images/g/fAMAAeSwxfNp1ETf/s-l50.webp", "source_url": "https://www.ebay.com/itm/366331477954?_skw=kids+shoes&itmmeta=01KNYCYNMG6JSFDDJBX6M82YHQ&hash=item554b0ebfc2%3Ag%3AfAMAAeSwxfNp1ETf&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xClTICQ1dIyrvyzIHRt9Aj5Di5NP8b2uS%2B6ysiPlk4voHJFYsr%2FiLhN%2BoDSoYR7JANQTAjIIHgi4wANWy5HeRYj48sCyqjKHF9xF%2BEIFxa4yfqVb27xffGhYPPWGRO%2FeTUMqYUie9sNxzho9SPiQ9Nuha%2BNo%2F8ojvNLoUa509M7otHSUooYrMSijHzTiJLzEV3jzEMsQRcwkAVT9RlvuXwSkAuyLKg5X4xL3mFCQGYFPaV%2F2jQUbdnbNw3Ye3vsCfc%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb - $18.990 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers", "brand": "Nike Boys", "price": "$13.75", "image_url": "https://i.ebayimg.com/images/g/logAAeSwe1Np2B-G/s-l50.webp", "source_url": "https://www.ebay.com/itm/287264246388?_skw=kids+shoes&itmmeta=01KNYCYNMG55HEJ2TPXWTFBJ83&hash=item42e2488a74%3Ag%3AlogAAeSwe1Np2B-G&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xC0Qu7G5v3njXp6uaqXF4qm3owaz9huGtvUjh5%2F8%2B1XO1dRazCwCjJuo18O13hhD%2FS7YAhKgNI0fdKXu%2BcC2hRsq3NCR0aHXLYN%2BBB1G83Sp8al1YniQkHdSU%2BQ7G1tPkVxtoM6hxUG9oLH7bYU%2FX%2FCs91zEQ0%2Bf88DhIn%2BbLNjIW8ignvZiZ0ZxX0PZ8jrFBBU5HQflMw5HX%2Bin0vKQ0Se2ablm0oawPvobtuflFhVcuZ8GBv%2BWUCZ1O4StyW29PzQTWTFHWVEmvpsTdBAQwvU8ss%2FXDb6SdIAS09QsEWMkA%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers - $13.75 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "jordan 12 obsidian size 4.5 youth", "brand": "eBay", "price": "$45.00", "image_url": "https://i.ebayimg.com/images/g/JfsAAeSwWIZp2Glm/s-l50.webp", "source_url": "https://www.ebay.com/itm/206200977741?_skw=kids+shoes&itmmeta=01KNYCYNMHQ8SQNNMM22EVA2RE&hash=item300289394d%3Ag%3AJfsAAeSwWIZp2Glm&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xB9rcgCbUTrou8CD8khQblLnuwssXF3G%2BdqERgBnr95VphJ7njezb0Q%2BUQtNrBzAwJkFEl%2Ba6myU%2FMftAPjWchH3Ty2ETbfd78ZqzyfEYLcm5WrqSUfVEkzLazLlw63GPbfFW%2BFGiTJyrN1NEA%2BKXJwvikJ2izwYKLhSbQaElTtxYEedO2IlEolw0UaGLpv2QyVXfq8l%2Fo153M7uFqu5tZeAUcsCkXGXN7WiwCSR4L81VruUv9TOVhGcJBZMVCj%2FTM%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "jordan 12 obsidian size 4.5 youth - $45.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 1", "brand": "Au", "price": "Check Site", "image_url": "https://ts2.mm.bing.net/th?id=OIP.SiCXPOm4zvTm6xyCi6w_MgHaIf&pid=15.1", "source_url": "https://au.levelshoes.com/kids.html", "source": "Au", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://au.levelshoes.com/kids.html", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 2", "brand": "Nike", "price": "Check Site", "image_url": "https://c.static-nike.com/a/images/w_1200,c_limit/bzl2wmsfh7kgdkufrrjq/seo-title.jpg", "source_url": "https://www.nike.com/fi/a/best-kids-shoes", "source": "Nike", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://www.nike.com/fi/a/best-kids-shoes", "moq": null, "location": null, "supplier_years": null, "is_verified": false}]</product_grid>
+Children Length: 10656
 Includes <product_carousel>: false
+ GET /chat/a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 66s (compile: 58s, proxy.ts: 1392ms, render: 5.9s)
+ GET /api/templates 200 in 2.7s (compile: 2.2s, proxy.ts: 17ms, render: 433ms)
+ GET /api/templates 200 in 39ms (compile: 7ms, proxy.ts: 11ms, render: 20ms)
+ ○ Compiling /api/vote ...
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 3.8s (compile: 3.7s, proxy.ts: 35ms, render: 140ms)
+ ○ Compiling / ...
+ GET / 200 in 15.3s (compile: 14.0s, proxy.ts: 166ms, render: 1140ms)
+ GET /api/templates 200 in 304ms (compile: 19ms, proxy.ts: 20ms, render: 266ms)
+ GET /api/templates 200 in 113ms (compile: 20ms, proxy.ts: 33ms, render: 60ms)
+ GET /api/history?limit=20 200 in 1900ms (compile: 1802ms, proxy.ts: 31ms, render: 67ms)
+ GET /api/auth/session 200 in 4.4s (compile: 4.3s, proxy.ts: 27ms, render: 57ms)
+ GET /api/auth/session 200 in 318ms (compile: 259ms, proxy.ts: 13ms, render: 46ms)
+ GET /chat/e0d2b02b-b2b4-4a9f-815f-a5abb894a666 200 in 513ms (compile: 262ms, proxy.ts: 56ms, render: 195ms)
+ GET /api/vote?chatId=e0d2b02b-b2b4-4a9f-815f-a5abb894a666 200 in 170ms (compile: 29ms, proxy.ts: 32ms, render: 109ms)
+ GET /api/templates 200 in 191ms (compile: 45ms, proxy.ts: 28ms, render: 118ms)
+ GET /api/templates 200 in 29ms (compile: 5ms, proxy.ts: 6ms, render: 19ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts3.mm.bing.net%2Fth%3Fid%3DOIP.kXi4oK7FBgZsWa1558oxPwHaHa%26pid%3D15.1 200 in 1753ms (compile: 1158ms, proxy.ts: 22ms, render: 573ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts1.mm.bing.net%2Fth%3Fid%3DOIP.Dx8v6nEJahGKUMdTNT0qoAHaJZ%26pid%3D15.1 200 in 1920ms (compile: 1182ms, proxy.ts: 24ms, render: 715ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fc.static-nike.com%2Fa%2Fimages%2Fw_1200%2Cc_limit%2Fbzl2wmsfh7kgdkufrrjq%2Fseo-title.jpg 200 in 1969ms (compile: 1205ms, proxy.ts: 21ms, render: 743ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.SiCXPOm4zvTm6xyCi6w_MgHaIf%26pid%3D15.1 200 in 2.1s (compile: 1223ms, proxy.ts: 24ms, render: 846ms)
+ ○ Compiling /search ...
+ GET /search 200 in 9.3s (compile: 9.2s, proxy.ts: 14ms, render: 108ms)
+ GET /api/templates 200 in 52ms (compile: 11ms, proxy.ts: 20ms, render: 22ms)
+ GET /api/templates 200 in 68ms (compile: 22ms, proxy.ts: 20ms, render: 27ms)
+ ○ Compiling /api/chat ...
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 4.1s (compile: 3.7s, proxy.ts: 19ms, render: 462ms)
+ GET /api/history?limit=20 200 in 78ms (compile: 13ms, proxy.ts: 18ms, render: 47ms)
+ GET /api/templates 200 in 108ms (compile: 24ms, proxy.ts: 30ms, render: 54ms)
+ GET /api/templates 200 in 156ms (compile: 63ms, proxy.ts: 63ms, render: 30ms)
+ GET /api/auth/session 200 in 723ms (compile: 495ms, proxy.ts: 53ms, render: 175ms)
+ GET /api/history?limit=20 200 in 837ms (compile: 79ms, proxy.ts: 83ms, render: 675ms)
+ GET /api/templates 200 in 396ms (compile: 158ms, proxy.ts: 144ms, render: 95ms)
+ GET /api/templates 200 in 255ms (compile: 122ms, proxy.ts: 93ms, render: 40ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 1428ms (compile: 469ms, proxy.ts: 76ms, render: 884ms)
+ GET /api/auth/session 200 in 101ms (compile: 47ms, proxy.ts: 21ms, render: 33ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FgMYAAeSwx-Bp1nG5%2Fs-l50.webp 200 in 1079ms (compile: 162ms, proxy.ts: 125ms, render: 792ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FezUAAeSwSYZp1GSF%2Fs-l50.webp 200 in 1125ms (compile: 197ms, proxy.ts: 121ms, render: 807ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2Fp-gAAeSwICVp1751%2Fs-l50.webp 200 in 958ms (compile: 128ms, proxy.ts: 167ms, render: 663ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2Fs9YAAeSwr9dp2E5R%2Fs-l300.webp 200 in 1104ms (compile: 192ms, proxy.ts: 114ms, render: 798ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2F5yIAAeSwdvpphC1~%2Fs-l300.webp 200 in 1151ms (compile: 214ms, proxy.ts: 122ms, render: 815ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FquQAAeSwkxNp17-t%2Fs-l50.webp 200 in 527ms (compile: 10ms, proxy.ts: 19ms, render: 498ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.SiCXPOm4zvTm6xyCi6w_MgHaIf%26pid%3D15.1 200 in 129ms (compile: 66ms, proxy.ts: 47ms, render: 15ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FEXkAAeSwcnFp19f4%2Fs-l50.webp 200 in 390ms (compile: 10ms, proxy.ts: 12ms, render: 368ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fc.static-nike.com%2Fa%2Fimages%2Fw_1200%2Cc_limit%2Fbzl2wmsfh7kgdkufrrjq%2Fseo-title.jpg 200 in 98ms (compile: 35ms, proxy.ts: 49ms, render: 13ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FlogAAeSwe1Np2B-G%2Fs-l50.webp 200 in 626ms (compile: 58ms, proxy.ts: 64ms, render: 504ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FJfsAAeSwWIZp2Glm%2Fs-l50.webp 200 in 621ms (compile: 53ms, proxy.ts: 69ms, render: 499ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FfAMAAeSwxfNp1ETf%2Fs-l50.webp 200 in 660ms (compile: 54ms, proxy.ts: 59ms, render: 547ms)
 ====== RESPONSE RENDER ======
 Children Raw: kids shoes
 Children Length: 10
 Includes <product_carousel>: false
 ====== RESPONSE RENDER ======
-Children Raw: Here are the best results I found:
-
-<product_grid>[{"name": "Kids & Party Shoes, Scandals - Best Quality Kids Footwears", "brand": "Duckduckgo", "price": "Check Site", "image_url": "https://ts1.mm.bing.net/th?id=OIP.SiCXPOm4zvTm6xyCi6w_MgHaIf&pid=15.1", "source_url": "https://duckduckgo.com/y.js?ad_domain=firstcry.com&ad_provider=bingv7aa&ad_type=txad&click_metadata=EG48ufBGJNPnJZzhbBa2SbWavX47NNpG4qCLZSIK2_DjNjwYDBuClhoKdJfBRhauPV%2D2oaOhiCoFHG3K9HUGqmq5MX%2DovoZO9dYuPaSnqmyDAKVKVDRtC6ec61_PYtmhflgjqDw0E9oYRLip0O4Ww7gs4WDU%2DUi9RGZOYs9sgqM.RfUz5QLPNqgDIon19VO9ig&rut=1afb97606e7ba4eedf14a3b044d7087857251bc4a42c6e62baea7377751b6ec5&u3=https%3A%2F%2Fwww.bing.com%2Faclick%3Fld%3De8ERkoXQceBRRqdWpx%2DzJMKjVUCUzFKOpSJZD%2Dx_SXGJCa9riLLLpuq7TiyTUqsPqMT39HtBEJ5sWNagCBe5ariyfg8IqlJWQuxt_ZCFwuSfIBEY6wJd%2DhnXJWF8OFTYZTdSc1Zj3WIJ1XJXg43o73rkPlwBR7FGfbEz0cm2t3mXvjKlgomCKrwdOPukg34Zy62q__B1FBPOcsakRVh3s7rnlJUsg%26u%3DaHR0cHMlM2ElMmYlMmZ3d3cuZmlyc3RjcnkuY29tJTJmZm9vdHdlYXIlMmY2JTJmMTcwJTNmc29ydCUzZGJlc3RzZWxsZXIlMjZyZWYlM2RCU04hQlNOX0NBVF9GVy1BbGwhJTI2bXNjbGtpZCUzZDQ3MGRiZTE1NWJmNTExNzRlMzViZDdjMzA2NzU0YTE5JTI2dXRtX3NvdXJjZSUzZGJpbmclMjZ1dG1fbWVkaXVtJTNkY3BjJTI2dXRtX2NhbXBhaWduJTNkQlNOX0NBVF9GVy1BbGwlMjZ1dG1fdGVybSUzZGNoaWxkcmVucyUyNTIwc2hvZSUyNTIwb25saW5lJTI1MjBwdXJjaGFzZSUyNnV0bV9jb250ZW50JTNkQ2hpbGRyZW4lMjUyMFNob2VzJTI1MjBCdXklMjUyME9ubGluZQ%26rlid%3D470dbe155bf51174e35bd7c306754a19&vqd=4-783927094150761536211286884324134163&iurl=%7B1%7DIG%3D04C55B1448A243AAB69EAAB57B3B80AA%26CID%3D1502A7D2210D688D2281B0E720F5693E%26ID%3DDevEx%2C5039.1", "source": "Duckduckgo", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Buybooties,shoes, sandals, flip-flops, clogs & more with 30 Days Return Policy. Online shopping for Baby &KidsFootwear for Girls & Boys at FirstCry.com", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "H&M Official - H&M Kids Kids Shoes", "brand": "Duckduckgo", "price": "Check Site", "image_url": "https://ts2.mm.bing.net/th?id=OIP.XIMpZgpgT1Pm2TlKbV9GQgHaHa&pid=15.1", "source_url": "https://duckduckgo.com/y.js?ad_domain=hm.com&ad_provider=bingv7aa&ad_type=txad&click_metadata=1nRogKwo90%2DaoCIkpYxmcZM%2DBqjthQo5Zq7yC2PlVSPqr43aQ4v8k%2DJru7rr82AfsQWQTvlBzN2tTJDLrfNW6HUuZEBe7EcBlmNVOoRuX9gx_5G6l7XeKdDYD2_xg6WKOdI1J_Zeql5WwL_R1sGjZ6KOttIhCWUraMcG6DStULk.3PH5wxGdqQDVXDQR_vsWTA&rut=71981b7a4dca18779b12d2c48a1df55a6d7457270dd613e62c805bf9827c4ead&u3=https%3A%2F%2Fwww.bing.com%2Faclick%3Fld%3De8djYvySvLsweU1DDkztLaMzVUCUxsyflZFzgZ24XA43ZtD%2D4OCH7oNkNjxFuk_ujWAj4rTlixdZ%2Di7skyGqr%2DlteIet380IeRXFfDICH%2DgtE1ERmWQfV6l%2DhlR7OPJjGXsXHKacm2QUlhMFwACf6xlr9M2N6ylP3a8edeaa6uKxFA42vs0EVE43INF0EIBcYIVZsb8yyuR9piYuVZV2dUYpl49wc%26u%3DaHR0cHMlM2ElMmYlMmYzNzU4LnhnNGtlbi5jb20lMmZ0cmslMmZ2MSUzZnByb2YlM2Q0NjElMjZjYW1wJTNkNjI1OTAlMjZrY3QlM2Rtc24lMjZrY2hpZCUzZDE0MzAwODAyMCUyNmNyaXRlcmlhaWQlM2Rrd2QtNzE4ODEzNzA2MjI2OTglM2Fsb2MtOTAlMjZjYW1wYWlnbmlkJTNkNjE0MDYxMzA4JTI2bG9jcGh5JTNkMTQ5MTg2JTI2YWRncm91cGlkJTNkMTE1MDA5MDg2NDc5NzAyMCUyNmNpZCUzZDcxODgwODMzNTgxNDM1JTI2a2R2JTNkYyUyNmtleHQlM2QlMjZrcGclM2QlMjZrcGlkJTNkJTI2cXVlcnlTdHIlM2RraWRzJTI1MjBzaG9lcyUyNTIwcmV0YWlsJTI1MjBidXklMjUyMG5vdyUyNnVybCUzZGh0dHBzJTNhJTJmJTJmd3d3Mi5obS5jb20lMmZlbl9pbiUyZmtpZHMlMmZzaG9wLWJ5LXByb2R1Y3QlMmZzaG9lcy5odG1sJTNmdXRtX2lkJTNkYmlfY21wLTYxNDA2MTMwOF9hZGctMTE1MDA5MDg2NDc5NzAyMF9hZC03MTg4MDgzMzU4MTQzNV9rd2QtNzE4ODEzNzA2MjI2OTglM2Fsb2MtOTBfZGV2LWNfZXh0LV9wcmQtX3NpZy03MmM1MTA4OTViZTQxNWZkZDMyMTc5NWYwNjY0NGVlMCUyNm1zY2xraWQlM2Q3MmM1MTA4OTViZTQxNWZkZDMyMTc5NWYwNjY0NGVlMCUyNnV0bV9zb3VyY2UlM2RiaW5nJTI2dXRtX21lZGl1bSUzZGNwYyUyNnV0bV9jYW1wYWlnbiUzZG1rdF9pbiUyNTdDbXBsX21pY3Jvc29mdCUyNTdDbG5nX2VuZyUyNTdDYXRjX2FjdGl2aXR5JTI1N0NpdHlfZ2VuZXJpYyUyNTdDb2JqX29ubGluZS1zYWxlcyUyNTdDY3B0X3NlYXJjaCUyNTdDZGN0X2tpZHMlMjU3Q21pX2luZ3UxMWVjM2FhNSUyNTdDZnR4X2FsbCUyNnV0bV90ZXJtJTNkS2lkcyUyNTIwU2hvZXMlMjZ1dG1fY29udGVudCUzZGRjdF9raWRzJTI1N0NmdHhfa2lkcy1zaG9lcw%26rlid%3D72c510895be415fdd321795f06644ee0&vqd=4-226105828854763852367336089383970466490&iurl=%7B1%7DIG%3D04C55B1448A243AAB69EAAB57B3B80AA%26CID%3D1502A7D2210D688D2281B0E720F5693E%26ID%3DDevEx%2C5044.1", "source": "Duckduckgo", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Fashion & Quality At The Best Price In Our SustainableKidsClothing Collection. Soft Fabrics & Functional Designs Allow YourKidsPlenty Of Freedom To Explore.", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Kids Shoes and Clothing | Kids Foot Locker", "brand": "Kidsfootlocker", "price": "Check Site", "image_url": "https://ts4.mm.bing.net/th?id=OIP.qpcQZzytXiCqTa7RZ8dIegHaHa&pid=15.1", "source_url": "https://www.kidsfootlocker.com/", "source": "Kidsfootlocker", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Shopkidsshoesand clothing from big brands like Nike, Jordan, adidas, Reebok and a bunch more. The coolest selection ofkidsshoeswith great deals and our 100% fit guarantee.", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Kids' Shoes - Target", "brand": "Target", "price": "$35", "image_url": "https://ts1.mm.bing.net/th?id=OIP.3b9fWfEgFUChYs1kX_yYvgHaHN&pid=15.1", "source_url": "https://www.target.com/c/kids-shoes/-/N-2wi2k", "source": "Target", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Shopkids'shoesfor every step! Target offers sneakers, sandals, boots & more for babies, toddlers, big & littlekids. Free shipping with orders $35+.", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Shop Kids' Shoes | DSW", "brand": "Dsw", "price": "Check Site", "image_url": "https://ts2.mm.bing.net/th?id=OIP.Y9lHn7YwxLx1_TIteYfI_wHaE7&pid=15.1", "source_url": "https://www.dsw.com/category/kids/shoes", "source": "Dsw", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Check out our huge selection of toddler andkids'shoesand more! Shopnowand enjoy everyday free shipping on boys and girlsshoes.", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 1", "brand": "Verifying...", "price": "Check Price", "image_url": "https://ts1.mm.bing.net/th?id=OIP.SiCXPOm4zvTm6xyCi6w_MgHaIf&pid=15.1", "source_url": "https://au.levelshoes.com/kids.html", "source": "Image Search", "rating_avg": "", "rating_count": "", "reviews": [], "details": "High-quality kids shoes found via visual search. Click for full details and pricing.", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 2", "brand": "Verifying...", "price": "Check Price", "image_url": "https://ts2.mm.bing.net/th?id=OIP.XIMpZgpgT1Pm2TlKbV9GQgHaHa&pid=15.1", "source_url": "https://www.freepik.com/premium-psd/kids-shoes_185050857.htm", "source": "Image Search", "rating_avg": "", "rating_count": "", "reviews": [], "details": "High-quality kids shoes found via visual search. Click for full details and pricing.", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 3", "brand": "Verifying...", "price": "Check Price", "image_url": "https://ts4.mm.bing.net/th?id=OIP.qpcQZzytXiCqTa7RZ8dIegHaHa&pid=15.1", "source_url": "https://www.indiamart.com/proddetail/kids-shoes-2852658896891.html", "source": "Image Search", "rating_avg": "", "rating_count": "", "reviews": [], "details": "High-quality kids shoes found via visual search. Click for full details and pricing.", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 4", "brand": "Verifying...", "price": "Check Price", "image_url": "https://ts1.mm.bing.net/th?id=OIP.3b9fWfEgFUChYs1kX_yYvgHaHN&pid=15.1", "source_url": "https://www.tradeindia.com/products/kids-shoes-8636947.html", "source": "Image Search", "rating_avg": "", "rating_count": "", "reviews": [], "details": "High-quality kids shoes found via visual search. Click for full details and pricing.", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 5", "brand": "Verifying...", "price": "Check Price", "image_url": "https://ts2.mm.bing.net/th?id=OIP.Y9lHn7YwxLx1_TIteYfI_wHaE7&pid=15.1", "source_url": "https://www.nike.com/fi/a/best-kids-shoes", "source": "Image Search", "rating_avg": "", "rating_count": "", "reviews": [], "details": "High-quality kids shoes found via visual search. Click for full details and pricing.", "moq": null, "location": null, "supplier_years": null, "is_verified": false}]</product_grid>
-Children Length: 8495
+Children Raw: <product_grid>[{"name": "adidas kids Grand Court 2.0 Shoes", "brand": "Grand Court", "price": "$21.00", "image_url": "https://i.ebayimg.com/images/g/gMYAAeSwx-Bp1nG5/s-l50.webp", "source_url": "https://www.ebay.com/itm/227292200974?_skw=kids+shoes&itmmeta=01KNYCYNMGQY21KDCW7Y3PYM16&hash=item34ebabc00e%3Ag%3AgMYAAeSwx-Bp1nG5&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xAJ6KZZbEt5UWQiN8DRkbJIf%2B005OQQ%2Flhkk3XbKuAhgGNUrYgWLVWHSYq%2BhBLjH045aAcVQHtcVMzPjC0xOHLPXFNQxg0DlimaCrmUQXg9uDwJhhY560ag72BCY7GdFJs3vmZQZ9jh8yFcK7um%2FPtFhiYkf5OgVIkR%2FFcM5Nkq7vgFNL%2BrVTSNyscnbIvp9DOogCFTWjj%2BNR%2FBWmvJqEJFh5j300SvAAE8w0spVBC5ntMr2iGC%2FC%2BFTKhRHJyCs3U%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "adidas kids Grand Court 2.0 Shoes - $21.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16", "brand": "Nike Air", "price": "$59.95", "image_url": "https://i.ebayimg.com/images/g/ezUAAeSwSYZp1GSF/s-l50.webp", "source_url": "https://www.ebay.com/itm/198260532652?_skw=kids+shoes&itmmeta=01KNYCYNMGZ6CBE47P3WKEG8GQ&hash=item2e293fa5ac%3Ag%3AezUAAeSwSYZp1GSF&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xDViWNgJHXbODIi3L6sX3DJ9lrKjlaaZBNMlXIpQ7svX3Rt64VKzvgdq7a2So54DgKdefHgKVw9NDbd3%2BQ2feB0pe6Aq%2BhYDHDX2wIap%2F0o6q0r2cbSnYxlwC%2BB9lZul2eC6rDmojcSt818hwPDnr7oc2aIXyQeKB%2B2vpMDtsQUXb5DI6ydWt%2BRH9sjjXyNQqoWv4QlhXyy2VGl8lnZcyqEu9cOkavdQXUhD8YgXi2OLw%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16 - $59.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y", "brand": "Jordan Rings", "price": "$90.00", "image_url": "https://i.ebayimg.com/images/g/5yIAAeSwdvpphC1~/s-l300.webp", "source_url": "https://www.ebay.com/itm/177836598602?_skw=kids+shoes&itmmeta=01KNYCYNMGQQKAFA87VMFVAW96&hash=item2967e3254a%3Ag%3A5yIAAeSwdvpphC1%7E&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xBa9x1fLKmTSewEjtc%2FaRPmdre7VIfvqTYVasRAgirEEQI3gRd5f0%2FH0B7n3UbYwFgEk5cbz2P23ZTYoGNNaP1hpr2y8azh71bPHWeHSkwwGFjGvZXlj%2FdFAIsy26lBrRlKpn%2Bqwq91Nyi3ZkP4HZ2IZEFgVH%2B1eL83mJEr9cbIXTF2hwDbYOxe8PV5F3auijY2gAQgYtrOmFsJOlLK4mmkahQu%2BB5ZK4qdukapbCB2dQ%3D%3D%7Ctkp%3ABlBMUMTa-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y - $90.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU", "brand": "Nike Force", "price": "$69.95", "image_url": "https://i.ebayimg.com/images/g/s9YAAeSwr9dp2E5R/s-l300.webp", "source_url": "https://www.ebay.com/itm/178036532604?_skw=kids+shoes&itmmeta=01KNYCYNMG6S5DW246D4JQG5D5&hash=item2973cde57c%3Ag%3As9YAAeSwr9dp2E5R&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xCE2HfvOm9mh1iLZ3lWK%2FulFuMl6e6zluQoFOuuVy7p%2FG0dK2U0RL3psJKSY4l%2Bn5MoZ1I6MTxhKaIMgOtvQp%2F2tCkgeOcBGaYkX1pUWk4Fr%2B%2F3zuK36HGA3sQhMozhZ%2FHRGozmdYx1SKdZbxGvsdxhrVpEmmoC%2F0LkcHZVkKovFYnF%2BrNjcVZ7HZKo4nUtPE11QyYK0mqAaN%2BmBMnfP9NuiRWZPdjmp1zFNgXgHPfW0A%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU - $69.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560-", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/p-gAAeSwICVp1751/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746523001?_skw=kids+shoes&itmmeta=01KNYCYNMGB3KPNBATZDAZE898&hash=item371f314179%3Ag%3Ap-gAAeSwICVp1751&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCkMVozXfERnW8s%2Bb2BF%2F3z8VRuTrEQQG%2FJ9O4YC5kJi3hnHY7qW6pr4ycdDn%2FiKhc3ZxcWTPYCx9ekF%2F6L%2BzKu%2FaOC3ZbIjpjAuI5tVVBQgIFRj%2F0IwiBnoDz%2B2TVi9wlVz9uredUBQYgrPMDthTxTn5zN%2Bezpc8ZNkwl%2FWu%2BP4%2BPtRSFE4RLVYtnF7OtugZTEv9AGm99yuqRRodLZEs%2Fblpq9Kr51%2BLurz0ggw0d2yLH5Noz7sG6TZX5wjHPCmAw%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560- - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/quQAAeSwkxNp17-t/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746527880?_skw=kids+shoes&epid=12061736291&itmmeta=01KNYCYNMG122MCXW050C532TX&hash=item371f315488%3Ag%3AquQAAeSwkxNp17-t&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCOTJZiYiFFMGyVD%2FDbxzWbaeqTpuzui6LOg2%2Bk4pyqwnOWN7c9Lqccl%2F5zbxcg%2FOrcc0YnQkJnyriezdohHjwvepJGSSsDYsJwMECEnxOj%2B%2FrgP2iwq4noQDlAiz2zGSHrOVgDh1FU1qZDqI6IoM18afzpt4LLwN2To%2Fhx9PVzc2%2FAfaKSnt5v%2BavcZNPt%2FAqaMpX9y8SP%2BT0eHtXwHG3G42CmATYZTLEian7JWfyJeQEm2IMHctklNWhPNKK32ZA%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10 - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White)", "brand": "Hoy Shoe", "price": "$10.000", "image_url": "https://i.ebayimg.com/images/g/EXkAAeSwcnFp19f4/s-l50.webp", "source_url": "https://www.ebay.com/itm/178035639787?_skw=kids+shoes&itmmeta=01KNYCYNMG15GZBB4MD39Z9J4B&hash=item2973c045eb%3Ag%3AEXkAAeSwcnFp19f4&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xBaSmUn7nfQDihD6vcTp0jIX4Hi2Bhc7V%2BAXg0qnCkOUR%2BjpiKPfGlkhT2mnv0U5RzrA%2B%2B%2BzYyq464T5jxMFr0MzXOI619s%2FcY6cXsMf2QAVlaTueZgvn3jNDEyrH3yHXgmZY2SdmqGo%2BDnhquwXb7S1EMv0gYwoSkL1MUssu0CBM3b8FoV8javkIuIe5hG8NtZOdWVK3srt0%2Bot1n9Hl3gR%2BSrG36CekeCf%2F1FIJ7Ux5jSuwXKGNlK4%2BfzBv7ub4s5hZ9c5tSLZgdQfPg4FgLq8HaW8pMd0n6LM1dHccnvvw%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White) - $10.000 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb", "brand": "Nike Boys", "price": "$18.990", "image_url": "https://i.ebayimg.com/images/g/fAMAAeSwxfNp1ETf/s-l50.webp", "source_url": "https://www.ebay.com/itm/366331477954?_skw=kids+shoes&itmmeta=01KNYCYNMG6JSFDDJBX6M82YHQ&hash=item554b0ebfc2%3Ag%3AfAMAAeSwxfNp1ETf&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xClTICQ1dIyrvyzIHRt9Aj5Di5NP8b2uS%2B6ysiPlk4voHJFYsr%2FiLhN%2BoDSoYR7JANQTAjIIHgi4wANWy5HeRYj48sCyqjKHF9xF%2BEIFxa4yfqVb27xffGhYPPWGRO%2FeTUMqYUie9sNxzho9SPiQ9Nuha%2BNo%2F8ojvNLoUa509M7otHSUooYrMSijHzTiJLzEV3jzEMsQRcwkAVT9RlvuXwSkAuyLKg5X4xL3mFCQGYFPaV%2F2jQUbdnbNw3Ye3vsCfc%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb - $18.990 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers", "brand": "Nike Boys", "price": "$13.75", "image_url": "https://i.ebayimg.com/images/g/logAAeSwe1Np2B-G/s-l50.webp", "source_url": "https://www.ebay.com/itm/287264246388?_skw=kids+shoes&itmmeta=01KNYCYNMG55HEJ2TPXWTFBJ83&hash=item42e2488a74%3Ag%3AlogAAeSwe1Np2B-G&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xC0Qu7G5v3njXp6uaqXF4qm3owaz9huGtvUjh5%2F8%2B1XO1dRazCwCjJuo18O13hhD%2FS7YAhKgNI0fdKXu%2BcC2hRsq3NCR0aHXLYN%2BBB1G83Sp8al1YniQkHdSU%2BQ7G1tPkVxtoM6hxUG9oLH7bYU%2FX%2FCs91zEQ0%2Bf88DhIn%2BbLNjIW8ignvZiZ0ZxX0PZ8jrFBBU5HQflMw5HX%2Bin0vKQ0Se2ablm0oawPvobtuflFhVcuZ8GBv%2BWUCZ1O4StyW29PzQTWTFHWVEmvpsTdBAQwvU8ss%2FXDb6SdIAS09QsEWMkA%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers - $13.75 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "jordan 12 obsidian size 4.5 youth", "brand": "eBay", "price": "$45.00", "image_url": "https://i.ebayimg.com/images/g/JfsAAeSwWIZp2Glm/s-l50.webp", "source_url": "https://www.ebay.com/itm/206200977741?_skw=kids+shoes&itmmeta=01KNYCYNMHQ8SQNNMM22EVA2RE&hash=item300289394d%3Ag%3AJfsAAeSwWIZp2Glm&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xB9rcgCbUTrou8CD8khQblLnuwssXF3G%2BdqERgBnr95VphJ7njezb0Q%2BUQtNrBzAwJkFEl%2Ba6myU%2FMftAPjWchH3Ty2ETbfd78ZqzyfEYLcm5WrqSUfVEkzLazLlw63GPbfFW%2BFGiTJyrN1NEA%2BKXJwvikJ2izwYKLhSbQaElTtxYEedO2IlEolw0UaGLpv2QyVXfq8l%2Fo153M7uFqu5tZeAUcsCkXGXN7WiwCSR4L81VruUv9TOVhGcJBZMVCj%2FTM%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "jordan 12 obsidian size 4.5 youth - $45.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 1", "brand": "Au", "price": "Check Site", "image_url": "https://ts2.mm.bing.net/th?id=OIP.SiCXPOm4zvTm6xyCi6w_MgHaIf&pid=15.1", "source_url": "https://au.levelshoes.com/kids.html", "source": "Au", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://au.levelshoes.com/kids.html", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 2", "brand": "Nike", "price": "Check Site", "image_url": "https://c.static-nike.com/a/images/w_1200,c_limit/bzl2wmsfh7kgdkufrrjq/seo-title.jpg", "source_url": "https://www.nike.com/fi/a/best-kids-shoes", "source": "Nike", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://www.nike.com/fi/a/best-kids-shoes", "moq": null, "location": null, "supplier_years": null, "is_verified": false}]</product_grid>
+Children Length: 10656
 Includes <product_carousel>: false
- GET /chat/677a3658-4ce6-400b-85ba-b1775db3badb 200 in 47s (compile: 41s, proxy.ts: 42ms, render: 5.9s)
- GET /api/auth/session 200 in 474ms (compile: 358ms, proxy.ts: 35ms, render: 81ms)
- GET /api/history?limit=20 200 in 137ms (compile: 27ms, proxy.ts: 27ms, render: 83ms)
- GET /api/auth/session 200 in 193ms (compile: 43ms, proxy.ts: 26ms, render: 124ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.XIMpZgpgT1Pm2TlKbV9GQgHaHa%26pid%3D15.1 200 in 3.0s (compile: 2.3s, proxy.ts: 48ms, render: 705ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts4.mm.bing.net%2Fth%3Fid%3DOIP.qpcQZzytXiCqTa7RZ8dIegHaHa%26pid%3D15.1 200 in 3.2s (compile: 2.4s, proxy.ts: 69ms, render: 692ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts1.mm.bing.net%2Fth%3Fid%3DOIP.3b9fWfEgFUChYs1kX_yYvgHaHN%26pid%3D15.1 200 in 3.0s (compile: 2.1s, proxy.ts: 41ms, render: 824ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.Y9lHn7YwxLx1_TIteYfI_wHaE7%26pid%3D15.1 200 in 3.0s (compile: 1994ms, proxy.ts: 29ms, render: 938ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts1.mm.bing.net%2Fth%3Fid%3DOIP.SiCXPOm4zvTm6xyCi6w_MgHaIf%26pid%3D15.1 200 in 3.2s (compile: 2.3s, proxy.ts: 60ms, render: 837ms)
+ GET /chat/a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 1418ms (compile: 194ms, proxy.ts: 17ms, render: 1206ms)
+ GET /api/auth/session 200 in 352ms (compile: 287ms, proxy.ts: 28ms, render: 38ms)
+ GET /api/history?limit=20 200 in 134ms (compile: 29ms, proxy.ts: 36ms, render: 69ms)
+ GET /api/auth/session 200 in 116ms (compile: 54ms, proxy.ts: 22ms, render: 40ms)
+ GET /api/templates 200 in 103ms (compile: 33ms, proxy.ts: 30ms, render: 40ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 138ms (compile: 29ms, proxy.ts: 31ms, render: 78ms)
+ GET /api/templates 200 in 54ms (compile: 14ms, proxy.ts: 8ms, render: 32ms)
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 191ms (compile: 8ms, proxy.ts: 12ms, render: 170ms)
+ GET /api/history?limit=20 200 in 38ms (compile: 9ms, proxy.ts: 10ms, render: 19ms)
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 207ms (compile: 5ms, proxy.ts: 5ms, render: 197ms)
+ GET /api/history?limit=20 200 in 50ms (compile: 11ms, proxy.ts: 13ms, render: 26ms)
+ GET /api/history?limit=20 200 in 125ms (compile: 24ms, proxy.ts: 33ms, render: 67ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 126ms (compile: 36ms, proxy.ts: 35ms, render: 55ms)
+ GET / 200 in 90ms (compile: 22ms, proxy.ts: 12ms, render: 57ms)
+ GET /api/templates 200 in 65ms (compile: 10ms, proxy.ts: 19ms, render: 35ms)
+ GET /api/templates 200 in 19ms (compile: 3ms, proxy.ts: 7ms, render: 8ms)
+ GET /api/history?limit=20 200 in 169ms (compile: 30ms, proxy.ts: 31ms, render: 108ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 183ms (compile: 66ms, proxy.ts: 27ms, render: 90ms)
+ GET /api/history?limit=20 200 in 81ms (compile: 21ms, proxy.ts: 28ms, render: 31ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 84ms (compile: 8ms, proxy.ts: 28ms, render: 48ms)
+ GET /api/history?limit=20 200 in 266ms (compile: 66ms, proxy.ts: 90ms, render: 110ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 277ms (compile: 92ms, proxy.ts: 84ms, render: 101ms)
+====== RESPONSE RENDER ======
+Children Raw: kids shoes
+Children Length: 10
+Includes <product_carousel>: false
+====== RESPONSE RENDER ======
+Children Raw: <product_grid>[{"name": "adidas kids Grand Court 2.0 Shoes", "brand": "Grand Court", "price": "$21.00", "image_url": "https://i.ebayimg.com/images/g/gMYAAeSwx-Bp1nG5/s-l50.webp", "source_url": "https://www.ebay.com/itm/227292200974?_skw=kids+shoes&itmmeta=01KNYCYNMGQY21KDCW7Y3PYM16&hash=item34ebabc00e%3Ag%3AgMYAAeSwx-Bp1nG5&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xAJ6KZZbEt5UWQiN8DRkbJIf%2B005OQQ%2Flhkk3XbKuAhgGNUrYgWLVWHSYq%2BhBLjH045aAcVQHtcVMzPjC0xOHLPXFNQxg0DlimaCrmUQXg9uDwJhhY560ag72BCY7GdFJs3vmZQZ9jh8yFcK7um%2FPtFhiYkf5OgVIkR%2FFcM5Nkq7vgFNL%2BrVTSNyscnbIvp9DOogCFTWjj%2BNR%2FBWmvJqEJFh5j300SvAAE8w0spVBC5ntMr2iGC%2FC%2BFTKhRHJyCs3U%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "adidas kids Grand Court 2.0 Shoes - $21.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16", "brand": "Nike Air", "price": "$59.95", "image_url": "https://i.ebayimg.com/images/g/ezUAAeSwSYZp1GSF/s-l50.webp", "source_url": "https://www.ebay.com/itm/198260532652?_skw=kids+shoes&itmmeta=01KNYCYNMGZ6CBE47P3WKEG8GQ&hash=item2e293fa5ac%3Ag%3AezUAAeSwSYZp1GSF&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xDViWNgJHXbODIi3L6sX3DJ9lrKjlaaZBNMlXIpQ7svX3Rt64VKzvgdq7a2So54DgKdefHgKVw9NDbd3%2BQ2feB0pe6Aq%2BhYDHDX2wIap%2F0o6q0r2cbSnYxlwC%2BB9lZul2eC6rDmojcSt818hwPDnr7oc2aIXyQeKB%2B2vpMDtsQUXb5DI6ydWt%2BRH9sjjXyNQqoWv4QlhXyy2VGl8lnZcyqEu9cOkavdQXUhD8YgXi2OLw%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16 - $59.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y", "brand": "Jordan Rings", "price": "$90.00", "image_url": "https://i.ebayimg.com/images/g/5yIAAeSwdvpphC1~/s-l300.webp", "source_url": "https://www.ebay.com/itm/177836598602?_skw=kids+shoes&itmmeta=01KNYCYNMGQQKAFA87VMFVAW96&hash=item2967e3254a%3Ag%3A5yIAAeSwdvpphC1%7E&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xBa9x1fLKmTSewEjtc%2FaRPmdre7VIfvqTYVasRAgirEEQI3gRd5f0%2FH0B7n3UbYwFgEk5cbz2P23ZTYoGNNaP1hpr2y8azh71bPHWeHSkwwGFjGvZXlj%2FdFAIsy26lBrRlKpn%2Bqwq91Nyi3ZkP4HZ2IZEFgVH%2B1eL83mJEr9cbIXTF2hwDbYOxe8PV5F3auijY2gAQgYtrOmFsJOlLK4mmkahQu%2BB5ZK4qdukapbCB2dQ%3D%3D%7Ctkp%3ABlBMUMTa-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y - $90.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU", "brand": "Nike Force", "price": "$69.95", "image_url": "https://i.ebayimg.com/images/g/s9YAAeSwr9dp2E5R/s-l300.webp", "source_url": "https://www.ebay.com/itm/178036532604?_skw=kids+shoes&itmmeta=01KNYCYNMG6S5DW246D4JQG5D5&hash=item2973cde57c%3Ag%3As9YAAeSwr9dp2E5R&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xCE2HfvOm9mh1iLZ3lWK%2FulFuMl6e6zluQoFOuuVy7p%2FG0dK2U0RL3psJKSY4l%2Bn5MoZ1I6MTxhKaIMgOtvQp%2F2tCkgeOcBGaYkX1pUWk4Fr%2B%2F3zuK36HGA3sQhMozhZ%2FHRGozmdYx1SKdZbxGvsdxhrVpEmmoC%2F0LkcHZVkKovFYnF%2BrNjcVZ7HZKo4nUtPE11QyYK0mqAaN%2BmBMnfP9NuiRWZPdjmp1zFNgXgHPfW0A%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU - $69.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560-", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/p-gAAeSwICVp1751/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746523001?_skw=kids+shoes&itmmeta=01KNYCYNMGB3KPNBATZDAZE898&hash=item371f314179%3Ag%3Ap-gAAeSwICVp1751&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCkMVozXfERnW8s%2Bb2BF%2F3z8VRuTrEQQG%2FJ9O4YC5kJi3hnHY7qW6pr4ycdDn%2FiKhc3ZxcWTPYCx9ekF%2F6L%2BzKu%2FaOC3ZbIjpjAuI5tVVBQgIFRj%2F0IwiBnoDz%2B2TVi9wlVz9uredUBQYgrPMDthTxTn5zN%2Bezpc8ZNkwl%2FWu%2BP4%2BPtRSFE4RLVYtnF7OtugZTEv9AGm99yuqRRodLZEs%2Fblpq9Kr51%2BLurz0ggw0d2yLH5Noz7sG6TZX5wjHPCmAw%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560- - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/quQAAeSwkxNp17-t/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746527880?_skw=kids+shoes&epid=12061736291&itmmeta=01KNYCYNMG122MCXW050C532TX&hash=item371f315488%3Ag%3AquQAAeSwkxNp17-t&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCOTJZiYiFFMGyVD%2FDbxzWbaeqTpuzui6LOg2%2Bk4pyqwnOWN7c9Lqccl%2F5zbxcg%2FOrcc0YnQkJnyriezdohHjwvepJGSSsDYsJwMECEnxOj%2B%2FrgP2iwq4noQDlAiz2zGSHrOVgDh1FU1qZDqI6IoM18afzpt4LLwN2To%2Fhx9PVzc2%2FAfaKSnt5v%2BavcZNPt%2FAqaMpX9y8SP%2BT0eHtXwHG3G42CmATYZTLEian7JWfyJeQEm2IMHctklNWhPNKK32ZA%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10 - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White)", "brand": "Hoy Shoe", "price": "$10.000", "image_url": "https://i.ebayimg.com/images/g/EXkAAeSwcnFp19f4/s-l50.webp", "source_url": "https://www.ebay.com/itm/178035639787?_skw=kids+shoes&itmmeta=01KNYCYNMG15GZBB4MD39Z9J4B&hash=item2973c045eb%3Ag%3AEXkAAeSwcnFp19f4&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xBaSmUn7nfQDihD6vcTp0jIX4Hi2Bhc7V%2BAXg0qnCkOUR%2BjpiKPfGlkhT2mnv0U5RzrA%2B%2B%2BzYyq464T5jxMFr0MzXOI619s%2FcY6cXsMf2QAVlaTueZgvn3jNDEyrH3yHXgmZY2SdmqGo%2BDnhquwXb7S1EMv0gYwoSkL1MUssu0CBM3b8FoV8javkIuIe5hG8NtZOdWVK3srt0%2Bot1n9Hl3gR%2BSrG36CekeCf%2F1FIJ7Ux5jSuwXKGNlK4%2BfzBv7ub4s5hZ9c5tSLZgdQfPg4FgLq8HaW8pMd0n6LM1dHccnvvw%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White) - $10.000 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb", "brand": "Nike Boys", "price": "$18.990", "image_url": "https://i.ebayimg.com/images/g/fAMAAeSwxfNp1ETf/s-l50.webp", "source_url": "https://www.ebay.com/itm/366331477954?_skw=kids+shoes&itmmeta=01KNYCYNMG6JSFDDJBX6M82YHQ&hash=item554b0ebfc2%3Ag%3AfAMAAeSwxfNp1ETf&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xClTICQ1dIyrvyzIHRt9Aj5Di5NP8b2uS%2B6ysiPlk4voHJFYsr%2FiLhN%2BoDSoYR7JANQTAjIIHgi4wANWy5HeRYj48sCyqjKHF9xF%2BEIFxa4yfqVb27xffGhYPPWGRO%2FeTUMqYUie9sNxzho9SPiQ9Nuha%2BNo%2F8ojvNLoUa509M7otHSUooYrMSijHzTiJLzEV3jzEMsQRcwkAVT9RlvuXwSkAuyLKg5X4xL3mFCQGYFPaV%2F2jQUbdnbNw3Ye3vsCfc%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb - $18.990 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers", "brand": "Nike Boys", "price": "$13.75", "image_url": "https://i.ebayimg.com/images/g/logAAeSwe1Np2B-G/s-l50.webp", "source_url": "https://www.ebay.com/itm/287264246388?_skw=kids+shoes&itmmeta=01KNYCYNMG55HEJ2TPXWTFBJ83&hash=item42e2488a74%3Ag%3AlogAAeSwe1Np2B-G&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xC0Qu7G5v3njXp6uaqXF4qm3owaz9huGtvUjh5%2F8%2B1XO1dRazCwCjJuo18O13hhD%2FS7YAhKgNI0fdKXu%2BcC2hRsq3NCR0aHXLYN%2BBB1G83Sp8al1YniQkHdSU%2BQ7G1tPkVxtoM6hxUG9oLH7bYU%2FX%2FCs91zEQ0%2Bf88DhIn%2BbLNjIW8ignvZiZ0ZxX0PZ8jrFBBU5HQflMw5HX%2Bin0vKQ0Se2ablm0oawPvobtuflFhVcuZ8GBv%2BWUCZ1O4StyW29PzQTWTFHWVEmvpsTdBAQwvU8ss%2FXDb6SdIAS09QsEWMkA%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers - $13.75 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "jordan 12 obsidian size 4.5 youth", "brand": "eBay", "price": "$45.00", "image_url": "https://i.ebayimg.com/images/g/JfsAAeSwWIZp2Glm/s-l50.webp", "source_url": "https://www.ebay.com/itm/206200977741?_skw=kids+shoes&itmmeta=01KNYCYNMHQ8SQNNMM22EVA2RE&hash=item300289394d%3Ag%3AJfsAAeSwWIZp2Glm&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xB9rcgCbUTrou8CD8khQblLnuwssXF3G%2BdqERgBnr95VphJ7njezb0Q%2BUQtNrBzAwJkFEl%2Ba6myU%2FMftAPjWchH3Ty2ETbfd78ZqzyfEYLcm5WrqSUfVEkzLazLlw63GPbfFW%2BFGiTJyrN1NEA%2BKXJwvikJ2izwYKLhSbQaElTtxYEedO2IlEolw0UaGLpv2QyVXfq8l%2Fo153M7uFqu5tZeAUcsCkXGXN7WiwCSR4L81VruUv9TOVhGcJBZMVCj%2FTM%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "jordan 12 obsidian size 4.5 youth - $45.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 1", "brand": "Au", "price": "Check Site", "image_url": "https://ts2.mm.bing.net/th?id=OIP.SiCXPOm4zvTm6xyCi6w_MgHaIf&pid=15.1", "source_url": "https://au.levelshoes.com/kids.html", "source": "Au", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://au.levelshoes.com/kids.html", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 2", "brand": "Nike", "price": "Check Site", "image_url": "https://c.static-nike.com/a/images/w_1200,c_limit/bzl2wmsfh7kgdkufrrjq/seo-title.jpg", "source_url": "https://www.nike.com/fi/a/best-kids-shoes", "source": "Nike", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://www.nike.com/fi/a/best-kids-shoes", "moq": null, "location": null, "supplier_years": null, "is_verified": false}]</product_grid>
+Children Length: 10656
+Includes <product_carousel>: false
+ GET /chat/a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 1235ms (compile: 160ms, proxy.ts: 17ms, render: 1058ms)
+ GET /api/auth/session 200 in 514ms (compile: 316ms, proxy.ts: 135ms, render: 62ms)
+ GET /api/history?limit=20 200 in 182ms (compile: 28ms, proxy.ts: 63ms, render: 91ms)
+ GET /api/auth/session 200 in 151ms (compile: 77ms, proxy.ts: 40ms, render: 34ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 119ms (compile: 19ms, proxy.ts: 32ms, render: 69ms)
+ GET /api/templates 200 in 116ms (compile: 40ms, proxy.ts: 16ms, render: 60ms)
+ GET /api/templates 200 in 58ms (compile: 13ms, proxy.ts: 13ms, render: 32ms)
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 328ms (compile: 12ms, proxy.ts: 23ms, render: 293ms)
+ GET /api/history?limit=20 200 in 70ms (compile: 10ms, proxy.ts: 19ms, render: 41ms)
+ GET /api/history?limit=20 200 in 168ms (compile: 26ms, proxy.ts: 42ms, render: 100ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 174ms (compile: 46ms, proxy.ts: 39ms, render: 89ms)
+ GET /api/history?limit=20 200 in 272ms (compile: 64ms, proxy.ts: 64ms, render: 145ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 271ms (compile: 81ms, proxy.ts: 76ms, render: 113ms)
+====== RESPONSE RENDER ======
+Children Raw: kids shoes
+Children Length: 10
+Includes <product_carousel>: false
+====== RESPONSE RENDER ======
+Children Raw: <product_grid>[{"name": "adidas kids Grand Court 2.0 Shoes", "brand": "Grand Court", "price": "$21.00", "image_url": "https://i.ebayimg.com/images/g/gMYAAeSwx-Bp1nG5/s-l50.webp", "source_url": "https://www.ebay.com/itm/227292200974?_skw=kids+shoes&itmmeta=01KNYCYNMGQY21KDCW7Y3PYM16&hash=item34ebabc00e%3Ag%3AgMYAAeSwx-Bp1nG5&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xAJ6KZZbEt5UWQiN8DRkbJIf%2B005OQQ%2Flhkk3XbKuAhgGNUrYgWLVWHSYq%2BhBLjH045aAcVQHtcVMzPjC0xOHLPXFNQxg0DlimaCrmUQXg9uDwJhhY560ag72BCY7GdFJs3vmZQZ9jh8yFcK7um%2FPtFhiYkf5OgVIkR%2FFcM5Nkq7vgFNL%2BrVTSNyscnbIvp9DOogCFTWjj%2BNR%2FBWmvJqEJFh5j300SvAAE8w0spVBC5ntMr2iGC%2FC%2BFTKhRHJyCs3U%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "adidas kids Grand Court 2.0 Shoes - $21.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16", "brand": "Nike Air", "price": "$59.95", "image_url": "https://i.ebayimg.com/images/g/ezUAAeSwSYZp1GSF/s-l50.webp", "source_url": "https://www.ebay.com/itm/198260532652?_skw=kids+shoes&itmmeta=01KNYCYNMGZ6CBE47P3WKEG8GQ&hash=item2e293fa5ac%3Ag%3AezUAAeSwSYZp1GSF&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xDViWNgJHXbODIi3L6sX3DJ9lrKjlaaZBNMlXIpQ7svX3Rt64VKzvgdq7a2So54DgKdefHgKVw9NDbd3%2BQ2feB0pe6Aq%2BhYDHDX2wIap%2F0o6q0r2cbSnYxlwC%2BB9lZul2eC6rDmojcSt818hwPDnr7oc2aIXyQeKB%2B2vpMDtsQUXb5DI6ydWt%2BRH9sjjXyNQqoWv4QlhXyy2VGl8lnZcyqEu9cOkavdQXUhD8YgXi2OLw%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16 - $59.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y", "brand": "Jordan Rings", "price": "$90.00", "image_url": "https://i.ebayimg.com/images/g/5yIAAeSwdvpphC1~/s-l300.webp", "source_url": "https://www.ebay.com/itm/177836598602?_skw=kids+shoes&itmmeta=01KNYCYNMGQQKAFA87VMFVAW96&hash=item2967e3254a%3Ag%3A5yIAAeSwdvpphC1%7E&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xBa9x1fLKmTSewEjtc%2FaRPmdre7VIfvqTYVasRAgirEEQI3gRd5f0%2FH0B7n3UbYwFgEk5cbz2P23ZTYoGNNaP1hpr2y8azh71bPHWeHSkwwGFjGvZXlj%2FdFAIsy26lBrRlKpn%2Bqwq91Nyi3ZkP4HZ2IZEFgVH%2B1eL83mJEr9cbIXTF2hwDbYOxe8PV5F3auijY2gAQgYtrOmFsJOlLK4mmkahQu%2BB5ZK4qdukapbCB2dQ%3D%3D%7Ctkp%3ABlBMUMTa-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y - $90.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU", "brand": "Nike Force", "price": "$69.95", "image_url": "https://i.ebayimg.com/images/g/s9YAAeSwr9dp2E5R/s-l300.webp", "source_url": "https://www.ebay.com/itm/178036532604?_skw=kids+shoes&itmmeta=01KNYCYNMG6S5DW246D4JQG5D5&hash=item2973cde57c%3Ag%3As9YAAeSwr9dp2E5R&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xCE2HfvOm9mh1iLZ3lWK%2FulFuMl6e6zluQoFOuuVy7p%2FG0dK2U0RL3psJKSY4l%2Bn5MoZ1I6MTxhKaIMgOtvQp%2F2tCkgeOcBGaYkX1pUWk4Fr%2B%2F3zuK36HGA3sQhMozhZ%2FHRGozmdYx1SKdZbxGvsdxhrVpEmmoC%2F0LkcHZVkKovFYnF%2BrNjcVZ7HZKo4nUtPE11QyYK0mqAaN%2BmBMnfP9NuiRWZPdjmp1zFNgXgHPfW0A%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU - $69.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560-", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/p-gAAeSwICVp1751/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746523001?_skw=kids+shoes&itmmeta=01KNYCYNMGB3KPNBATZDAZE898&hash=item371f314179%3Ag%3Ap-gAAeSwICVp1751&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCkMVozXfERnW8s%2Bb2BF%2F3z8VRuTrEQQG%2FJ9O4YC5kJi3hnHY7qW6pr4ycdDn%2FiKhc3ZxcWTPYCx9ekF%2F6L%2BzKu%2FaOC3ZbIjpjAuI5tVVBQgIFRj%2F0IwiBnoDz%2B2TVi9wlVz9uredUBQYgrPMDthTxTn5zN%2Bezpc8ZNkwl%2FWu%2BP4%2BPtRSFE4RLVYtnF7OtugZTEv9AGm99yuqRRodLZEs%2Fblpq9Kr51%2BLurz0ggw0d2yLH5Noz7sG6TZX5wjHPCmAw%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560- - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/quQAAeSwkxNp17-t/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746527880?_skw=kids+shoes&epid=12061736291&itmmeta=01KNYCYNMG122MCXW050C532TX&hash=item371f315488%3Ag%3AquQAAeSwkxNp17-t&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCOTJZiYiFFMGyVD%2FDbxzWbaeqTpuzui6LOg2%2Bk4pyqwnOWN7c9Lqccl%2F5zbxcg%2FOrcc0YnQkJnyriezdohHjwvepJGSSsDYsJwMECEnxOj%2B%2FrgP2iwq4noQDlAiz2zGSHrOVgDh1FU1qZDqI6IoM18afzpt4LLwN2To%2Fhx9PVzc2%2FAfaKSnt5v%2BavcZNPt%2FAqaMpX9y8SP%2BT0eHtXwHG3G42CmATYZTLEian7JWfyJeQEm2IMHctklNWhPNKK32ZA%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10 - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White)", "brand": "Hoy Shoe", "price": "$10.000", "image_url": "https://i.ebayimg.com/images/g/EXkAAeSwcnFp19f4/s-l50.webp", "source_url": "https://www.ebay.com/itm/178035639787?_skw=kids+shoes&itmmeta=01KNYCYNMG15GZBB4MD39Z9J4B&hash=item2973c045eb%3Ag%3AEXkAAeSwcnFp19f4&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xBaSmUn7nfQDihD6vcTp0jIX4Hi2Bhc7V%2BAXg0qnCkOUR%2BjpiKPfGlkhT2mnv0U5RzrA%2B%2B%2BzYyq464T5jxMFr0MzXOI619s%2FcY6cXsMf2QAVlaTueZgvn3jNDEyrH3yHXgmZY2SdmqGo%2BDnhquwXb7S1EMv0gYwoSkL1MUssu0CBM3b8FoV8javkIuIe5hG8NtZOdWVK3srt0%2Bot1n9Hl3gR%2BSrG36CekeCf%2F1FIJ7Ux5jSuwXKGNlK4%2BfzBv7ub4s5hZ9c5tSLZgdQfPg4FgLq8HaW8pMd0n6LM1dHccnvvw%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White) - $10.000 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb", "brand": "Nike Boys", "price": "$18.990", "image_url": "https://i.ebayimg.com/images/g/fAMAAeSwxfNp1ETf/s-l50.webp", "source_url": "https://www.ebay.com/itm/366331477954?_skw=kids+shoes&itmmeta=01KNYCYNMG6JSFDDJBX6M82YHQ&hash=item554b0ebfc2%3Ag%3AfAMAAeSwxfNp1ETf&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xClTICQ1dIyrvyzIHRt9Aj5Di5NP8b2uS%2B6ysiPlk4voHJFYsr%2FiLhN%2BoDSoYR7JANQTAjIIHgi4wANWy5HeRYj48sCyqjKHF9xF%2BEIFxa4yfqVb27xffGhYPPWGRO%2FeTUMqYUie9sNxzho9SPiQ9Nuha%2BNo%2F8ojvNLoUa509M7otHSUooYrMSijHzTiJLzEV3jzEMsQRcwkAVT9RlvuXwSkAuyLKg5X4xL3mFCQGYFPaV%2F2jQUbdnbNw3Ye3vsCfc%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb - $18.990 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers", "brand": "Nike Boys", "price": "$13.75", "image_url": "https://i.ebayimg.com/images/g/logAAeSwe1Np2B-G/s-l50.webp", "source_url": "https://www.ebay.com/itm/287264246388?_skw=kids+shoes&itmmeta=01KNYCYNMG55HEJ2TPXWTFBJ83&hash=item42e2488a74%3Ag%3AlogAAeSwe1Np2B-G&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xC0Qu7G5v3njXp6uaqXF4qm3owaz9huGtvUjh5%2F8%2B1XO1dRazCwCjJuo18O13hhD%2FS7YAhKgNI0fdKXu%2BcC2hRsq3NCR0aHXLYN%2BBB1G83Sp8al1YniQkHdSU%2BQ7G1tPkVxtoM6hxUG9oLH7bYU%2FX%2FCs91zEQ0%2Bf88DhIn%2BbLNjIW8ignvZiZ0ZxX0PZ8jrFBBU5HQflMw5HX%2Bin0vKQ0Se2ablm0oawPvobtuflFhVcuZ8GBv%2BWUCZ1O4StyW29PzQTWTFHWVEmvpsTdBAQwvU8ss%2FXDb6SdIAS09QsEWMkA%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers - $13.75 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "jordan 12 obsidian size 4.5 youth", "brand": "eBay", "price": "$45.00", "image_url": "https://i.ebayimg.com/images/g/JfsAAeSwWIZp2Glm/s-l50.webp", "source_url": "https://www.ebay.com/itm/206200977741?_skw=kids+shoes&itmmeta=01KNYCYNMHQ8SQNNMM22EVA2RE&hash=item300289394d%3Ag%3AJfsAAeSwWIZp2Glm&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xB9rcgCbUTrou8CD8khQblLnuwssXF3G%2BdqERgBnr95VphJ7njezb0Q%2BUQtNrBzAwJkFEl%2Ba6myU%2FMftAPjWchH3Ty2ETbfd78ZqzyfEYLcm5WrqSUfVEkzLazLlw63GPbfFW%2BFGiTJyrN1NEA%2BKXJwvikJ2izwYKLhSbQaElTtxYEedO2IlEolw0UaGLpv2QyVXfq8l%2Fo153M7uFqu5tZeAUcsCkXGXN7WiwCSR4L81VruUv9TOVhGcJBZMVCj%2FTM%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "jordan 12 obsidian size 4.5 youth - $45.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 1", "brand": "Au", "price": "Check Site", "image_url": "https://ts2.mm.bing.net/th?id=OIP.SiCXPOm4zvTm6xyCi6w_MgHaIf&pid=15.1", "source_url": "https://au.levelshoes.com/kids.html", "source": "Au", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://au.levelshoes.com/kids.html", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 2", "brand": "Nike", "price": "Check Site", "image_url": "https://c.static-nike.com/a/images/w_1200,c_limit/bzl2wmsfh7kgdkufrrjq/seo-title.jpg", "source_url": "https://www.nike.com/fi/a/best-kids-shoes", "source": "Nike", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://www.nike.com/fi/a/best-kids-shoes", "moq": null, "location": null, "supplier_years": null, "is_verified": false}]</product_grid>
+Children Length: 10656
+Includes <product_carousel>: false
+ GET /chat/a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 1343ms (compile: 273ms, proxy.ts: 55ms, render: 1015ms)
+ GET /api/auth/session 200 in 445ms (compile: 270ms, proxy.ts: 76ms, render: 99ms)
+ GET /api/history?limit=20 200 in 167ms (compile: 35ms, proxy.ts: 42ms, render: 90ms)
+ GET /api/auth/session 200 in 185ms (compile: 83ms, proxy.ts: 50ms, render: 51ms)
+ GET /api/templates 200 in 97ms (compile: 31ms, proxy.ts: 22ms, render: 45ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 163ms (compile: 22ms, proxy.ts: 29ms, render: 111ms)
+ GET /api/templates 200 in 92ms (compile: 29ms, proxy.ts: 19ms, render: 44ms)
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 286ms (compile: 17ms, proxy.ts: 20ms, render: 248ms)
+ GET /api/history?limit=20 200 in 88ms (compile: 19ms, proxy.ts: 19ms, render: 51ms)
+ GET /api/history?limit=20 200 in 932ms (compile: 196ms, proxy.ts: 371ms, render: 365ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 874ms (compile: 352ms, proxy.ts: 306ms, render: 217ms)
+====== RESPONSE RENDER ======
+Children Raw: kids shoes
+Children Length: 10
+Includes <product_carousel>: false
+====== RESPONSE RENDER ======
+Children Raw: <product_grid>[{"name": "adidas kids Grand Court 2.0 Shoes", "brand": "Grand Court", "price": "$21.00", "image_url": "https://i.ebayimg.com/images/g/gMYAAeSwx-Bp1nG5/s-l50.webp", "source_url": "https://www.ebay.com/itm/227292200974?_skw=kids+shoes&itmmeta=01KNYCYNMGQY21KDCW7Y3PYM16&hash=item34ebabc00e%3Ag%3AgMYAAeSwx-Bp1nG5&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xAJ6KZZbEt5UWQiN8DRkbJIf%2B005OQQ%2Flhkk3XbKuAhgGNUrYgWLVWHSYq%2BhBLjH045aAcVQHtcVMzPjC0xOHLPXFNQxg0DlimaCrmUQXg9uDwJhhY560ag72BCY7GdFJs3vmZQZ9jh8yFcK7um%2FPtFhiYkf5OgVIkR%2FFcM5Nkq7vgFNL%2BrVTSNyscnbIvp9DOogCFTWjj%2BNR%2FBWmvJqEJFh5j300SvAAE8w0spVBC5ntMr2iGC%2FC%2BFTKhRHJyCs3U%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "adidas kids Grand Court 2.0 Shoes - $21.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16", "brand": "Nike Air", "price": "$59.95", "image_url": "https://i.ebayimg.com/images/g/ezUAAeSwSYZp1GSF/s-l50.webp", "source_url": "https://www.ebay.com/itm/198260532652?_skw=kids+shoes&itmmeta=01KNYCYNMGZ6CBE47P3WKEG8GQ&hash=item2e293fa5ac%3Ag%3AezUAAeSwSYZp1GSF&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xDViWNgJHXbODIi3L6sX3DJ9lrKjlaaZBNMlXIpQ7svX3Rt64VKzvgdq7a2So54DgKdefHgKVw9NDbd3%2BQ2feB0pe6Aq%2BhYDHDX2wIap%2F0o6q0r2cbSnYxlwC%2BB9lZul2eC6rDmojcSt818hwPDnr7oc2aIXyQeKB%2B2vpMDtsQUXb5DI6ydWt%2BRH9sjjXyNQqoWv4QlhXyy2VGl8lnZcyqEu9cOkavdQXUhD8YgXi2OLw%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16 - $59.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y", "brand": "Jordan Rings", "price": "$90.00", "image_url": "https://i.ebayimg.com/images/g/5yIAAeSwdvpphC1~/s-l300.webp", "source_url": "https://www.ebay.com/itm/177836598602?_skw=kids+shoes&itmmeta=01KNYCYNMGQQKAFA87VMFVAW96&hash=item2967e3254a%3Ag%3A5yIAAeSwdvpphC1%7E&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xBa9x1fLKmTSewEjtc%2FaRPmdre7VIfvqTYVasRAgirEEQI3gRd5f0%2FH0B7n3UbYwFgEk5cbz2P23ZTYoGNNaP1hpr2y8azh71bPHWeHSkwwGFjGvZXlj%2FdFAIsy26lBrRlKpn%2Bqwq91Nyi3ZkP4HZ2IZEFgVH%2B1eL83mJEr9cbIXTF2hwDbYOxe8PV5F3auijY2gAQgYtrOmFsJOlLK4mmkahQu%2BB5ZK4qdukapbCB2dQ%3D%3D%7Ctkp%3ABlBMUMTa-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y - $90.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU", "brand": "Nike Force", "price": "$69.95", "image_url": "https://i.ebayimg.com/images/g/s9YAAeSwr9dp2E5R/s-l300.webp", "source_url": "https://www.ebay.com/itm/178036532604?_skw=kids+shoes&itmmeta=01KNYCYNMG6S5DW246D4JQG5D5&hash=item2973cde57c%3Ag%3As9YAAeSwr9dp2E5R&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xCE2HfvOm9mh1iLZ3lWK%2FulFuMl6e6zluQoFOuuVy7p%2FG0dK2U0RL3psJKSY4l%2Bn5MoZ1I6MTxhKaIMgOtvQp%2F2tCkgeOcBGaYkX1pUWk4Fr%2B%2F3zuK36HGA3sQhMozhZ%2FHRGozmdYx1SKdZbxGvsdxhrVpEmmoC%2F0LkcHZVkKovFYnF%2BrNjcVZ7HZKo4nUtPE11QyYK0mqAaN%2BmBMnfP9NuiRWZPdjmp1zFNgXgHPfW0A%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU - $69.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560-", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/p-gAAeSwICVp1751/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746523001?_skw=kids+shoes&itmmeta=01KNYCYNMGB3KPNBATZDAZE898&hash=item371f314179%3Ag%3Ap-gAAeSwICVp1751&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCkMVozXfERnW8s%2Bb2BF%2F3z8VRuTrEQQG%2FJ9O4YC5kJi3hnHY7qW6pr4ycdDn%2FiKhc3ZxcWTPYCx9ekF%2F6L%2BzKu%2FaOC3ZbIjpjAuI5tVVBQgIFRj%2F0IwiBnoDz%2B2TVi9wlVz9uredUBQYgrPMDthTxTn5zN%2Bezpc8ZNkwl%2FWu%2BP4%2BPtRSFE4RLVYtnF7OtugZTEv9AGm99yuqRRodLZEs%2Fblpq9Kr51%2BLurz0ggw0d2yLH5Noz7sG6TZX5wjHPCmAw%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560- - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/quQAAeSwkxNp17-t/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746527880?_skw=kids+shoes&epid=12061736291&itmmeta=01KNYCYNMG122MCXW050C532TX&hash=item371f315488%3Ag%3AquQAAeSwkxNp17-t&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCOTJZiYiFFMGyVD%2FDbxzWbaeqTpuzui6LOg2%2Bk4pyqwnOWN7c9Lqccl%2F5zbxcg%2FOrcc0YnQkJnyriezdohHjwvepJGSSsDYsJwMECEnxOj%2B%2FrgP2iwq4noQDlAiz2zGSHrOVgDh1FU1qZDqI6IoM18afzpt4LLwN2To%2Fhx9PVzc2%2FAfaKSnt5v%2BavcZNPt%2FAqaMpX9y8SP%2BT0eHtXwHG3G42CmATYZTLEian7JWfyJeQEm2IMHctklNWhPNKK32ZA%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10 - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White)", "brand": "Hoy Shoe", "price": "$10.000", "image_url": "https://i.ebayimg.com/images/g/EXkAAeSwcnFp19f4/s-l50.webp", "source_url": "https://www.ebay.com/itm/178035639787?_skw=kids+shoes&itmmeta=01KNYCYNMG15GZBB4MD39Z9J4B&hash=item2973c045eb%3Ag%3AEXkAAeSwcnFp19f4&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xBaSmUn7nfQDihD6vcTp0jIX4Hi2Bhc7V%2BAXg0qnCkOUR%2BjpiKPfGlkhT2mnv0U5RzrA%2B%2B%2BzYyq464T5jxMFr0MzXOI619s%2FcY6cXsMf2QAVlaTueZgvn3jNDEyrH3yHXgmZY2SdmqGo%2BDnhquwXb7S1EMv0gYwoSkL1MUssu0CBM3b8FoV8javkIuIe5hG8NtZOdWVK3srt0%2Bot1n9Hl3gR%2BSrG36CekeCf%2F1FIJ7Ux5jSuwXKGNlK4%2BfzBv7ub4s5hZ9c5tSLZgdQfPg4FgLq8HaW8pMd0n6LM1dHccnvvw%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White) - $10.000 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb", "brand": "Nike Boys", "price": "$18.990", "image_url": "https://i.ebayimg.com/images/g/fAMAAeSwxfNp1ETf/s-l50.webp", "source_url": "https://www.ebay.com/itm/366331477954?_skw=kids+shoes&itmmeta=01KNYCYNMG6JSFDDJBX6M82YHQ&hash=item554b0ebfc2%3Ag%3AfAMAAeSwxfNp1ETf&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xClTICQ1dIyrvyzIHRt9Aj5Di5NP8b2uS%2B6ysiPlk4voHJFYsr%2FiLhN%2BoDSoYR7JANQTAjIIHgi4wANWy5HeRYj48sCyqjKHF9xF%2BEIFxa4yfqVb27xffGhYPPWGRO%2FeTUMqYUie9sNxzho9SPiQ9Nuha%2BNo%2F8ojvNLoUa509M7otHSUooYrMSijHzTiJLzEV3jzEMsQRcwkAVT9RlvuXwSkAuyLKg5X4xL3mFCQGYFPaV%2F2jQUbdnbNw3Ye3vsCfc%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb - $18.990 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers", "brand": "Nike Boys", "price": "$13.75", "image_url": "https://i.ebayimg.com/images/g/logAAeSwe1Np2B-G/s-l50.webp", "source_url": "https://www.ebay.com/itm/287264246388?_skw=kids+shoes&itmmeta=01KNYCYNMG55HEJ2TPXWTFBJ83&hash=item42e2488a74%3Ag%3AlogAAeSwe1Np2B-G&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xC0Qu7G5v3njXp6uaqXF4qm3owaz9huGtvUjh5%2F8%2B1XO1dRazCwCjJuo18O13hhD%2FS7YAhKgNI0fdKXu%2BcC2hRsq3NCR0aHXLYN%2BBB1G83Sp8al1YniQkHdSU%2BQ7G1tPkVxtoM6hxUG9oLH7bYU%2FX%2FCs91zEQ0%2Bf88DhIn%2BbLNjIW8ignvZiZ0ZxX0PZ8jrFBBU5HQflMw5HX%2Bin0vKQ0Se2ablm0oawPvobtuflFhVcuZ8GBv%2BWUCZ1O4StyW29PzQTWTFHWVEmvpsTdBAQwvU8ss%2FXDb6SdIAS09QsEWMkA%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers - $13.75 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "jordan 12 obsidian size 4.5 youth", "brand": "eBay", "price": "$45.00", "image_url": "https://i.ebayimg.com/images/g/JfsAAeSwWIZp2Glm/s-l50.webp", "source_url": "https://www.ebay.com/itm/206200977741?_skw=kids+shoes&itmmeta=01KNYCYNMHQ8SQNNMM22EVA2RE&hash=item300289394d%3Ag%3AJfsAAeSwWIZp2Glm&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xB9rcgCbUTrou8CD8khQblLnuwssXF3G%2BdqERgBnr95VphJ7njezb0Q%2BUQtNrBzAwJkFEl%2Ba6myU%2FMftAPjWchH3Ty2ETbfd78ZqzyfEYLcm5WrqSUfVEkzLazLlw63GPbfFW%2BFGiTJyrN1NEA%2BKXJwvikJ2izwYKLhSbQaElTtxYEedO2IlEolw0UaGLpv2QyVXfq8l%2Fo153M7uFqu5tZeAUcsCkXGXN7WiwCSR4L81VruUv9TOVhGcJBZMVCj%2FTM%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "jordan 12 obsidian size 4.5 youth - $45.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 1", "brand": "Au", "price": "Check Site", "image_url": "https://ts2.mm.bing.net/th?id=OIP.SiCXPOm4zvTm6xyCi6w_MgHaIf&pid=15.1", "source_url": "https://au.levelshoes.com/kids.html", "source": "Au", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://au.levelshoes.com/kids.html", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 2", "brand": "Nike", "price": "Check Site", "image_url": "https://c.static-nike.com/a/images/w_1200,c_limit/bzl2wmsfh7kgdkufrrjq/seo-title.jpg", "source_url": "https://www.nike.com/fi/a/best-kids-shoes", "source": "Nike", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://www.nike.com/fi/a/best-kids-shoes", "moq": null, "location": null, "supplier_years": null, "is_verified": false}]</product_grid>
+Children Length: 10656
+Includes <product_carousel>: false
+ GET /chat/a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 1914ms (compile: 253ms, proxy.ts: 24ms, render: 1638ms)
+ GET /api/auth/session 200 in 553ms (compile: 322ms, proxy.ts: 92ms, render: 140ms)
+ GET /api/auth/session 200 in 189ms (compile: 103ms, proxy.ts: 30ms, render: 55ms)
+ GET /api/history?limit=20 200 in 211ms (compile: 38ms, proxy.ts: 42ms, render: 131ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 136ms (compile: 23ms, proxy.ts: 35ms, render: 78ms)
+ GET /api/templates 200 in 259ms (compile: 43ms, proxy.ts: 34ms, render: 182ms)
+ GET /api/templates 200 in 109ms (compile: 18ms, proxy.ts: 16ms, render: 76ms)
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 312ms (compile: 13ms, proxy.ts: 38ms, render: 261ms)
+ GET /api/history?limit=20 200 in 80ms (compile: 7ms, proxy.ts: 15ms, render: 58ms)
+ GET /api/history?limit=20 200 in 100ms (compile: 20ms, proxy.ts: 27ms, render: 53ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 97ms (compile: 24ms, proxy.ts: 25ms, render: 49ms)
+Route /chat/[id] is rendering with server caches disabled. For this navigation, Component Metadata in React DevTools will not accurately reflect what is statically prerenderable and runtime prefetchable. See more info here: https://nextjs.org/docs/messages/cache-bypass-in-dev
+====== RESPONSE RENDER ======
+Children Raw: kids shoes
+Children Length: 10
+Includes <product_carousel>: false
+====== RESPONSE RENDER ======
+Children Raw: <product_grid>[{"name": "adidas kids Grand Court 2.0 Shoes", "brand": "Grand Court", "price": "$21.00", "image_url": "https://i.ebayimg.com/images/g/gMYAAeSwx-Bp1nG5/s-l50.webp", "source_url": "https://www.ebay.com/itm/227292200974?_skw=kids+shoes&itmmeta=01KNYCYNMGQY21KDCW7Y3PYM16&hash=item34ebabc00e%3Ag%3AgMYAAeSwx-Bp1nG5&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xAJ6KZZbEt5UWQiN8DRkbJIf%2B005OQQ%2Flhkk3XbKuAhgGNUrYgWLVWHSYq%2BhBLjH045aAcVQHtcVMzPjC0xOHLPXFNQxg0DlimaCrmUQXg9uDwJhhY560ag72BCY7GdFJs3vmZQZ9jh8yFcK7um%2FPtFhiYkf5OgVIkR%2FFcM5Nkq7vgFNL%2BrVTSNyscnbIvp9DOogCFTWjj%2BNR%2FBWmvJqEJFh5j300SvAAE8w0spVBC5ntMr2iGC%2FC%2BFTKhRHJyCs3U%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "adidas kids Grand Court 2.0 Shoes - $21.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16", "brand": "Nike Air", "price": "$59.95", "image_url": "https://i.ebayimg.com/images/g/ezUAAeSwSYZp1GSF/s-l50.webp", "source_url": "https://www.ebay.com/itm/198260532652?_skw=kids+shoes&itmmeta=01KNYCYNMGZ6CBE47P3WKEG8GQ&hash=item2e293fa5ac%3Ag%3AezUAAeSwSYZp1GSF&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xDViWNgJHXbODIi3L6sX3DJ9lrKjlaaZBNMlXIpQ7svX3Rt64VKzvgdq7a2So54DgKdefHgKVw9NDbd3%2BQ2feB0pe6Aq%2BhYDHDX2wIap%2F0o6q0r2cbSnYxlwC%2BB9lZul2eC6rDmojcSt818hwPDnr7oc2aIXyQeKB%2B2vpMDtsQUXb5DI6ydWt%2BRH9sjjXyNQqoWv4QlhXyy2VGl8lnZcyqEu9cOkavdQXUhD8YgXi2OLw%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16 - $59.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y", "brand": "Jordan Rings", "price": "$90.00", "image_url": "https://i.ebayimg.com/images/g/5yIAAeSwdvpphC1~/s-l300.webp", "source_url": "https://www.ebay.com/itm/177836598602?_skw=kids+shoes&itmmeta=01KNYCYNMGQQKAFA87VMFVAW96&hash=item2967e3254a%3Ag%3A5yIAAeSwdvpphC1%7E&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xBa9x1fLKmTSewEjtc%2FaRPmdre7VIfvqTYVasRAgirEEQI3gRd5f0%2FH0B7n3UbYwFgEk5cbz2P23ZTYoGNNaP1hpr2y8azh71bPHWeHSkwwGFjGvZXlj%2FdFAIsy26lBrRlKpn%2Bqwq91Nyi3ZkP4HZ2IZEFgVH%2B1eL83mJEr9cbIXTF2hwDbYOxe8PV5F3auijY2gAQgYtrOmFsJOlLK4mmkahQu%2BB5ZK4qdukapbCB2dQ%3D%3D%7Ctkp%3ABlBMUMTa-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y - $90.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU", "brand": "Nike Force", "price": "$69.95", "image_url": "https://i.ebayimg.com/images/g/s9YAAeSwr9dp2E5R/s-l300.webp", "source_url": "https://www.ebay.com/itm/178036532604?_skw=kids+shoes&itmmeta=01KNYCYNMG6S5DW246D4JQG5D5&hash=item2973cde57c%3Ag%3As9YAAeSwr9dp2E5R&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xCE2HfvOm9mh1iLZ3lWK%2FulFuMl6e6zluQoFOuuVy7p%2FG0dK2U0RL3psJKSY4l%2Bn5MoZ1I6MTxhKaIMgOtvQp%2F2tCkgeOcBGaYkX1pUWk4Fr%2B%2F3zuK36HGA3sQhMozhZ%2FHRGozmdYx1SKdZbxGvsdxhrVpEmmoC%2F0LkcHZVkKovFYnF%2BrNjcVZ7HZKo4nUtPE11QyYK0mqAaN%2BmBMnfP9NuiRWZPdjmp1zFNgXgHPfW0A%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU - $69.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560-", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/p-gAAeSwICVp1751/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746523001?_skw=kids+shoes&itmmeta=01KNYCYNMGB3KPNBATZDAZE898&hash=item371f314179%3Ag%3Ap-gAAeSwICVp1751&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCkMVozXfERnW8s%2Bb2BF%2F3z8VRuTrEQQG%2FJ9O4YC5kJi3hnHY7qW6pr4ycdDn%2FiKhc3ZxcWTPYCx9ekF%2F6L%2BzKu%2FaOC3ZbIjpjAuI5tVVBQgIFRj%2F0IwiBnoDz%2B2TVi9wlVz9uredUBQYgrPMDthTxTn5zN%2Bezpc8ZNkwl%2FWu%2BP4%2BPtRSFE4RLVYtnF7OtugZTEv9AGm99yuqRRodLZEs%2Fblpq9Kr51%2BLurz0ggw0d2yLH5Noz7sG6TZX5wjHPCmAw%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560- - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/quQAAeSwkxNp17-t/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746527880?_skw=kids+shoes&epid=12061736291&itmmeta=01KNYCYNMG122MCXW050C532TX&hash=item371f315488%3Ag%3AquQAAeSwkxNp17-t&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCOTJZiYiFFMGyVD%2FDbxzWbaeqTpuzui6LOg2%2Bk4pyqwnOWN7c9Lqccl%2F5zbxcg%2FOrcc0YnQkJnyriezdohHjwvepJGSSsDYsJwMECEnxOj%2B%2FrgP2iwq4noQDlAiz2zGSHrOVgDh1FU1qZDqI6IoM18afzpt4LLwN2To%2Fhx9PVzc2%2FAfaKSnt5v%2BavcZNPt%2FAqaMpX9y8SP%2BT0eHtXwHG3G42CmATYZTLEian7JWfyJeQEm2IMHctklNWhPNKK32ZA%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10 - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White)", "brand": "Hoy Shoe", "price": "$10.000", "image_url": "https://i.ebayimg.com/images/g/EXkAAeSwcnFp19f4/s-l50.webp", "source_url": "https://www.ebay.com/itm/178035639787?_skw=kids+shoes&itmmeta=01KNYCYNMG15GZBB4MD39Z9J4B&hash=item2973c045eb%3Ag%3AEXkAAeSwcnFp19f4&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xBaSmUn7nfQDihD6vcTp0jIX4Hi2Bhc7V%2BAXg0qnCkOUR%2BjpiKPfGlkhT2mnv0U5RzrA%2B%2B%2BzYyq464T5jxMFr0MzXOI619s%2FcY6cXsMf2QAVlaTueZgvn3jNDEyrH3yHXgmZY2SdmqGo%2BDnhquwXb7S1EMv0gYwoSkL1MUssu0CBM3b8FoV8javkIuIe5hG8NtZOdWVK3srt0%2Bot1n9Hl3gR%2BSrG36CekeCf%2F1FIJ7Ux5jSuwXKGNlK4%2BfzBv7ub4s5hZ9c5tSLZgdQfPg4FgLq8HaW8pMd0n6LM1dHccnvvw%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White) - $10.000 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb", "brand": "Nike Boys", "price": "$18.990", "image_url": "https://i.ebayimg.com/images/g/fAMAAeSwxfNp1ETf/s-l50.webp", "source_url": "https://www.ebay.com/itm/366331477954?_skw=kids+shoes&itmmeta=01KNYCYNMG6JSFDDJBX6M82YHQ&hash=item554b0ebfc2%3Ag%3AfAMAAeSwxfNp1ETf&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xClTICQ1dIyrvyzIHRt9Aj5Di5NP8b2uS%2B6ysiPlk4voHJFYsr%2FiLhN%2BoDSoYR7JANQTAjIIHgi4wANWy5HeRYj48sCyqjKHF9xF%2BEIFxa4yfqVb27xffGhYPPWGRO%2FeTUMqYUie9sNxzho9SPiQ9Nuha%2BNo%2F8ojvNLoUa509M7otHSUooYrMSijHzTiJLzEV3jzEMsQRcwkAVT9RlvuXwSkAuyLKg5X4xL3mFCQGYFPaV%2F2jQUbdnbNw3Ye3vsCfc%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb - $18.990 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers", "brand": "Nike Boys", "price": "$13.75", "image_url": "https://i.ebayimg.com/images/g/logAAeSwe1Np2B-G/s-l50.webp", "source_url": "https://www.ebay.com/itm/287264246388?_skw=kids+shoes&itmmeta=01KNYCYNMG55HEJ2TPXWTFBJ83&hash=item42e2488a74%3Ag%3AlogAAeSwe1Np2B-G&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xC0Qu7G5v3njXp6uaqXF4qm3owaz9huGtvUjh5%2F8%2B1XO1dRazCwCjJuo18O13hhD%2FS7YAhKgNI0fdKXu%2BcC2hRsq3NCR0aHXLYN%2BBB1G83Sp8al1YniQkHdSU%2BQ7G1tPkVxtoM6hxUG9oLH7bYU%2FX%2FCs91zEQ0%2Bf88DhIn%2BbLNjIW8ignvZiZ0ZxX0PZ8jrFBBU5HQflMw5HX%2Bin0vKQ0Se2ablm0oawPvobtuflFhVcuZ8GBv%2BWUCZ1O4StyW29PzQTWTFHWVEmvpsTdBAQwvU8ss%2FXDb6SdIAS09QsEWMkA%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers - $13.75 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "jordan 12 obsidian size 4.5 youth", "brand": "eBay", "price": "$45.00", "image_url": "https://i.ebayimg.com/images/g/JfsAAeSwWIZp2Glm/s-l50.webp", "source_url": "https://www.ebay.com/itm/206200977741?_skw=kids+shoes&itmmeta=01KNYCYNMHQ8SQNNMM22EVA2RE&hash=item300289394d%3Ag%3AJfsAAeSwWIZp2Glm&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xB9rcgCbUTrou8CD8khQblLnuwssXF3G%2BdqERgBnr95VphJ7njezb0Q%2BUQtNrBzAwJkFEl%2Ba6myU%2FMftAPjWchH3Ty2ETbfd78ZqzyfEYLcm5WrqSUfVEkzLazLlw63GPbfFW%2BFGiTJyrN1NEA%2BKXJwvikJ2izwYKLhSbQaElTtxYEedO2IlEolw0UaGLpv2QyVXfq8l%2Fo153M7uFqu5tZeAUcsCkXGXN7WiwCSR4L81VruUv9TOVhGcJBZMVCj%2FTM%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "jordan 12 obsidian size 4.5 youth - $45.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 1", "brand": "Au", "price": "Check Site", "image_url": "https://ts2.mm.bing.net/th?id=OIP.SiCXPOm4zvTm6xyCi6w_MgHaIf&pid=15.1", "source_url": "https://au.levelshoes.com/kids.html", "source": "Au", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://au.levelshoes.com/kids.html", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 2", "brand": "Nike", "price": "Check Site", "image_url": "https://c.static-nike.com/a/images/w_1200,c_limit/bzl2wmsfh7kgdkufrrjq/seo-title.jpg", "source_url": "https://www.nike.com/fi/a/best-kids-shoes", "source": "Nike", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://www.nike.com/fi/a/best-kids-shoes", "moq": null, "location": null, "supplier_years": null, "is_verified": false}]</product_grid>
+Children Length: 10656
+Includes <product_carousel>: false
+ GET /chat/a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 1046ms (compile: 201ms, proxy.ts: 26ms, render: 819ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FEXkAAeSwcnFp19f4%2Fs-l50.webp 200 in 482ms (compile: 37ms, proxy.ts: 45ms, render: 400ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2Fp-gAAeSwICVp1751%2Fs-l50.webp 200 in 296ms (compile: 17ms, proxy.ts: 32ms, render: 248ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FgMYAAeSwx-Bp1nG5%2Fs-l50.webp 200 in 468ms (compile: 41ms, proxy.ts: 40ms, render: 387ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FfAMAAeSwxfNp1ETf%2Fs-l50.webp 200 in 456ms (compile: 56ms, proxy.ts: 36ms, render: 364ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fc.static-nike.com%2Fa%2Fimages%2Fw_1200%2Cc_limit%2Fbzl2wmsfh7kgdkufrrjq%2Fseo-title.jpg 200 in 495ms (compile: 42ms, proxy.ts: 47ms, render: 407ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2F5yIAAeSwdvpphC1~%2Fs-l300.webp 200 in 249ms (compile: 41ms, proxy.ts: 31ms, render: 177ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FJfsAAeSwWIZp2Glm%2Fs-l50.webp 200 in 253ms (compile: 63ms, proxy.ts: 40ms, render: 150ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FlogAAeSwe1Np2B-G%2Fs-l50.webp 200 in 258ms (compile: 79ms, proxy.ts: 42ms, render: 136ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2Fs9YAAeSwr9dp2E5R%2Fs-l300.webp 200 in 281ms (compile: 47ms, proxy.ts: 35ms, render: 198ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.SiCXPOm4zvTm6xyCi6w_MgHaIf%26pid%3D15.1 200 in 786ms (compile: 41ms, proxy.ts: 36ms, render: 709ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FezUAAeSwSYZp1GSF%2Fs-l50.webp 200 in 520ms (compile: 90ms, proxy.ts: 45ms, render: 385ms)
+ GET /api/auth/session 200 in 287ms (compile: 186ms, proxy.ts: 44ms, render: 57ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FquQAAeSwkxNp17-t%2Fs-l50.webp 200 in 316ms (compile: 41ms, proxy.ts: 49ms, render: 225ms)
+ GET /api/history?limit=20 200 in 308ms (compile: 41ms, proxy.ts: 58ms, render: 208ms)
+ GET /api/auth/session 200 in 142ms (compile: 70ms, proxy.ts: 23ms, render: 49ms)
+ GET /api/templates 200 in 119ms (compile: 44ms, proxy.ts: 26ms, render: 49ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 147ms (compile: 30ms, proxy.ts: 31ms, render: 86ms)
+ GET /api/templates 200 in 82ms (compile: 22ms, proxy.ts: 13ms, render: 48ms)
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 257ms (compile: 16ms, proxy.ts: 17ms, render: 224ms)
+ GET /api/history?limit=20 200 in 65ms (compile: 21ms, proxy.ts: 13ms, render: 32ms)
+ GET /api/history?limit=20 200 in 842ms (compile: 267ms, proxy.ts: 348ms, render: 227ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 750ms (compile: 144ms, proxy.ts: 243ms, render: 363ms)
+====== RESPONSE RENDER ======
+Children Raw: kids shoes
+Children Length: 10
+Includes <product_carousel>: false
+====== RESPONSE RENDER ======
+Children Raw: <product_grid>[{"name": "adidas kids Grand Court 2.0 Shoes", "brand": "Grand Court", "price": "$21.00", "image_url": "https://i.ebayimg.com/images/g/gMYAAeSwx-Bp1nG5/s-l50.webp", "source_url": "https://www.ebay.com/itm/227292200974?_skw=kids+shoes&itmmeta=01KNYCYNMGQY21KDCW7Y3PYM16&hash=item34ebabc00e%3Ag%3AgMYAAeSwx-Bp1nG5&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xAJ6KZZbEt5UWQiN8DRkbJIf%2B005OQQ%2Flhkk3XbKuAhgGNUrYgWLVWHSYq%2BhBLjH045aAcVQHtcVMzPjC0xOHLPXFNQxg0DlimaCrmUQXg9uDwJhhY560ag72BCY7GdFJs3vmZQZ9jh8yFcK7um%2FPtFhiYkf5OgVIkR%2FFcM5Nkq7vgFNL%2BrVTSNyscnbIvp9DOogCFTWjj%2BNR%2FBWmvJqEJFh5j300SvAAE8w0spVBC5ntMr2iGC%2FC%2BFTKhRHJyCs3U%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "adidas kids Grand Court 2.0 Shoes - $21.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16", "brand": "Nike Air", "price": "$59.95", "image_url": "https://i.ebayimg.com/images/g/ezUAAeSwSYZp1GSF/s-l50.webp", "source_url": "https://www.ebay.com/itm/198260532652?_skw=kids+shoes&itmmeta=01KNYCYNMGZ6CBE47P3WKEG8GQ&hash=item2e293fa5ac%3Ag%3AezUAAeSwSYZp1GSF&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xDViWNgJHXbODIi3L6sX3DJ9lrKjlaaZBNMlXIpQ7svX3Rt64VKzvgdq7a2So54DgKdefHgKVw9NDbd3%2BQ2feB0pe6Aq%2BhYDHDX2wIap%2F0o6q0r2cbSnYxlwC%2BB9lZul2eC6rDmojcSt818hwPDnr7oc2aIXyQeKB%2B2vpMDtsQUXb5DI6ydWt%2BRH9sjjXyNQqoWv4QlhXyy2VGl8lnZcyqEu9cOkavdQXUhD8YgXi2OLw%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16 - $59.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y", "brand": "Jordan Rings", "price": "$90.00", "image_url": "https://i.ebayimg.com/images/g/5yIAAeSwdvpphC1~/s-l300.webp", "source_url": "https://www.ebay.com/itm/177836598602?_skw=kids+shoes&itmmeta=01KNYCYNMGQQKAFA87VMFVAW96&hash=item2967e3254a%3Ag%3A5yIAAeSwdvpphC1%7E&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xBa9x1fLKmTSewEjtc%2FaRPmdre7VIfvqTYVasRAgirEEQI3gRd5f0%2FH0B7n3UbYwFgEk5cbz2P23ZTYoGNNaP1hpr2y8azh71bPHWeHSkwwGFjGvZXlj%2FdFAIsy26lBrRlKpn%2Bqwq91Nyi3ZkP4HZ2IZEFgVH%2B1eL83mJEr9cbIXTF2hwDbYOxe8PV5F3auijY2gAQgYtrOmFsJOlLK4mmkahQu%2BB5ZK4qdukapbCB2dQ%3D%3D%7Ctkp%3ABlBMUMTa-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y - $90.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU", "brand": "Nike Force", "price": "$69.95", "image_url": "https://i.ebayimg.com/images/g/s9YAAeSwr9dp2E5R/s-l300.webp", "source_url": "https://www.ebay.com/itm/178036532604?_skw=kids+shoes&itmmeta=01KNYCYNMG6S5DW246D4JQG5D5&hash=item2973cde57c%3Ag%3As9YAAeSwr9dp2E5R&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xCE2HfvOm9mh1iLZ3lWK%2FulFuMl6e6zluQoFOuuVy7p%2FG0dK2U0RL3psJKSY4l%2Bn5MoZ1I6MTxhKaIMgOtvQp%2F2tCkgeOcBGaYkX1pUWk4Fr%2B%2F3zuK36HGA3sQhMozhZ%2FHRGozmdYx1SKdZbxGvsdxhrVpEmmoC%2F0LkcHZVkKovFYnF%2BrNjcVZ7HZKo4nUtPE11QyYK0mqAaN%2BmBMnfP9NuiRWZPdjmp1zFNgXgHPfW0A%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU - $69.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560-", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/p-gAAeSwICVp1751/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746523001?_skw=kids+shoes&itmmeta=01KNYCYNMGB3KPNBATZDAZE898&hash=item371f314179%3Ag%3Ap-gAAeSwICVp1751&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCkMVozXfERnW8s%2Bb2BF%2F3z8VRuTrEQQG%2FJ9O4YC5kJi3hnHY7qW6pr4ycdDn%2FiKhc3ZxcWTPYCx9ekF%2F6L%2BzKu%2FaOC3ZbIjpjAuI5tVVBQgIFRj%2F0IwiBnoDz%2B2TVi9wlVz9uredUBQYgrPMDthTxTn5zN%2Bezpc8ZNkwl%2FWu%2BP4%2BPtRSFE4RLVYtnF7OtugZTEv9AGm99yuqRRodLZEs%2Fblpq9Kr51%2BLurz0ggw0d2yLH5Noz7sG6TZX5wjHPCmAw%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560- - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/quQAAeSwkxNp17-t/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746527880?_skw=kids+shoes&epid=12061736291&itmmeta=01KNYCYNMG122MCXW050C532TX&hash=item371f315488%3Ag%3AquQAAeSwkxNp17-t&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCOTJZiYiFFMGyVD%2FDbxzWbaeqTpuzui6LOg2%2Bk4pyqwnOWN7c9Lqccl%2F5zbxcg%2FOrcc0YnQkJnyriezdohHjwvepJGSSsDYsJwMECEnxOj%2B%2FrgP2iwq4noQDlAiz2zGSHrOVgDh1FU1qZDqI6IoM18afzpt4LLwN2To%2Fhx9PVzc2%2FAfaKSnt5v%2BavcZNPt%2FAqaMpX9y8SP%2BT0eHtXwHG3G42CmATYZTLEian7JWfyJeQEm2IMHctklNWhPNKK32ZA%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10 - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White)", "brand": "Hoy Shoe", "price": "$10.000", "image_url": "https://i.ebayimg.com/images/g/EXkAAeSwcnFp19f4/s-l50.webp", "source_url": "https://www.ebay.com/itm/178035639787?_skw=kids+shoes&itmmeta=01KNYCYNMG15GZBB4MD39Z9J4B&hash=item2973c045eb%3Ag%3AEXkAAeSwcnFp19f4&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xBaSmUn7nfQDihD6vcTp0jIX4Hi2Bhc7V%2BAXg0qnCkOUR%2BjpiKPfGlkhT2mnv0U5RzrA%2B%2B%2BzYyq464T5jxMFr0MzXOI619s%2FcY6cXsMf2QAVlaTueZgvn3jNDEyrH3yHXgmZY2SdmqGo%2BDnhquwXb7S1EMv0gYwoSkL1MUssu0CBM3b8FoV8javkIuIe5hG8NtZOdWVK3srt0%2Bot1n9Hl3gR%2BSrG36CekeCf%2F1FIJ7Ux5jSuwXKGNlK4%2BfzBv7ub4s5hZ9c5tSLZgdQfPg4FgLq8HaW8pMd0n6LM1dHccnvvw%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White) - $10.000 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb", "brand": "Nike Boys", "price": "$18.990", "image_url": "https://i.ebayimg.com/images/g/fAMAAeSwxfNp1ETf/s-l50.webp", "source_url": "https://www.ebay.com/itm/366331477954?_skw=kids+shoes&itmmeta=01KNYCYNMG6JSFDDJBX6M82YHQ&hash=item554b0ebfc2%3Ag%3AfAMAAeSwxfNp1ETf&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xClTICQ1dIyrvyzIHRt9Aj5Di5NP8b2uS%2B6ysiPlk4voHJFYsr%2FiLhN%2BoDSoYR7JANQTAjIIHgi4wANWy5HeRYj48sCyqjKHF9xF%2BEIFxa4yfqVb27xffGhYPPWGRO%2FeTUMqYUie9sNxzho9SPiQ9Nuha%2BNo%2F8ojvNLoUa509M7otHSUooYrMSijHzTiJLzEV3jzEMsQRcwkAVT9RlvuXwSkAuyLKg5X4xL3mFCQGYFPaV%2F2jQUbdnbNw3Ye3vsCfc%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb - $18.990 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers", "brand": "Nike Boys", "price": "$13.75", "image_url": "https://i.ebayimg.com/images/g/logAAeSwe1Np2B-G/s-l50.webp", "source_url": "https://www.ebay.com/itm/287264246388?_skw=kids+shoes&itmmeta=01KNYCYNMG55HEJ2TPXWTFBJ83&hash=item42e2488a74%3Ag%3AlogAAeSwe1Np2B-G&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xC0Qu7G5v3njXp6uaqXF4qm3owaz9huGtvUjh5%2F8%2B1XO1dRazCwCjJuo18O13hhD%2FS7YAhKgNI0fdKXu%2BcC2hRsq3NCR0aHXLYN%2BBB1G83Sp8al1YniQkHdSU%2BQ7G1tPkVxtoM6hxUG9oLH7bYU%2FX%2FCs91zEQ0%2Bf88DhIn%2BbLNjIW8ignvZiZ0ZxX0PZ8jrFBBU5HQflMw5HX%2Bin0vKQ0Se2ablm0oawPvobtuflFhVcuZ8GBv%2BWUCZ1O4StyW29PzQTWTFHWVEmvpsTdBAQwvU8ss%2FXDb6SdIAS09QsEWMkA%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers - $13.75 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "jordan 12 obsidian size 4.5 youth", "brand": "eBay", "price": "$45.00", "image_url": "https://i.ebayimg.com/images/g/JfsAAeSwWIZp2Glm/s-l50.webp", "source_url": "https://www.ebay.com/itm/206200977741?_skw=kids+shoes&itmmeta=01KNYCYNMHQ8SQNNMM22EVA2RE&hash=item300289394d%3Ag%3AJfsAAeSwWIZp2Glm&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xB9rcgCbUTrou8CD8khQblLnuwssXF3G%2BdqERgBnr95VphJ7njezb0Q%2BUQtNrBzAwJkFEl%2Ba6myU%2FMftAPjWchH3Ty2ETbfd78ZqzyfEYLcm5WrqSUfVEkzLazLlw63GPbfFW%2BFGiTJyrN1NEA%2BKXJwvikJ2izwYKLhSbQaElTtxYEedO2IlEolw0UaGLpv2QyVXfq8l%2Fo153M7uFqu5tZeAUcsCkXGXN7WiwCSR4L81VruUv9TOVhGcJBZMVCj%2FTM%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "jordan 12 obsidian size 4.5 youth - $45.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 1", "brand": "Au", "price": "Check Site", "image_url": "https://ts2.mm.bing.net/th?id=OIP.SiCXPOm4zvTm6xyCi6w_MgHaIf&pid=15.1", "source_url": "https://au.levelshoes.com/kids.html", "source": "Au", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://au.levelshoes.com/kids.html", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 2", "brand": "Nike", "price": "Check Site", "image_url": "https://c.static-nike.com/a/images/w_1200,c_limit/bzl2wmsfh7kgdkufrrjq/seo-title.jpg", "source_url": "https://www.nike.com/fi/a/best-kids-shoes", "source": "Nike", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://www.nike.com/fi/a/best-kids-shoes", "moq": null, "location": null, "supplier_years": null, "is_verified": false}]</product_grid>
+Children Length: 10656
+Includes <product_carousel>: false
+ GET /chat/a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 1912ms (compile: 215ms, proxy.ts: 29ms, render: 1668ms)
+ GET /api/auth/session 200 in 248ms (compile: 174ms, proxy.ts: 25ms, render: 50ms)
+ GET /api/history?limit=20 200 in 141ms (compile: 34ms, proxy.ts: 56ms, render: 51ms)
+ GET /api/auth/session 200 in 158ms (compile: 84ms, proxy.ts: 29ms, render: 45ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 137ms (compile: 23ms, proxy.ts: 30ms, render: 85ms)
+ GET /api/templates 200 in 194ms (compile: 31ms, proxy.ts: 30ms, render: 132ms)
+ GET /api/templates 200 in 79ms (compile: 13ms, proxy.ts: 21ms, render: 45ms)
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 452ms (compile: 26ms, proxy.ts: 23ms, render: 402ms)
+ GET /api/history?limit=20 200 in 256ms (compile: 57ms, proxy.ts: 72ms, render: 128ms)
+ GET /api/history?limit=20 200 in 106ms (compile: 11ms, proxy.ts: 38ms, render: 57ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 110ms (compile: 30ms, proxy.ts: 33ms, render: 46ms)
+ GET /api/history?limit=20 200 in 470ms (compile: 147ms, proxy.ts: 182ms, render: 141ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 425ms (compile: 76ms, proxy.ts: 124ms, render: 225ms)
+====== RESPONSE RENDER ======
+Children Raw: kids shoes
+Children Length: 10
+Includes <product_carousel>: false
+====== RESPONSE RENDER ======
+Children Raw: <product_grid>[{"name": "adidas kids Grand Court 2.0 Shoes", "brand": "Grand Court", "price": "$21.00", "image_url": "https://i.ebayimg.com/images/g/gMYAAeSwx-Bp1nG5/s-l50.webp", "source_url": "https://www.ebay.com/itm/227292200974?_skw=kids+shoes&itmmeta=01KNYCYNMGQY21KDCW7Y3PYM16&hash=item34ebabc00e%3Ag%3AgMYAAeSwx-Bp1nG5&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xAJ6KZZbEt5UWQiN8DRkbJIf%2B005OQQ%2Flhkk3XbKuAhgGNUrYgWLVWHSYq%2BhBLjH045aAcVQHtcVMzPjC0xOHLPXFNQxg0DlimaCrmUQXg9uDwJhhY560ag72BCY7GdFJs3vmZQZ9jh8yFcK7um%2FPtFhiYkf5OgVIkR%2FFcM5Nkq7vgFNL%2BrVTSNyscnbIvp9DOogCFTWjj%2BNR%2FBWmvJqEJFh5j300SvAAE8w0spVBC5ntMr2iGC%2FC%2BFTKhRHJyCs3U%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "adidas kids Grand Court 2.0 Shoes - $21.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16", "brand": "Nike Air", "price": "$59.95", "image_url": "https://i.ebayimg.com/images/g/ezUAAeSwSYZp1GSF/s-l50.webp", "source_url": "https://www.ebay.com/itm/198260532652?_skw=kids+shoes&itmmeta=01KNYCYNMGZ6CBE47P3WKEG8GQ&hash=item2e293fa5ac%3Ag%3AezUAAeSwSYZp1GSF&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xDViWNgJHXbODIi3L6sX3DJ9lrKjlaaZBNMlXIpQ7svX3Rt64VKzvgdq7a2So54DgKdefHgKVw9NDbd3%2BQ2feB0pe6Aq%2BhYDHDX2wIap%2F0o6q0r2cbSnYxlwC%2BB9lZul2eC6rDmojcSt818hwPDnr7oc2aIXyQeKB%2B2vpMDtsQUXb5DI6ydWt%2BRH9sjjXyNQqoWv4QlhXyy2VGl8lnZcyqEu9cOkavdQXUhD8YgXi2OLw%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Air Force 1 Low Lace PS Kids Sneakers ~ White ~ Size 2.5 Y ~ IF16 - $59.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y", "brand": "Jordan Rings", "price": "$90.00", "image_url": "https://i.ebayimg.com/images/g/5yIAAeSwdvpphC1~/s-l300.webp", "source_url": "https://www.ebay.com/itm/177836598602?_skw=kids+shoes&itmmeta=01KNYCYNMGQQKAFA87VMFVAW96&hash=item2967e3254a%3Ag%3A5yIAAeSwdvpphC1%7E&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xBa9x1fLKmTSewEjtc%2FaRPmdre7VIfvqTYVasRAgirEEQI3gRd5f0%2FH0B7n3UbYwFgEk5cbz2P23ZTYoGNNaP1hpr2y8azh71bPHWeHSkwwGFjGvZXlj%2FdFAIsy26lBrRlKpn%2Bqwq91Nyi3ZkP4HZ2IZEFgVH%2B1eL83mJEr9cbIXTF2hwDbYOxe8PV5F3auijY2gAQgYtrOmFsJOlLK4mmkahQu%2BB5ZK4qdukapbCB2dQ%3D%3D%7Ctkp%3ABlBMUMTa-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan 6 Rings GS White True Blue Red Sneakers Boys 7Y - $90.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU", "brand": "Nike Force", "price": "$69.95", "image_url": "https://i.ebayimg.com/images/g/s9YAAeSwr9dp2E5R/s-l300.webp", "source_url": "https://www.ebay.com/itm/178036532604?_skw=kids+shoes&itmmeta=01KNYCYNMG6S5DW246D4JQG5D5&hash=item2973cde57c%3Ag%3As9YAAeSwr9dp2E5R&itmprp=enc%3AAQALAAAAwGfYFPkwiKCW4ZNSs2u11xCE2HfvOm9mh1iLZ3lWK%2FulFuMl6e6zluQoFOuuVy7p%2FG0dK2U0RL3psJKSY4l%2Bn5MoZ1I6MTxhKaIMgOtvQp%2F2tCkgeOcBGaYkX1pUWk4Fr%2B%2F3zuK36HGA3sQhMozhZ%2FHRGozmdYx1SKdZbxGvsdxhrVpEmmoC%2F0LkcHZVkKovFYnF%2BrNjcVZ7HZKo4nUtPE11QyYK0mqAaN%2BmBMnfP9NuiRWZPdjmp1zFNgXgHPfW0A%3D%3D%7Ctkp%3ABlBMUMba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Force 1 Low BP Lace ~ Yellow Pulse / Pink Foam ~ Size ~ 1.5Y ~ IU - $69.95 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560-", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/p-gAAeSwICVp1751/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746523001?_skw=kids+shoes&itmmeta=01KNYCYNMGB3KPNBATZDAZE898&hash=item371f314179%3Ag%3Ap-gAAeSwICVp1751&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCkMVozXfERnW8s%2Bb2BF%2F3z8VRuTrEQQG%2FJ9O4YC5kJi3hnHY7qW6pr4ycdDn%2FiKhc3ZxcWTPYCx9ekF%2F6L%2BzKu%2FaOC3ZbIjpjAuI5tVVBQgIFRj%2F0IwiBnoDz%2B2TVi9wlVz9uredUBQYgrPMDthTxTn5zN%2Bezpc8ZNkwl%2FWu%2BP4%2BPtRSFE4RLVYtnF7OtugZTEv9AGm99yuqRRodLZEs%2Fblpq9Kr51%2BLurz0ggw0d2yLH5Noz7sG6TZX5wjHPCmAw%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 Low Black White Gold Boys Sneakers Size 5Y 553560- - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10", "brand": "Jordan Air", "price": "$11.500", "image_url": "https://i.ebayimg.com/images/g/quQAAeSwkxNp17-t/s-l50.webp", "source_url": "https://www.ebay.com/itm/236746527880?_skw=kids+shoes&epid=12061736291&itmmeta=01KNYCYNMG122MCXW050C532TX&hash=item371f315488%3Ag%3AquQAAeSwkxNp17-t&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xCOTJZiYiFFMGyVD%2FDbxzWbaeqTpuzui6LOg2%2Bk4pyqwnOWN7c9Lqccl%2F5zbxcg%2FOrcc0YnQkJnyriezdohHjwvepJGSSsDYsJwMECEnxOj%2B%2FrgP2iwq4noQDlAiz2zGSHrOVgDh1FU1qZDqI6IoM18afzpt4LLwN2To%2Fhx9PVzc2%2FAfaKSnt5v%2BavcZNPt%2FAqaMpX9y8SP%2BT0eHtXwHG3G42CmATYZTLEian7JWfyJeQEm2IMHctklNWhPNKK32ZA%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Jordan Air Jordan 1 High OG Black White Red Leather Sneakers DQ8423-10 - $11.500 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White)", "brand": "Hoy Shoe", "price": "$10.000", "image_url": "https://i.ebayimg.com/images/g/EXkAAeSwcnFp19f4/s-l50.webp", "source_url": "https://www.ebay.com/itm/178035639787?_skw=kids+shoes&itmmeta=01KNYCYNMG15GZBB4MD39Z9J4B&hash=item2973c045eb%3Ag%3AEXkAAeSwcnFp19f4&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xBaSmUn7nfQDihD6vcTp0jIX4Hi2Bhc7V%2BAXg0qnCkOUR%2BjpiKPfGlkhT2mnv0U5RzrA%2B%2B%2BzYyq464T5jxMFr0MzXOI619s%2FcY6cXsMf2QAVlaTueZgvn3jNDEyrH3yHXgmZY2SdmqGo%2BDnhquwXb7S1EMv0gYwoSkL1MUssu0CBM3b8FoV8javkIuIe5hG8NtZOdWVK3srt0%2Bot1n9Hl3gR%2BSrG36CekeCf%2F1FIJ7Ux5jSuwXKGNlK4%2BfzBv7ub4s5hZ9c5tSLZgdQfPg4FgLq8HaW8pMd0n6LM1dHccnvvw%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "NEW, Hoy Shoe, 9, Surfer 1700 Series, White (9 Child,White) - $10.000 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb", "brand": "Nike Boys", "price": "$18.990", "image_url": "https://i.ebayimg.com/images/g/fAMAAeSwxfNp1ETf/s-l50.webp", "source_url": "https://www.ebay.com/itm/366331477954?_skw=kids+shoes&itmmeta=01KNYCYNMG6JSFDDJBX6M82YHQ&hash=item554b0ebfc2%3Ag%3AfAMAAeSwxfNp1ETf&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xClTICQ1dIyrvyzIHRt9Aj5Di5NP8b2uS%2B6ysiPlk4voHJFYsr%2FiLhN%2BoDSoYR7JANQTAjIIHgi4wANWy5HeRYj48sCyqjKHF9xF%2BEIFxa4yfqVb27xffGhYPPWGRO%2FeTUMqYUie9sNxzho9SPiQ9Nuha%2BNo%2F8ojvNLoUa509M7otHSUooYrMSijHzTiJLzEV3jzEMsQRcwkAVT9RlvuXwSkAuyLKg5X4xL3mFCQGYFPaV%2F2jQUbdnbNw3Ye3vsCfc%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys High Top Sneakers White Navy 3.5Y Lace Up Leather Upper Rubb - $18.990 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers", "brand": "Nike Boys", "price": "$13.75", "image_url": "https://i.ebayimg.com/images/g/logAAeSwe1Np2B-G/s-l50.webp", "source_url": "https://www.ebay.com/itm/287264246388?_skw=kids+shoes&itmmeta=01KNYCYNMG55HEJ2TPXWTFBJ83&hash=item42e2488a74%3Ag%3AlogAAeSwe1Np2B-G&itmprp=enc%3AAQALAAAA8GfYFPkwiKCW4ZNSs2u11xC0Qu7G5v3njXp6uaqXF4qm3owaz9huGtvUjh5%2F8%2B1XO1dRazCwCjJuo18O13hhD%2FS7YAhKgNI0fdKXu%2BcC2hRsq3NCR0aHXLYN%2BBB1G83Sp8al1YniQkHdSU%2BQ7G1tPkVxtoM6hxUG9oLH7bYU%2FX%2FCs91zEQ0%2Bf88DhIn%2BbLNjIW8ignvZiZ0ZxX0PZ8jrFBBU5HQflMw5HX%2Bin0vKQ0Se2ablm0oawPvobtuflFhVcuZ8GBv%2BWUCZ1O4StyW29PzQTWTFHWVEmvpsTdBAQwvU8ss%2FXDb6SdIAS09QsEWMkA%3D%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Nike Boys Black Mesh Lace Up Breathable Low Top Athletic Sneakers - $13.75 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "jordan 12 obsidian size 4.5 youth", "brand": "eBay", "price": "$45.00", "image_url": "https://i.ebayimg.com/images/g/JfsAAeSwWIZp2Glm/s-l50.webp", "source_url": "https://www.ebay.com/itm/206200977741?_skw=kids+shoes&itmmeta=01KNYCYNMHQ8SQNNMM22EVA2RE&hash=item300289394d%3Ag%3AJfsAAeSwWIZp2Glm&itmprp=enc%3AAQALAAAA0GfYFPkwiKCW4ZNSs2u11xB9rcgCbUTrou8CD8khQblLnuwssXF3G%2BdqERgBnr95VphJ7njezb0Q%2BUQtNrBzAwJkFEl%2Ba6myU%2FMftAPjWchH3Ty2ETbfd78ZqzyfEYLcm5WrqSUfVEkzLazLlw63GPbfFW%2BFGiTJyrN1NEA%2BKXJwvikJ2izwYKLhSbQaElTtxYEedO2IlEolw0UaGLpv2QyVXfq8l%2Fo153M7uFqu5tZeAUcsCkXGXN7WiwCSR4L81VruUv9TOVhGcJBZMVCj%2FTM%3D%7Ctkp%3ABk9SR8ba-syvZw&keyword=kids+shoes&sacat=0&relatedSearch=true", "source": "eBay", "rating_avg": "", "rating_count": "", "reviews": [], "details": "jordan 12 obsidian size 4.5 youth - $45.00 on eBay", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 1", "brand": "Au", "price": "Check Site", "image_url": "https://ts2.mm.bing.net/th?id=OIP.SiCXPOm4zvTm6xyCi6w_MgHaIf&pid=15.1", "source_url": "https://au.levelshoes.com/kids.html", "source": "Au", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://au.levelshoes.com/kids.html", "moq": null, "location": null, "supplier_years": null, "is_verified": false}, {"name": "kids shoes 2", "brand": "Nike", "price": "Check Site", "image_url": "https://c.static-nike.com/a/images/w_1200,c_limit/bzl2wmsfh7kgdkufrrjq/seo-title.jpg", "source_url": "https://www.nike.com/fi/a/best-kids-shoes", "source": "Nike", "rating_avg": "", "rating_count": "", "reviews": [], "details": "Product from https://www.nike.com/fi/a/best-kids-shoes", "moq": null, "location": null, "supplier_years": null, "is_verified": false}]</product_grid>
+Children Length: 10656
+Includes <product_carousel>: false
+ GET /chat/a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 1187ms (compile: 179ms, proxy.ts: 21ms, render: 987ms)
+ GET /api/auth/session 200 in 261ms (compile: 180ms, proxy.ts: 26ms, render: 54ms)
+ GET /api/history?limit=20 200 in 144ms (compile: 23ms, proxy.ts: 36ms, render: 85ms)
+ GET /api/auth/session 200 in 97ms (compile: 37ms, proxy.ts: 29ms, render: 32ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 115ms (compile: 15ms, proxy.ts: 20ms, render: 80ms)
+ GET /api/templates 200 in 142ms (compile: 30ms, proxy.ts: 18ms, render: 94ms)
+ GET /api/templates 200 in 64ms (compile: 18ms, proxy.ts: 16ms, render: 29ms)
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 267ms (compile: 11ms, proxy.ts: 16ms, render: 240ms)
+ GET /api/history?limit=20 200 in 71ms (compile: 13ms, proxy.ts: 21ms, render: 38ms)
+ GET / 200 in 1391ms (compile: 165ms, proxy.ts: 145ms, render: 1081ms)
+ GET /api/auth/session 200 in 325ms (compile: 199ms, proxy.ts: 21ms, render: 104ms)
+ GET /api/templates 200 in 172ms (compile: 32ms, proxy.ts: 19ms, render: 121ms)
+ GET /api/history?limit=20 200 in 206ms (compile: 41ms, proxy.ts: 78ms, render: 87ms)
+ GET /api/auth/session 200 in 171ms (compile: 98ms, proxy.ts: 37ms, render: 36ms)
+ GET /api/auth/session 200 in 95ms (compile: 29ms, proxy.ts: 16ms, render: 50ms)
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 449ms (compile: 20ms, proxy.ts: 25ms, render: 404ms)
+ GET /api/history?limit=20 200 in 313ms (compile: 62ms, proxy.ts: 78ms, render: 173ms)
+ GET / 200 in 2.0s (compile: 228ms, proxy.ts: 287ms, render: 1492ms)
+ GET /api/auth/session 200 in 319ms (compile: 168ms, proxy.ts: 36ms, render: 115ms)
+ GET /api/history?limit=20 200 in 196ms (compile: 57ms, proxy.ts: 33ms, render: 106ms)
+ GET /api/auth/session 200 in 122ms (compile: 42ms, proxy.ts: 55ms, render: 25ms)
+ GET /api/auth/session 200 in 99ms (compile: 47ms, proxy.ts: 23ms, render: 29ms)
+ GET /api/templates 200 in 282ms (compile: 19ms, proxy.ts: 19ms, render: 244ms)
+ GET /api/templates 200 in 56ms (compile: 17ms, proxy.ts: 11ms, render: 27ms)
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 442ms (compile: 30ms, proxy.ts: 20ms, render: 392ms)
+ GET /api/history?limit=20 200 in 100ms (compile: 21ms, proxy.ts: 17ms, render: 62ms)
+ GET / 200 in 157ms (compile: 26ms, proxy.ts: 25ms, render: 105ms)
+ GET / 200 in 167ms (compile: 30ms, proxy.ts: 12ms, render: 124ms)
+ GET /chat/eb7d92d2-f4a2-48d6-a688-33326d6f291f 200 in 1160ms (compile: 170ms, proxy.ts: 19ms, render: 970ms)
+ GET / 200 in 225ms (compile: 64ms, proxy.ts: 38ms, render: 123ms)
+ GET /api/templates 200 in 66ms (compile: 14ms, proxy.ts: 9ms, render: 42ms)
+ GET /api/templates 200 in 30ms (compile: 8ms, proxy.ts: 6ms, render: 15ms)
+[Chat API Schema Error]: Error [ZodError]: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "null",
+    "path": [
+      "template_id"
+    ],
+    "message": "Expected string, received null"
+  }
+]
+    at POST (app/(chat)/api/chat/route.ts:59:41)
+  57 |   try {
+  58 |     const json = await request.json();
+> 59 |     requestBody = postRequestBodySchema.parse(json);
+     |                                         ^
+  60 |   } catch (error: any) {
+  61 |     console.error("[Chat API Schema Error]:", error);
+  62 |     return new ChatSDKError("bad_request:api").toResponse(); {
+  issues: [Array],
+  addIssue: [Function (anonymous)],
+  addIssues: [Function (anonymous)]
+}
+ POST /api/chat 400 in 310ms (compile: 14ms, proxy.ts: 27ms, render: 269ms)
+ GET /api/history?limit=20 200 in 80ms (compile: 17ms, proxy.ts: 20ms, render: 43ms)
+ GET / 200 in 1405ms (compile: 170ms, proxy.ts: 201ms, render: 1034ms)
+ GET /api/auth/session 200 in 605ms (compile: 380ms, proxy.ts: 146ms, render: 79ms)
+ GET /api/history?limit=20 200 in 159ms (compile: 27ms, proxy.ts: 49ms, render: 83ms)
+ GET /api/auth/session 200 in 169ms (compile: 93ms, proxy.ts: 31ms, render: 45ms)
+ GET /api/auth/session 200 in 124ms (compile: 39ms, proxy.ts: 33ms, render: 52ms)
+ GET /api/templates 200 in 182ms (compile: 22ms, proxy.ts: 29ms, render: 132ms)
+ GET /api/templates 200 in 56ms (compile: 10ms, proxy.ts: 20ms, render: 26ms)
+[Chat API] Session status: Authenticated { userId: '19de20d1-46ba-40b0-81f9-474555f5af88', userType: 'regular' }
+[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
+[Chat API] Backend response status: 200 OK
+[Chat API] Backend data received: {"type":"message","response":"<product_grid>[{\"name\": \"Nike Air Shoes Men\\u2019s Size 9 Zoom Win...
+ POST /api/chat 200 in 10.8s (compile: 1324ms, proxy.ts: 56ms, render: 9.4s)
+ GET /api/vote?chatId=bfd58dd3-3dc8-4783-98d6-5ff4ef7348c8 200 in 122ms (compile: 33ms, proxy.ts: 35ms, render: 54ms)
+ GET /api/history?limit=20 200 in 70ms (compile: 10ms, proxy.ts: 15ms, render: 45ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FbCwAAeSwJfBp2XXR%2Fs-l500.webp 200 in 1183ms (compile: 22ms, proxy.ts: 23ms, render: 1138ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FHjwAAeSwhzBp1q5X%2Fs-l500.webp 200 in 1184ms (compile: 23ms, proxy.ts: 21ms, render: 1140ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2Fg~QAAeSwKOdp1q9X%2Fs-l500.webp 200 in 1193ms (compile: 19ms, proxy.ts: 27ms, render: 1148ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FWhsAAeSwU9Bp17WK%2Fs-l500.webp 200 in 1201ms (compile: 18ms, proxy.ts: 30ms, render: 1153ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FH2EAAeSw9lFpzdcj%2Fs-l500.webp 200 in 1227ms (compile: 17ms, proxy.ts: 44ms, render: 1166ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2F1JMAAeSwmc1p2mGw%2Fs-l500.webp 200 in 1235ms (compile: 19ms, proxy.ts: 42ms, render: 1174ms)
+ GET /api/history?limit=20 200 in 290ms (compile: 107ms, proxy.ts: 73ms, render: 110ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FuqcAAeSwrkRp153C%2Fs-l500.webp 200 in 526ms (compile: 70ms, proxy.ts: 50ms, render: 406ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FNike-Women-s-Dunk-Low-Retro-White-Black-Panda-Sneaker-from-StockX_ce28dea2-036e-4b6e-8ff0-c0bb1f69e4a2.1631f6f40fdc03baddade2d039b95e48.jpeg%3FodnHeight%3D864%26odnWidth%3D576%26odnBg%3DFFFFFF 200 in 728ms (compile: 77ms, proxy.ts: 47ms, render: 604ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FtB0AAeSwPspp0xJm%2Fs-l500.webp 200 in 398ms (compile: 13ms, proxy.ts: 11ms, render: 374ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FNike-Men-s-Air-Max-270-White-Black-Running-Shoes-from-StockX_97a8003b-e32d-4b38-9566-030315244f9e.a630b4f5ea3fbe481cb9a3d7b9a40200.jpeg%3FodnHeight%3D864%26odnWidth%3D576%26odnBg%3DFFFFFF 200 in 1421ms (compile: 11ms, proxy.ts: 14ms, render: 1395ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FNike-Zoom-Bella-6-Women-s-Size-10-5-Men-s-Size-9-White-Athletic-Shoes-FJ1589-100_835d7f9f-733a-429b-bdc8-a81e5dcb1c41.07b573f04e48b0352d786df9f8f98167.jpeg%3FodnHeight%3D864%26odnWidth%3D576%26odnBg%3DFFFFFF 200 in 1683ms (compile: 132ms, proxy.ts: 63ms, render: 1489ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FNike-Men-s-Air-Monarch-IV-Training-Shoe-Widths-Available_4084f276-0370-499b-9ecc-d64c4486720a.792f8b19201db12455f09f71884e2ef0.jpeg%3FodnHeight%3D864%26odnWidth%3D576%26odnBg%3DFFFFFF 200 in 1710ms (compile: 96ms, proxy.ts: 48ms, render: 1566ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FNike-Air-Max-Plus-II-GS-Big-Kids-Shoe-CT4383-002-Size-6-5-Youth-US-New-in-Box_7089b443-ddcc-4217-a70f-ade7dce894ab.79d61b067a64867df935168dab5a8814.jpeg%3FodnHeight%3D864%26odnWidth%3D576%26odnBg%3DFFFFFF 200 in 1706ms (compile: 129ms, proxy.ts: 53ms, render: 1524ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FToddler-s-Nike-Air-Force-1-White-Honeydew-White-Black-CZ1691-108-6_fdbcce13-e933-4cd6-98a3-e3b179944844.73ff0006a6db93163e0f238cf9050ebd.jpeg%3FodnHeight%3D864%26odnWidth%3D576%26odnBg%3DFFFFFF 200 in 1460ms (compile: 8ms, proxy.ts: 15ms, render: 1437ms)
+ GET / 200 in 1840ms (compile: 219ms, proxy.ts: 245ms, render: 1375ms)
+ GET /api/auth/session 200 in 643ms (compile: 337ms, proxy.ts: 172ms, render: 135ms)
+ GET /api/auth/session 200 in 686ms (compile: 483ms, proxy.ts: 123ms, render: 80ms)
+ GET /api/history?limit=20 200 in 984ms (compile: 134ms, proxy.ts: 200ms, render: 649ms)
+ GET /api/auth/session 200 in 200ms (compile: 100ms, proxy.ts: 39ms, render: 61ms)
 Error fetching templates: TypeError: fetch failed
     at async GET (app/(chat)/api/templates/route.ts:6:26)
   4 |     try {
@@ -83,7 +578,7 @@ Error fetching templates: TypeError: fetch failed
     port: 8000
   }
 }
- GET /api/templates 500 in 1074ms (compile: 31ms, proxy.ts: 30ms, render: 1013ms)
+ GET /api/templates 500 in 462ms (compile: 29ms, proxy.ts: 42ms, render: 391ms)
 Error fetching templates: TypeError: fetch failed
     at async GET (app/(chat)/api/templates/route.ts:6:26)
   4 |     try {
@@ -102,409 +597,57 @@ Error fetching templates: TypeError: fetch failed
     port: 8000
   }
 }
- GET /api/templates 500 in 1280ms (compile: 39ms, proxy.ts: 66ms, render: 1175ms)
- GET /api/vote?chatId=677a3658-4ce6-400b-85ba-b1775db3badb 200 in 2.8s (compile: 2.6s, proxy.ts: 37ms, render: 106ms)
- GET /api/history?limit=20 200 in 283ms (compile: 49ms, proxy.ts: 54ms, render: 180ms)
- GET /api/vote?chatId=677a3658-4ce6-400b-85ba-b1775db3badb 200 in 443ms (compile: 118ms, proxy.ts: 68ms, render: 257ms)
- ○ Compiling /api/chat ...
-[Chat API] Session status: Authenticated { userId: '6508cbd6-19cb-4fcc-824e-6b17a9ad7a3b', userType: 'regular' }
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
-[Chat API] Fetch error: TypeError - fetch failed {
-  url: 'http://127.0.0.1:8000/api/chat',
-  cause: Error: connect ECONNREFUSED 127.0.0.1:8000
-      at <unknown> (Error: connect ECONNREFUSED 127.0.0.1:8000) {
-    errno: -111,
-    code: 'ECONNREFUSED',
-    syscall: 'connect',
-    address: '127.0.0.1',
-    port: 8000
-  }
-}
-Error calling Python backend: TypeError: fetch failed
-    at async execute (app/(chat)/api/chat/route.ts:187:24)
-  185 |           let response;
-  186 |           try {
-> 187 |             response = await fetch(`${backendUrl}/api/chat`, {
-      |                        ^
-  188 |               method: "POST",
-  189 |               headers: {
-  190 |                 "Content-Type": "application/json", {
-  [cause]: Error: connect ECONNREFUSED 127.0.0.1:8000
-      at <unknown> (Error: connect ECONNREFUSED 127.0.0.1:8000) {
-    errno: -111,
-    code: 'ECONNREFUSED',
-    syscall: 'connect',
-    address: '127.0.0.1',
-    port: 8000
-  }
-}
- POST /api/chat 200 in 11.2s (compile: 9.1s, proxy.ts: 50ms, render: 2.1s)
- GET /api/history?limit=20 200 in 158ms (compile: 25ms, proxy.ts: 52ms, render: 81ms)
- GET /api/history?limit=20 200 in 236ms (compile: 55ms, proxy.ts: 65ms, render: 116ms)
- GET /api/vote?chatId=677a3658-4ce6-400b-85ba-b1775db3badb 200 in 272ms (compile: 71ms, proxy.ts: 83ms, render: 118ms)
- GET /api/history?limit=20 200 in 286ms (compile: 34ms, proxy.ts: 146ms, render: 106ms)
- GET /api/vote?chatId=677a3658-4ce6-400b-85ba-b1775db3badb 200 in 305ms (compile: 57ms, proxy.ts: 144ms, render: 104ms)
- GET /api/history?limit=20 200 in 230ms (compile: 54ms, proxy.ts: 70ms, render: 106ms)
- GET /api/vote?chatId=677a3658-4ce6-400b-85ba-b1775db3badb 200 in 256ms (compile: 80ms, proxy.ts: 68ms, render: 108ms)
- GET / 200 in 8.2s (compile: 874ms, proxy.ts: 1120ms, render: 6.2s)
- GET /api/auth/session 200 in 695ms (compile: 424ms, proxy.ts: 80ms, render: 192ms)
- GET /api/history?limit=20 200 in 434ms (compile: 99ms, proxy.ts: 36ms, render: 299ms)
- GET /api/auth/session 200 in 213ms (compile: 74ms, proxy.ts: 81ms, render: 57ms)
- GET /api/history?limit=20 200 in 286ms (compile: 75ms, proxy.ts: 74ms, render: 138ms)
- GET /api/history?ending_before=0a87feb6-2c92-4f81-aaf9-b401407ef51e&limit=20 200 in 325ms (compile: 106ms, proxy.ts: 58ms, render: 161ms)
- GET /api/templates 200 in 626ms (compile: 74ms, proxy.ts: 40ms, render: 512ms)
- GET /api/templates 200 in 238ms (compile: 64ms, proxy.ts: 80ms, render: 94ms)
- GET /api/history?limit=20 200 in 1386ms (compile: 337ms, proxy.ts: 472ms, render: 578ms)
- ○ Compiling /search ...
- GET /search 200 in 34.4s (compile: 32.6s, proxy.ts: 132ms, render: 1725ms)
- GET /?query=iphone+15+price 200 in 904ms (compile: 175ms, proxy.ts: 129ms, render: 601ms)
- GET /api/templates 200 in 427ms (compile: 37ms, proxy.ts: 19ms, render: 372ms)
- GET /api/templates 200 in 197ms (compile: 40ms, proxy.ts: 59ms, render: 97ms)
- ⨯ Error: aborted
-    at ignore-listed frames {
-  code: 'ECONNRESET'
-}
- ⨯ Error: aborted
-    at ignore-listed frames {
-  code: 'ECONNRESET'
-}
- GET /chat/d3845bc9-9a64-43f7-b2b2-0055dfb9599f 200 in 5.5s (compile: 649ms, proxy.ts: 95ms, render: 4.8s)
- ○ Compiling /_error ...
- GET /api/auth/session 200 in 496ms (compile: 389ms, proxy.ts: 34ms, render: 73ms)
- GET /api/history?limit=20 200 in 216ms (compile: 39ms, proxy.ts: 46ms, render: 131ms)
- GET /api/auth/session 200 in 956ms (compile: 608ms, proxy.ts: 45ms, render: 303ms)
- GET / 200 in 1631ms (compile: 65ms, proxy.ts: 58ms, render: 1509ms)
- GET /api/auth/session 200 in 807ms (compile: 505ms, proxy.ts: 57ms, render: 245ms)
- GET /api/history?limit=20 200 in 328ms (compile: 76ms, proxy.ts: 73ms, render: 178ms)
- GET /api/auth/session 200 in 285ms (compile: 136ms, proxy.ts: 70ms, render: 79ms)
- GET /api/history?limit=20 200 in 203ms (compile: 27ms, proxy.ts: 105ms, render: 71ms)
- GET /api/history?ending_before=0a87feb6-2c92-4f81-aaf9-b401407ef51e&limit=20 200 in 2.1s (compile: 796ms, proxy.ts: 845ms, render: 473ms)
- GET / 200 in 2.9s (compile: 122ms, proxy.ts: 74ms, render: 2.7s)
- GET /api/auth/session 200 in 661ms (compile: 468ms, proxy.ts: 68ms, render: 126ms)
- GET /api/history?limit=20 200 in 296ms (compile: 93ms, proxy.ts: 74ms, render: 129ms)
- GET /api/auth/session 200 in 285ms (compile: 100ms, proxy.ts: 67ms, render: 118ms)
- GET /api/history?limit=20 200 in 202ms (compile: 16ms, proxy.ts: 47ms, render: 140ms)
- GET /api/history?ending_before=0a87feb6-2c92-4f81-aaf9-b401407ef51e&limit=20 200 in 2.1s (compile: 50ms, proxy.ts: 49ms, render: 1989ms)
- GET /api/templates 200 in 163ms (compile: 21ms, proxy.ts: 25ms, render: 116ms)
- GET /api/templates 200 in 161ms (compile: 29ms, proxy.ts: 73ms, render: 59ms)
- GET /api/history?limit=20 200 in 311ms (compile: 92ms, proxy.ts: 56ms, render: 163ms)
- GET /api/vote?chatId=677a3658-4ce6-400b-85ba-b1775db3badb 200 in 351ms (compile: 159ms, proxy.ts: 57ms, render: 135ms)
- GET /chat/1596463b-de5e-4893-988d-9285acb5dfec 200 in 1068ms (compile: 419ms, proxy.ts: 48ms, render: 601ms)
- GET /api/vote?chatId=1596463b-de5e-4893-988d-9285acb5dfec 200 in 196ms (compile: 24ms, proxy.ts: 38ms, render: 134ms)
- GET /api/templates 200 in 108ms (compile: 19ms, proxy.ts: 24ms, render: 64ms)
- GET /api/templates 200 in 172ms (compile: 20ms, proxy.ts: 15ms, render: 136ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.xJZeeBXUY0gBbrTlaPo7lwHaHa%26pid%3D15.1 200 in 1336ms (compile: 246ms, proxy.ts: 181ms, render: 909ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.fe2Lqcn-jLdF2W2SBLKkTAAAAA%26pid%3D15.1 200 in 1374ms (compile: 315ms, proxy.ts: 237ms, render: 822ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts3.mm.bing.net%2Fth%3Fid%3DOIP.GwFP-E2tjmlTYWRJU9OCTAHaHa%26pid%3D15.1 200 in 1566ms (compile: 229ms, proxy.ts: 177ms, render: 1160ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts3.mm.bing.net%2Fth%3Fid%3DOIP.wvkb0r1uBQmkANsbCouBegHaFj%26pid%3D15.1 200 in 1716ms (compile: 276ms, proxy.ts: 241ms, render: 1198ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts1.mm.bing.net%2Fth%3Fid%3DOIP.8TX6AmvUwTy9SnJIdPbNBAHaHa%26pid%3D15.1 200 in 1775ms (compile: 353ms, proxy.ts: 232ms, render: 1191ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts4.mm.bing.net%2Fth%3Fid%3DOIP.QvBvWEMmAKbWNlD22KTYDAHaNK%26pid%3D15.1 200 in 1893ms (compile: 334ms, proxy.ts: 232ms, render: 1327ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.MMfD1ObDggq7gseTSuIpyAHaNK%26pid%3D15.1 200 in 723ms (compile: 236ms, proxy.ts: 350ms, render: 136ms)
- GET /api/history?limit=20 200 in 628ms (compile: 61ms, proxy.ts: 302ms, render: 264ms)
- GET /api/vote?chatId=677a3658-4ce6-400b-85ba-b1775db3badb 200 in 443ms (compile: 105ms, proxy.ts: 80ms, render: 259ms)
- GET /api/history?limit=20 200 in 415ms (compile: 69ms, proxy.ts: 177ms, render: 169ms)
- GET /api/vote?chatId=677a3658-4ce6-400b-85ba-b1775db3badb 200 in 442ms (compile: 114ms, proxy.ts: 159ms, render: 169ms)
-[Chat API] Session status: Authenticated { userId: '6508cbd6-19cb-4fcc-824e-6b17a9ad7a3b', userType: 'regular' }
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
- GET /api/history?limit=20 200 in 497ms (compile: 113ms, proxy.ts: 268ms, render: 116ms)
- GET /api/vote?chatId=677a3658-4ce6-400b-85ba-b1775db3badb 200 in 431ms (compile: 22ms, proxy.ts: 219ms, render: 189ms)
- GET /api/history?limit=20 200 in 288ms (compile: 43ms, proxy.ts: 80ms, render: 165ms)
- GET /api/vote?chatId=677a3658-4ce6-400b-85ba-b1775db3badb 200 in 296ms (compile: 77ms, proxy.ts: 66ms, render: 153ms)
-[Chat API] Backend response status: 200 OK
-[Chat API] Backend data received: {"type":"message","response":"Here are the best results I found:\n\n<product_grid>[{\"name\": \"Lil'...
- POST /api/chat 200 in 14.3s (compile: 46ms, proxy.ts: 46ms, render: 14.2s)
- GET /api/history?limit=20 200 in 1189ms (compile: 297ms, proxy.ts: 421ms, render: 471ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.SiCXPOm4zvTm6xyCi6w_MgHaIf%26pid%3D15.1 200 in 1470ms (compile: 239ms, proxy.ts: 40ms, render: 1191ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts1.mm.bing.net%2Fth%3Fid%3DOIP.9oQBVuheYgBtPRrIhXaK1QHaHZ%26pid%3D15.1 200 in 1345ms (compile: 309ms, proxy.ts: 290ms, render: 746ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.WJmyTVt8NtJqZRealYPl9QHaHa%26pid%3D15.1 200 in 1542ms (compile: 307ms, proxy.ts: 285ms, render: 950ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts3.mm.bing.net%2Fth%3Fid%3DOIP.8uHRHlzTsOaR7EeEZfSwbwHaEk%26pid%3D15.1 200 in 1579ms (compile: 296ms, proxy.ts: 288ms, render: 994ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts1.mm.bing.net%2Fth%3Fid%3DOIP.YbknCfqBOKhSO7xDOBdrNgHaHa%26pid%3D15.1 200 in 1675ms (compile: 302ms, proxy.ts: 284ms, render: 1088ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.ocGcTYLxLz3YeXWGgUcS4QHaHa%26pid%3D15.1 200 in 543ms (compile: 50ms, proxy.ts: 80ms, render: 412ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts4.mm.bing.net%2Fth%3Fid%3DOIP.xwnqszSFqDF3AUJYmaiyAwHaFA%26pid%3D15.1 200 in 833ms (compile: 126ms, proxy.ts: 87ms, render: 620ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts3.mm.bing.net%2Fth%3Fid%3DOIP.tcNU3dZqeTu2TzdUid2SnAHaHa%26pid%3D15.1 200 in 621ms (compile: 179ms, proxy.ts: 56ms, render: 386ms)
- GET /api/proxy/image?url=https%3A%2F%2Fts4.mm.bing.net%2Fth%3Fid%3DOIP.fCYSjJwm00-gqps4Mx0P_gHaHa%26pid%3D15.1 200 in 777ms (compile: 118ms, proxy.ts: 145ms, render: 514ms)
- GET /api/vote?chatId=677a3658-4ce6-400b-85ba-b1775db3badb 200 in 139ms (compile: 16ms, proxy.ts: 23ms, render: 100ms)
- GET /api/templates 200 in 5.5s (compile: 60ms, proxy.ts: 147ms, render: 5.2s)
- GET /search 200 in 342ms (compile: 88ms, proxy.ts: 30ms, render: 224ms)
- GET /?query=Find+foldable+camping+chairs+under+%2415. 200 in 146ms (compile: 46ms, proxy.ts: 10ms, render: 89ms)
- GET /api/templates 200 in 51ms (compile: 7ms, proxy.ts: 12ms, render: 32ms)
- GET /api/templates 200 in 267ms (compile: 101ms, proxy.ts: 69ms, render: 98ms)
- GET /api/vote?chatId=1fa127ff-0d5c-4ad7-b45a-cc4097f75d58 404 in 1979ms (compile: 139ms, proxy.ts: 89ms, render: 1752ms)
-[Chat API] Session status: Authenticated { userId: '6508cbd6-19cb-4fcc-824e-6b17a9ad7a3b', userType: 'regular' }
- POST /api/chat 200 in 2.3s (compile: 1246ms, proxy.ts: 161ms, render: 895ms)
- POST /api/chat 200 in 2.2s (compile: 1800ms, proxy.ts: 150ms, render: 292ms)
-[Chat API] Session status: Authenticated { userId: '6508cbd6-19cb-4fcc-824e-6b17a9ad7a3b', userType: 'regular' }
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
-saveChat actual error: Error [PostgresError]: duplicate key value violates unique constraint "Chat_pkey"
-    at ignore-listed frames {
-  severity_local: 'ERROR',
-  severity: 'ERROR',
-  code: '23505',
-  detail: 'Key (id)=(1fa127ff-0d5c-4ad7-b45a-cc4097f75d58) already exists.',
-  schema_name: 'public',
-  table_name: 'Chat',
-  constraint_name: 'Chat_pkey',
-  file: 'nbtinsert.c',
-  line: '666',
-  routine: '_bt_check_unique'
-}
-{
-  code: 'bad_request:database',
-  message: 'An error occurred while executing a database query.',
-  cause: 'Failed to save chat'
-}
- GET /chat/1fa127ff-0d5c-4ad7-b45a-cc4097f75d58 200 in 3.0s (compile: 712ms, proxy.ts: 89ms, render: 2.2s)
- GET /api/auth/session 200 in 521ms (compile: 363ms, proxy.ts: 38ms, render: 121ms)
- GET /api/history?limit=20 200 in 312ms (compile: 45ms, proxy.ts: 103ms, render: 164ms)
- GET /api/auth/session 200 in 885ms (compile: 104ms, proxy.ts: 93ms, render: 688ms)
- GET / 200 in 2.2s (compile: 192ms, proxy.ts: 93ms, render: 1913ms)
- GET /api/auth/session 200 in 361ms (compile: 114ms, proxy.ts: 63ms, render: 184ms)
- GET /api/history?limit=20 200 in 326ms (compile: 75ms, proxy.ts: 49ms, render: 203ms)
- GET /api/auth/session 200 in 381ms (compile: 188ms, proxy.ts: 100ms, render: 93ms)
-[Chat API] Backend response status: 200 OK
-[Chat API] Backend data received: {"type":"message","response":"Here are the best results I found:\n\n<product_grid>[{\"name\": \"Camp...
- GET /api/templates 200 in 1381ms (compile: 14ms, proxy.ts: 37ms, render: 1330ms)
- GET /api/templates 200 in 177ms (compile: 24ms, proxy.ts: 25ms, render: 128ms)
- GET /api/history?limit=20 200 in 212ms (compile: 43ms, proxy.ts: 121ms, render: 48ms)
- GET /api/history?limit=20 200 in 813ms (compile: 130ms, proxy.ts: 360ms, render: 323ms)
- GET /api/history?limit=20 200 in 141ms (compile: 40ms, proxy.ts: 38ms, render: 63ms)
- GET /api/history?limit=20 200 in 352ms (compile: 65ms, proxy.ts: 32ms, render: 255ms)
- GET /api/history?limit=20 200 in 289ms (compile: 81ms, proxy.ts: 63ms, render: 145ms)
- GET /api/history?limit=20 200 in 293ms (compile: 48ms, proxy.ts: 104ms, render: 140ms)
- GET /api/history?limit=20 200 in 384ms (compile: 132ms, proxy.ts: 94ms, render: 158ms)
- GET /api/history?limit=20 200 in 217ms (compile: 21ms, proxy.ts: 122ms, render: 74ms)
- GET /search 200 in 1130ms (compile: 275ms, proxy.ts: 66ms, render: 789ms)
- GET /api/history?limit=20 200 in 242ms (compile: 62ms, proxy.ts: 43ms, render: 137ms)
- GET /search 200 in 349ms (compile: 150ms, proxy.ts: 66ms, render: 132ms)
- GET /api/history?limit=20 200 in 231ms (compile: 41ms, proxy.ts: 93ms, render: 97ms)
- ✓ Compiled in 2.2s
- ✓ Compiled in 1370ms
- ✓ Compiled in 1518ms
- GET /search 200 in 7.8s (compile: 417ms, proxy.ts: 313ms, render: 7.1s)
- GET /search 200 in 810ms (compile: 30ms, proxy.ts: 63ms, render: 717ms)
- GET /chat/1596463b-de5e-4893-988d-9285acb5dfec 200 in 8.6s (compile: 3.8s, proxy.ts: 309ms, render: 4.6s)
- GET /chat/1596463b-de5e-4893-988d-9285acb5dfec 200 in 812ms (compile: 140ms, proxy.ts: 200ms, render: 472ms)
- ⨯ Error: Functions cannot be passed directly to Client Components unless you explicitly expose it by marking it with "use server". Or maybe you meant to call this function rather than return it.
-  <... autoResume={false} id=... initialChatModel=... initialMessages=... initialVisibilityType=... isReadonly=... customEmptyState={function customEmptyState}>
-                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    at stringify (<anonymous>) {
-  digest: '685863872'
-}
- ✓ Compiled in 18.3s
- GET /chat/1596463b-de5e-4893-988d-9285acb5dfec 200 in 11.5s (compile: 768ms, proxy.ts: 151ms, render: 10.6s)
- GET /search 200 in 11.6s (compile: 3.6s, proxy.ts: 210ms, render: 7.9s)
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ⨯ Error: Functions cannot be passed directly to Client Components unless you explicitly expose it by marking it with "use server". Or maybe you meant to call this function rather than return it.
-  <... autoResume={false} id=... initialChatModel=... initialMessages=... initialVisibilityType=... isReadonly=... customEmptyState={function customEmptyState}>
-                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    at stringify (<anonymous>) {
-  digest: '685863872'
-}
- GET /search 200 in 7.3s (compile: 95ms, proxy.ts: 62ms, render: 7.2s)
- GET /api/auth/session 200 in 659ms (compile: 480ms, proxy.ts: 60ms, render: 119ms)
- ⨯ Error: Functions cannot be passed directly to Client Components unless you explicitly expose it by marking it with "use server". Or maybe you meant to call this function rather than return it.
-  <... autoResume={false} id=... initialChatModel=... initialMessages=... initialVisibilityType=... isReadonly=... customEmptyState={function customEmptyState}>
-                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    at stringify (<anonymous>) {
-  digest: '685863872'
-}
- GET /search 200 in 6.1s (compile: 289ms, proxy.ts: 304ms, render: 5.5s)
- GET /api/auth/session 200 in 425ms (compile: 336ms, proxy.ts: 22ms, render: 67ms)
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ⨯ ReferenceError: customEmptyState is not defined
-    at Chat (components/chat.tsx:299:11)
-  297 |       <div className={`overscroll-behavior-contain flex min-w-0 touch-pan-y flex-col bg-background ${isHero ? "bg-hero-glow" : "h-dvh overflow-hidden"}`}>
-  298 |         {isHero ? (
-> 299 |           customEmptyState ? (
-      |           ^
-  300 |             customEmptyState({ sendMessage: handleSendMessage, setInput, chatId: id })
-  301 |           ) : (
-  302 |             <div className="flex flex-col items-center justify-center min-h-dvh w-full relative"> {
-  digest: '3634462690'
-}
- GET /chat/1596463b-de5e-4893-988d-9285acb5dfec 200 in 15.2s (compile: 985ms, proxy.ts: 683ms, render: 13.5s)
- GET /search 200 in 15.0s (compile: 4.5s, proxy.ts: 458ms, render: 10.1s)
- ✓ Compiled in 2.4s
- GET /api/auth/session 200 in 484ms (compile: 347ms, proxy.ts: 43ms, render: 94ms)
- GET /api/auth/session 200 in 73ms (compile: 24ms, proxy.ts: 22ms, render: 27ms)
- ⨯ ReferenceError: customEmptyState is not defined
-    at Chat (components/chat.tsx:299:11)
-  297 |       <div className={`overscroll-behavior-contain flex min-w-0 touch-pan-y flex-col bg-background ${isHero ? "bg-hero-glow" : "h-dvh overflow-hidden"}`}>
-  298 |         {isHero ? (
-> 299 |           customEmptyState ? (
-      |           ^
-  300 |             customEmptyState({ sendMessage: handleSendMessage, setInput, chatId: id })
-  301 |           ) : (
-  302 |             <div className="flex flex-col items-center justify-center min-h-dvh w-full relative"> {
-  digest: '3634462690'
-}
- GET /search 200 in 1301ms (compile: 178ms, proxy.ts: 32ms, render: 1091ms)
- GET /api/auth/session 200 in 409ms (compile: 311ms, proxy.ts: 36ms, render: 61ms)
- GET /api/auth/session 200 in 136ms (compile: 49ms, proxy.ts: 28ms, render: 59ms)
- ⨯ ReferenceError: customEmptyState is not defined
-    at Chat (components/chat.tsx:299:11)
-  297 |       <div className={`overscroll-behavior-contain flex min-w-0 touch-pan-y flex-col bg-background ${isHero ? "bg-hero-glow" : "h-dvh overflow-hidden"}`}>
-  298 |         {isHero ? (
-> 299 |           customEmptyState ? (
-      |           ^
-  300 |             customEmptyState({ sendMessage: handleSendMessage, setInput, chatId: id })
-  301 |           ) : (
-  302 |             <div className="flex flex-col items-center justify-center min-h-dvh w-full relative"> {
-  digest: '3634462690'
-}
- GET /search 200 in 854ms (compile: 44ms, proxy.ts: 27ms, render: 784ms)
- GET /api/auth/session 200 in 389ms (compile: 305ms, proxy.ts: 22ms, render: 63ms)
- GET /api/auth/session 200 in 74ms (compile: 20ms, proxy.ts: 23ms, render: 31ms)
- ⨯ ReferenceError: customEmptyState is not defined
-    at Chat (components/chat.tsx:299:11)
-  297 |       <div className={`overscroll-behavior-contain flex min-w-0 touch-pan-y flex-col bg-background ${isHero ? "bg-hero-glow" : "h-dvh overflow-hidden"}`}>
-  298 |         {isHero ? (
-> 299 |           customEmptyState ? (
-      |           ^
-  300 |             customEmptyState({ sendMessage: handleSendMessage, setInput, chatId: id })
-  301 |           ) : (
-  302 |             <div className="flex flex-col items-center justify-center min-h-dvh w-full relative"> {
-  digest: '3634462690'
-}
- GET /search 200 in 2.9s (compile: 197ms, proxy.ts: 116ms, render: 2.6s)
- GET /api/auth/session 200 in 601ms (compile: 434ms, proxy.ts: 34ms, render: 134ms)
- GET /api/auth/session 200 in 196ms (compile: 81ms, proxy.ts: 45ms, render: 69ms)
- ⨯ ReferenceError: customEmptyState is not defined
-    at Chat (components/chat.tsx:299:11)
-  297 |       <div className={`overscroll-behavior-contain flex min-w-0 touch-pan-y flex-col bg-background ${isHero ? "bg-hero-glow" : "h-dvh overflow-hidden"}`}>
-  298 |         {isHero ? (
-> 299 |           customEmptyState ? (
-      |           ^
-  300 |             customEmptyState({ sendMessage: handleSendMessage, setInput, chatId: id })
-  301 |           ) : (
-  302 |             <div className="flex flex-col items-center justify-center min-h-dvh w-full relative"> {
-  digest: '3634462690'
-}
- GET /search 200 in 1337ms (compile: 62ms, proxy.ts: 20ms, render: 1255ms)
- GET /api/auth/session 200 in 508ms (compile: 393ms, proxy.ts: 45ms, render: 69ms)
- GET /api/auth/session 200 in 191ms (compile: 44ms, proxy.ts: 44ms, render: 104ms)
- ✓ Compiled in 2.2s
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ✓ Compiled in 21ms
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- GET /search 200 in 8.2s (compile: 2.2s, proxy.ts: 187ms, render: 5.7s)
- GET /search 200 in 8.1s (compile: 4.1s, proxy.ts: 128ms, render: 3.9s)
- GET /api/auth/session 200 in 257ms (compile: 191ms, proxy.ts: 19ms, render: 48ms)
- GET /api/auth/session 200 in 269ms (compile: 204ms, proxy.ts: 29ms, render: 36ms)
- GET /api/auth/session 200 in 105ms (compile: 47ms, proxy.ts: 16ms, render: 41ms)
- GET /api/auth/session 200 in 76ms (compile: 25ms, proxy.ts: 16ms, render: 36ms)
- GET /api/auth/session 200 in 66ms (compile: 26ms, proxy.ts: 21ms, render: 19ms)
- GET /api/history?limit=20 200 in 125ms (compile: 22ms, proxy.ts: 18ms, render: 85ms)
- GET /api/vote?chatId=1596463b-de5e-4893-988d-9285acb5dfec 200 in 209ms (compile: 40ms, proxy.ts: 53ms, render: 116ms)
- GET /api/history?limit=20 200 in 117ms (compile: 25ms, proxy.ts: 30ms, render: 63ms)
- GET /api/templates 200 in 979ms (compile: 14ms, proxy.ts: 11ms, render: 953ms)
- GET /api/templates 200 in 954ms (compile: 10ms, proxy.ts: 13ms, render: 931ms)
- GET /api/templates 200 in 105ms (compile: 33ms, proxy.ts: 29ms, render: 43ms)
- GET /api/templates 200 in 87ms (compile: 17ms, proxy.ts: 37ms, render: 33ms)
- GET /api/history?limit=20 200 in 82ms (compile: 16ms, proxy.ts: 23ms, render: 43ms)
- GET /api/history?ending_before=0a87feb6-2c92-4f81-aaf9-b401407ef51e&limit=20 200 in 88ms (compile: 12ms, proxy.ts: 20ms, render: 57ms)
- GET /api/history?limit=20 200 in 42ms (compile: 8ms, proxy.ts: 9ms, render: 25ms)
- GET /api/templates 200 in 58ms (compile: 9ms, proxy.ts: 7ms, render: 43ms)
-[Chat API] Session status: Authenticated { userId: '6508cbd6-19cb-4fcc-824e-6b17a9ad7a3b', userType: 'regular' }
- GET /api/templates 200 in 74ms (compile: 7ms, proxy.ts: 26ms, render: 40ms)
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
-[Chat API] Session status: Authenticated { userId: '6508cbd6-19cb-4fcc-824e-6b17a9ad7a3b', userType: 'regular' }
- GET /api/templates 200 in 102ms (compile: 23ms, proxy.ts: 14ms, render: 65ms)
- GET /api/templates 200 in 60ms (compile: 10ms, proxy.ts: 17ms, render: 33ms)
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
-[Chat API] Backend response status: 200 OK
-[Chat API] Backend data received: {"type":"message","response":"Here are the best results I found:\n\n<product_grid>[{\"name\": \"Nilk...
- POST /api/chat 200 in 7.7s (compile: 37ms, proxy.ts: 34ms, render: 7.6s)
- GET /api/history?limit=20 200 in 31ms (compile: 6ms, proxy.ts: 7ms, render: 17ms)
- GET /api/history?limit=20 200 in 69ms (compile: 31ms, proxy.ts: 10ms, render: 28ms)
-[Chat API] Session status: Authenticated { userId: '6508cbd6-19cb-4fcc-824e-6b17a9ad7a3b', userType: 'regular' }
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
- GET /api/templates 200 in 690ms (compile: 45ms, proxy.ts: 19ms, render: 626ms)
-[Chat API] Session status: Authenticated { userId: '6508cbd6-19cb-4fcc-824e-6b17a9ad7a3b', userType: 'regular' }
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
- GET /api/templates 200 in 1124ms (compile: 8ms, proxy.ts: 7ms, render: 1109ms)
- GET /api/templates 200 in 186ms (compile: 7ms, proxy.ts: 5ms, render: 175ms)
- GET /api/templates 200 in 33ms (compile: 6ms, proxy.ts: 5ms, render: 22ms)
-[Chat API] Backend response status: 200 OK
-[Chat API] Backend data received: {"type":"message","response":"Here are the best results I found:\n\n<product_grid>[{\"name\": \"Top ...
- POST /api/chat 200 in 6.5s (compile: 33ms, proxy.ts: 20ms, render: 6.4s)
- GET /api/history?limit=20 200 in 59ms (compile: 13ms, proxy.ts: 13ms, render: 32ms)
- GET /api/history?limit=20 200 in 40ms (compile: 7ms, proxy.ts: 13ms, render: 20ms)
-[Chat API] Backend response status: 200 OK
-[Chat API] Backend data received: {"type":"message","response":"Here are the best results I found:\n\n<product_grid>[{\"name\": \"fold...
- POST /api/chat 200 in 5.9s (compile: 33ms, proxy.ts: 42ms, render: 5.8s)
- GET /api/history?limit=20 200 in 186ms (compile: 62ms, proxy.ts: 65ms, render: 58ms)
- GET /api/history?limit=20 200 in 97ms (compile: 16ms, proxy.ts: 26ms, render: 56ms)
-[Chat API] Backend response status: 200 OK
-[Chat API] Backend data received: {"type":"message","response":"Here are the best results I found:\n\n<product_grid>[{\"name\": \"fold...
- POST /api/chat 200 in 5.5s (compile: 11ms, proxy.ts: 13ms, render: 5.4s)
- GET /api/history?limit=20 200 in 664ms (compile: 167ms, proxy.ts: 284ms, render: 213ms)
-[Chat API] Session status: Authenticated { userId: '6508cbd6-19cb-4fcc-824e-6b17a9ad7a3b', userType: 'regular' }
- GET /api/templates 200 in 372ms (compile: 72ms, proxy.ts: 160ms, render: 140ms)
- GET /api/templates 200 in 196ms (compile: 64ms, proxy.ts: 73ms, render: 59ms)
- GET /api/history?limit=20 200 in 276ms (compile: 57ms, proxy.ts: 92ms, render: 126ms)
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
-[Chat API] Session status: Authenticated { userId: '19de20d1-46ba-40b0-81f9-474555f5af88', userType: 'regular' }
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
- GET /api/templates 200 in 4.6s (compile: 123ms, proxy.ts: 222ms, render: 4.2s)
-[Chat API] Backend response status: 200 OK
-[Chat API] Backend data received: {"type":"message","response":"Here are the best results I found:\n\n<product_grid>[{\"name\": \"Fold...
- POST /api/chat 200 in 5.9s (compile: 81ms, proxy.ts: 368ms, render: 5.4s)
- POST /api/chat 200 in 16.5s (compile: 82ms, proxy.ts: 159ms, render: 16.2s)
- GET /api/history?limit=20 200 in 567ms (compile: 155ms, proxy.ts: 282ms, render: 130ms)
- GET /api/history?limit=20 200 in 669ms (compile: 225ms, proxy.ts: 210ms, render: 233ms)
- GET /search 200 in 8.4s (compile: 488ms, proxy.ts: 275ms, render: 7.6s)
- GET /api/templates 200 in 1019ms (compile: 125ms, proxy.ts: 465ms, render: 429ms)
-[Chat API] Session status: Authenticated { userId: '6508cbd6-19cb-4fcc-824e-6b17a9ad7a3b', userType: 'regular' }
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
- GET /api/templates 200 in 1580ms (compile: 326ms, proxy.ts: 179ms, render: 1075ms)
- GET /api/auth/session 200 in 1897ms (compile: 1408ms, proxy.ts: 109ms, render: 379ms)
- GET /api/auth/session 200 in 381ms (compile: 179ms, proxy.ts: 91ms, render: 111ms)
- GET /api/auth/session 200 in 373ms (compile: 105ms, proxy.ts: 111ms, render: 158ms)
- GET /api/history?limit=20 200 in 257ms (compile: 70ms, proxy.ts: 55ms, render: 131ms)
-[Chat API] Session status: Authenticated { userId: '19de20d1-46ba-40b0-81f9-474555f5af88', userType: 'regular' }
- GET /api/history?limit=20 200 in 222ms (compile: 35ms, proxy.ts: 50ms, render: 137ms)
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
-[Chat API] Session status: Authenticated { userId: '19de20d1-46ba-40b0-81f9-474555f5af88', userType: 'regular' }
- GET /api/history?ending_before=e6309073-5b28-4acb-a811-7408f7de3c82&limit=20 200 in 262ms (compile: 40ms, proxy.ts: 118ms, render: 105ms)
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
- GET /api/templates 200 in 4.1s (compile: 48ms, proxy.ts: 141ms, render: 3.9s)
- GET /api/templates 200 in 363ms (compile: 52ms, proxy.ts: 70ms, render: 241ms)
- GET /api/templates 200 in 240ms (compile: 47ms, proxy.ts: 55ms, render: 138ms)
- GET /api/templates 200 in 2.0s (compile: 139ms, proxy.ts: 103ms, render: 1761ms)
- GET /api/auth/session 200 in 1649ms (compile: 827ms, proxy.ts: 156ms, render: 666ms)
-[Chat API] Session status: Authenticated { userId: '19de20d1-46ba-40b0-81f9-474555f5af88', userType: 'regular' }
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
-[Chat API] Session status: Authenticated { userId: '19de20d1-46ba-40b0-81f9-474555f5af88', userType: 'regular' }
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
- GET /api/templates 200 in 3.2s (compile: 248ms, proxy.ts: 253ms, render: 2.7s)
-[Chat API] Backend response status: 200 OK
- GET /api/history?limit=20 200 in 2.0s (compile: 394ms, proxy.ts: 42ms, render: 1580ms)
-[Chat API] Backend data received: {"type":"message","response":"Here are the best results I found:\n\n<product_grid>[{\"name\": \"mini...
-[Chat API] Session status: Authenticated { userId: '19de20d1-46ba-40b0-81f9-474555f5af88', userType: 'regular' }
-[Chat API] Calling backend: http://127.0.0.1:8000/api/chat
- GET /api/vote?chatId=1596463b-de5e-4893-988d-9285acb5dfec 200 in 1291ms (compile: 534ms, proxy.ts: 188ms, render: 569ms)
- GET /api/templates 200 in 4.4s (compile: 171ms, proxy.ts: 37ms, render: 4.2s)
- GET /api/auth/session 200 in 819ms (compile: 525ms, proxy.ts: 77ms, render: 216ms)
+ GET /api/templates 500 in 264ms (compile: 11ms, proxy.ts: 24ms, render: 230ms)
 [Chat API] Session status: Authenticated { userId: '19de20d1-46ba-40b0-81f9-474555f5af88', userType: 'regular' }
 [Chat API] Calling backend: http://127.0.0.1:8000/api/chat
 [Chat API] Backend response status: 200 OK
-[Chat API] Backend data received: {"type":"message","response":"Here are the best results I found:\n\n<product_grid>[{\"name\": \"mini...
- POST /api/chat 200 in 30.1s (compile: 272ms, proxy.ts: 253ms, render: 29.6s)
- GET /api/history?limit=20 200 in 455ms (compile: 131ms, proxy.ts: 139ms, render: 185ms)
- GET /api/history?limit=20 200 in 199ms (compile: 26ms, proxy.ts: 39ms, render: 134ms)
-[Chat API] Backend response status: 200 OK
-[Chat API] Backend data received: {"type":"message","response":"Here are the best results I found:\n\n<product_grid>[{\"name\": \"mini...
- POST /api/chat 200 in 29.6s (compile: 29ms, proxy.ts: 28ms, render: 29.5s)
- GET /api/history?ending_before=907259e8-8fbd-4e52-a44f-92991bc4f6ef&limit=20 200 in 2.1s (compile: 669ms, proxy.ts: 354ms, render: 1034ms)
+[Chat API] Backend data received: {"type":"message","response":"<product_grid>[{\"name\": \"Nike Air Shoes Men\\u2019s Size 9 Zoom Win...
+ POST /api/chat 200 in 9.7s (compile: 24ms, proxy.ts: 34ms, render: 9.6s)
+ GET /api/vote?chatId=123a7d4a-8b77-464b-80ae-d83d27a318ef 200 in 177ms (compile: 41ms, proxy.ts: 50ms, render: 85ms)
+ GET /api/history?limit=20 200 in 69ms (compile: 18ms, proxy.ts: 16ms, render: 35ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FNike-Air-Max-Plus-II-GS-Big-Kids-Shoe-CT4383-002-Size-6-5-Youth-US-New-in-Box_7089b443-ddcc-4217-a70f-ade7dce894ab.79d61b067a64867df935168dab5a8814.jpeg%3FodnHeight%3D540%26odnWidth%3D360%26odnBg%3DFFFFFF 200 in 508ms (compile: 51ms, proxy.ts: 24ms, render: 433ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FNike-Men-s-Air-Max-270-White-Black-Running-Shoes-from-StockX_97a8003b-e32d-4b38-9566-030315244f9e.a630b4f5ea3fbe481cb9a3d7b9a40200.jpeg%3FodnHeight%3D540%26odnWidth%3D360%26odnBg%3DFFFFFF 200 in 523ms (compile: 58ms, proxy.ts: 14ms, render: 451ms)
+ GET /api/history?limit=20 200 in 204ms (compile: 29ms, proxy.ts: 25ms, render: 150ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F613l8ZN8TfL.jpg 200 in 759ms (compile: 47ms, proxy.ts: 38ms, render: 675ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.ztDW2G-hTbTromRC69db1AHaFj%26pid%3D15.1 200 in 785ms (compile: 27ms, proxy.ts: 43ms, render: 715ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts1.mm.bing.net%2Fth%3Fid%3DOIP.GWg_sLpWeFj_bO-cps6-AQHaJD%26pid%3D15.1 200 in 818ms (compile: 39ms, proxy.ts: 23ms, render: 756ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.xbT_7DZ_o_8GYl7jLxb_SQHaJD%26pid%3D15.1 200 in 782ms (compile: 35ms, proxy.ts: 39ms, render: 708ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FNike-Men-s-Air-Monarch-IV-Training-Shoe-Widths-Available_4084f276-0370-499b-9ecc-d64c4486720a.792f8b19201db12455f09f71884e2ef0.jpeg%3FodnHeight%3D540%26odnWidth%3D360%26odnBg%3DFFFFFF 200 in 136ms (compile: 12ms, proxy.ts: 26ms, render: 98ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi.ebayimg.com%2Fimages%2Fg%2FYxEAAeSwhYVp2lK-%2Fs-l500.webp 200 in 771ms (compile: 16ms, proxy.ts: 36ms, render: 719ms)
 [Chat API] Session status: Authenticated { userId: '19de20d1-46ba-40b0-81f9-474555f5af88', userType: 'regular' }
 [Chat API] Calling backend: http://127.0.0.1:8000/api/chat
- GET /api/history?limit=20 200 in 8.0s (compile: 811ms, proxy.ts: 6.6s, render: 590ms)
- GET /api/history?limit=20 200 in 2.2s (compile: 215ms, proxy.ts: 1528ms, render: 459ms)
 [Chat API] Backend response status: 200 OK
-[Chat API] Backend data received: {"type":"message","response":"Here are the best results I found:\n\n<product_grid>[{\"name\": \"mini...
- ○ Compiling /api/plan ...
- POST /api/chat 200 in 61s (compile: 303ms, proxy.ts: 331ms, render: 61s)
- GET /api/history?limit=20 200 in 3.9s (compile: 652ms, proxy.ts: 2.4s, render: 867ms)
+[Chat API] Backend data received: {"type":"message","response":"<product_grid>[{\"name\": \"site:ebay.com nike shoes amazon india flip...
+ POST /api/chat 200 in 5.5s (compile: 52ms, proxy.ts: 29ms, render: 5.5s)
+ GET /api/proxy/image?url=https%3A%2F%2Fts1.mm.bing.net%2Fth%3Fid%3DOIP.XKhvh_lUssW4d2PuTsmvlwHaI4%26pid%3D15.1 200 in 614ms (compile: 43ms, proxy.ts: 17ms, render: 554ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts4.mm.bing.net%2Fth%3Fid%3DOIP.SporCzUoW9L7h5eBCm8LdQAAAA%26pid%3D15.1 200 in 629ms (compile: 69ms, proxy.ts: 93ms, render: 468ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts4.mm.bing.net%2Fth%3Fid%3DOIP.LWaGRTmXhPF9SIN2LZhaggHaI4%26pid%3D15.1 200 in 760ms (compile: 57ms, proxy.ts: 93ms, render: 611ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts4.mm.bing.net%2Fth%3Fid%3DOIP.bfrrLOhMxeZlSLpDRW-wYgAAAA%26pid%3D15.1 200 in 750ms (compile: 81ms, proxy.ts: 92ms, render: 577ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts3.mm.bing.net%2Fth%3Fid%3DOIP.mFkg0pXvUVbt_Bi79X6wmgAAAA%26pid%3D15.1 200 in 747ms (compile: 99ms, proxy.ts: 88ms, render: 560ms)
+ GET /api/history?limit=20 200 in 192ms (compile: 28ms, proxy.ts: 18ms, render: 145ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F61%2B4HuCd9yL.jpg 200 in 722ms (compile: 119ms, proxy.ts: 48ms, render: 555ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fts2.mm.bing.net%2Fth%3Fid%3DOIP.G82pGJQ9A5lvASq5pwAiPAHaDX%26pid%3D15.1 200 in 541ms (compile: 11ms, proxy.ts: 22ms, render: 507ms)
+ GET /api/proxy/image?url=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FMen-s-Nike-Killshot-2-Leather-White-Black-Light-Silver-HF1054-100-7_6f57f126-c0d2-4377-8c7e-277799e69511.c5cb3d8a5f0871dbaef1ed92ce83db88.jpeg%3FodnHeight%3D864%26odnWidth%3D576%26odnBg%3DFFFFFF 200 in 1529ms (compile: 43ms, proxy.ts: 67ms, render: 1420ms)
+ POST /chat/123a7d4a-8b77-464b-80ae-d83d27a318ef 200 in 1372ms (compile: 440ms, proxy.ts: 363ms, render: 570ms)
+ POST /chat/123a7d4a-8b77-464b-80ae-d83d27a318ef 200 in 944ms (compile: 187ms, proxy.ts: 35ms, render: 722ms)
+ POST /chat/123a7d4a-8b77-464b-80ae-d83d27a318ef 200 in 355ms (compile: 42ms, proxy.ts: 26ms, render: 286ms)
+ GET /api/templates 200 in 334ms (compile: 10ms, proxy.ts: 7ms, render: 317ms)
+ GET /api/vote?chatId=123a7d4a-8b77-464b-80ae-d83d27a318ef 200 in 209ms (compile: 25ms, proxy.ts: 18ms, render: 166ms)
+ GET /api/templates 200 in 33ms (compile: 9ms, proxy.ts: 10ms, render: 14ms)
+ GET /api/history?limit=20 200 in 813ms (compile: 111ms, proxy.ts: 401ms, render: 300ms)
+ GET /api/history?limit=20 200 in 46ms (compile: 10ms, proxy.ts: 20ms, render: 16ms)
+ GET /api/history?limit=20 200 in 852ms (compile: 210ms, proxy.ts: 257ms, render: 385ms)
+ GET /api/vote?chatId=123a7d4a-8b77-464b-80ae-d83d27a318ef 200 in 657ms (compile: 201ms, proxy.ts: 116ms, render: 341ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 743ms (compile: 210ms, proxy.ts: 151ms, render: 383ms)
+ GET /api/history?limit=20 200 in 282ms (compile: 47ms, proxy.ts: 75ms, render: 160ms)
+ GET /api/history?limit=20 200 in 275ms (compile: 90ms, proxy.ts: 75ms, render: 111ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 282ms (compile: 96ms, proxy.ts: 63ms, render: 123ms)
+ GET /api/vote?chatId=123a7d4a-8b77-464b-80ae-d83d27a318ef 200 in 325ms (compile: 73ms, proxy.ts: 67ms, render: 184ms)
+ GET /api/history?limit=20 200 in 66ms (compile: 15ms, proxy.ts: 29ms, render: 21ms)
+ GET /api/history?limit=20 200 in 496ms (compile: 80ms, proxy.ts: 144ms, render: 273ms)
+ GET /api/history?limit=20 200 in 561ms (compile: 146ms, proxy.ts: 189ms, render: 227ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 509ms (compile: 200ms, proxy.ts: 139ms, render: 170ms)
+ GET /api/vote?chatId=123a7d4a-8b77-464b-80ae-d83d27a318ef 200 in 467ms (compile: 237ms, proxy.ts: 92ms, render: 138ms)
+ GET /api/history?limit=20 200 in 118ms (compile: 43ms, proxy.ts: 37ms, render: 39ms)
+ GET /api/history?limit=20 200 in 346ms (compile: 54ms, proxy.ts: 38ms, render: 255ms)
+ GET /api/vote?chatId=a404ef3d-333d-46f5-8179-ce69d43ccb14 200 in 423ms (compile: 36ms, proxy.ts: 33ms, render: 354ms)
