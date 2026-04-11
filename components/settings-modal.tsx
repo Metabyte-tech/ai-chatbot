@@ -99,16 +99,10 @@ export function SettingsModal({ isOpen, onClose, defaultTab = "account" }: Setti
                 {/* Content Area */}
                 <div className="flex-1 flex flex-col bg-white overflow-hidden relative">
                     {/* Header */}
-                    <div className="flex items-center justify-between px-8 py-6 border-b border-zinc-50">
+                    <div className="flex items-center px-8 py-6 border-b border-zinc-50">
                         <h2 className="text-lg font-bold tracking-tight text-zinc-900 capitalize">
                             {tabs.find(t => t.id === activeTab)?.label || activeTab}
                         </h2>
-                        <button
-                            onClick={onClose}
-                            className="p-2 rounded-full hover:bg-zinc-100 text-zinc-400 transition-colors"
-                        >
-                            <X size={20} />
-                        </button>
                     </div>
 
                     {/* Scrollable Content */}
