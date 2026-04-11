@@ -41,6 +41,8 @@ export type Product = {
     is_verified?: boolean;
     advantages?: string[];
     disadvantages?: string[];
+    savedProductId?: string;
+    source?: string;
 };
 
 interface ProductCarouselProps {

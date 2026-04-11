@@ -5,9 +5,10 @@ import { Plus, X, Loader2, FolderHeart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { getUserListsAction, getListWithProductsAction } from "@/lib/actions/lists";
+import { getUserListsAction, getListWithProductsAction, removeSavedProductAction } from "@/lib/actions/lists";
 import { ProductGrid } from "@/components/product-grid";
 import { toast } from "sonner";
+import { type Product } from "@/components/product-carousel";
 
 export default function MyListsPage() {
     const [activeTab, setActiveTab] = useState<"products" | "suppliers">("products");
@@ -44,14 +45,37 @@ export default function MyListsPage() {
         }
     };
 
+    const handleDeleteProduct = async (product: Product) => {
+        if (!product.savedProductId) return;
+
+        // Optimistic UI update
+        const previousData = { ...listData };
+        setListData({
+            ...listData,
+            products: listData.products.filter((p: Product) => p.savedProductId !== product.savedProductId)
+        });
+
+        try {
+            await removeSavedProductAction(product.savedProductId);
+            toast.success("Product removed from list");
+        } catch (error) {
+            console.error("Failed to remove product", error);
+            toast.error("Failed to remove product");
+            // Revert on error
+            setListData(previousData);
+        }
+    };
+
     const loadListDetails = async (id: string) => {
         setLoadingListData(true);
         try {
             const data = await getListWithProductsAction(id);
             // Parse productData back from JSON strings if needed
-            const parsedProducts = data.savedProducts.map((sp: any) =>
-                typeof sp.productData === 'string' ? JSON.parse(sp.productData) : sp.productData
-            );
+            const parsedProducts = data.savedProducts.map((sp: any) => {
+                const pd = typeof sp.productData === 'string' ? JSON.parse(sp.productData) : sp.productData;
+                pd.savedProductId = sp.id;
+                return pd;
+            });
             setListData({ ...data.list, products: parsedProducts });
         } catch (error) {
             console.error("Failed to load list details", error);
@@ -160,7 +184,7 @@ export default function MyListsPage() {
                             </div>
                         ) : listData?.products?.length > 0 ? (
                             <div className="p-8 pb-32">
-                                <ProductGrid products={listData.products} />
+                                <ProductGrid products={listData.products} onDelete={handleDeleteProduct} />
                             </div>
                         ) : (
                             <div className="flex flex-col items-center justify-center p-12 text-center h-full pb-32">

@@ -13,7 +13,7 @@ import {
     DialogTitle,
     DialogDescription,
 } from "@/components/ui/dialog";
-import { ExternalLinkIcon, MessageSquare, Star, ShoppingCart, CheckCircle2, MapPin, ListPlus } from "lucide-react";
+import { ExternalLinkIcon, MessageSquare, Star, ShoppingCart, CheckCircle2, MapPin, ListPlus, Trash2 } from "lucide-react";
 import { type Product } from "./product-carousel";
 import { AddToListPopover } from "./add-to-list-popover";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -21,6 +21,7 @@ import { useSelectedProducts } from "@/lib/contexts/selected-products-context";
 
 interface ProductGridProps {
     products: Product[];
+    onDelete?: (product: Product) => void;
 }
 
 function sanitizeUrl(url: string, isImage: boolean = false) {
@@ -77,7 +78,7 @@ function ProductImage({ src, alt, className = "" }: { src: string; alt: string; 
     );
 }
 
-export function ProductGrid({ products }: ProductGridProps) {
+export function ProductGrid({ products, onDelete }: ProductGridProps) {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const { toggleProduct, isSelected } = useSelectedProducts();
 
@@ -102,16 +103,27 @@ export function ProductGrid({ products }: ProductGridProps) {
                                 className="group-hover:scale-105 transition-transform duration-500 object-contain p-2"
                             />
                             <div className="absolute top-2 right-2 flex flex-col gap-2 z-10">
-                                <AddToListPopover products={product}>
+                                {onDelete ? (
                                     <Button
-                                        variant="secondary"
+                                        variant="default"
                                         size="icon"
-                                        className="rounded-full h-9 w-9 bg-white shadow-sm border border-zinc-200/80 hover:bg-zinc-50 transition-all hover:scale-105 active:scale-95"
-                                        onClick={(e) => { e.stopPropagation(); }}
+                                        className="rounded-full h-9 w-9 border border-zinc-200/80 bg-white hover:bg-red-50 hover:border-red-200 transition-all hover:scale-105 active:scale-95 group/del"
+                                        onClick={(e) => { e.stopPropagation(); onDelete(product); }}
                                     >
-                                        <ListPlus size={18} className="text-zinc-700" />
+                                        <Trash2 size={16} className="text-zinc-400 group-hover/del:text-red-500" />
                                     </Button>
-                                </AddToListPopover>
+                                ) : (
+                                    <AddToListPopover products={product}>
+                                        <Button
+                                            variant="secondary"
+                                            size="icon"
+                                            className="rounded-full h-9 w-9 bg-white shadow-sm border border-zinc-200/80 hover:bg-zinc-50 transition-all hover:scale-105 active:scale-95"
+                                            onClick={(e) => { e.stopPropagation(); }}
+                                        >
+                                            <ListPlus size={18} className="text-zinc-700" />
+                                        </Button>
+                                    </AddToListPopover>
+                                )}
 
                                 <div
                                     data-testid="product-select-button"

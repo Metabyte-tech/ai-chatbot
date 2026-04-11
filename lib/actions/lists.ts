@@ -7,7 +7,8 @@ import {
     getProductListsByUserId,
     addSavedProduct,
     getSavedProductsByListId,
-    getProductListById
+    getProductListById,
+    removeSavedProductById
 } from "@/lib/db/queries";
 
 export async function createListAction(name: string) {
@@ -63,4 +64,18 @@ export async function getListWithProductsAction(listId: string) {
         console.error("getListWithProductsAction error:", e?.message);
         throw new Error("Could not load list.");
     }
+}
+
+export async function removeSavedProductAction(savedProductId: string) {
+    const session = await auth();
+    if (!session?.user) {
+        throw new Error("Unauthorized");
+    }
+
+    const [removed] = await removeSavedProductById(savedProductId);
+    if (removed) {
+        revalidatePath(`/lists`);
+        revalidatePath(`/lists/${removed.listId}`);
+    }
+    return removed;
 }

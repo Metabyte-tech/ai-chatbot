@@ -654,6 +654,15 @@ export async function getSavedProductsByListId(listId: string) {
   }
 }
 
+export async function removeSavedProductById(id: string) {
+  try {
+    return await db.delete(savedProduct).where(eq(savedProduct.id, id)).returning();
+  } catch (error) {
+    console.error("Failed to remove saved product", error);
+    throw error;
+  }
+}
+
 export async function getProductListById(listId: string) {
   try {
     const lists = await db.select().from(productList).where(eq(productList.id, listId));

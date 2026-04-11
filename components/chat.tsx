@@ -260,9 +260,13 @@ export function Chat({
 
       setHasAppendedQuery(true);
 
-      if (window.history.state && !window.history.state.tree) {
-        window.location.replace(`/chat/${id}`);
-      } else {
+      try {
+        if (typeof window !== "undefined" && window.history && window.history.state && !window.history.state.tree) {
+          window.location.replace(`/chat/${id}`);
+        } else {
+          router.replace(`/chat/${id}`, { scroll: false });
+        }
+      } catch (err) {
         router.replace(`/chat/${id}`, { scroll: false });
       }
     }
