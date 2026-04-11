@@ -168,3 +168,25 @@ export const stream = pgTable(
 );
 
 export type Stream = InferSelectModel<typeof stream>;
+
+export const productList = pgTable("ProductList", {
+  id: uuid("id").primaryKey().notNull().defaultRandom(),
+  name: varchar("name", { length: 255 }).notNull(),
+  userId: uuid("userId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+});
+
+export type ProductList = InferSelectModel<typeof productList>;
+
+export const savedProduct = pgTable("SavedProduct", {
+  id: uuid("id").primaryKey().notNull().defaultRandom(),
+  listId: uuid("listId")
+    .notNull()
+    .references(() => productList.id, { onDelete: "cascade" }),
+  productData: json("productData").notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+});
+
+export type SavedProduct = InferSelectModel<typeof savedProduct>;

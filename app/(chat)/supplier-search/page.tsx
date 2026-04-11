@@ -1,6 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { Suspense } from "react";
+import { Chat } from "@/components/chat";
+import { DataStreamHandler } from "@/components/data-stream-handler";
+import { DEFAULT_CHAT_MODEL } from "@/lib/ai/models";
+import { generateUUID } from "@/lib/utils";
 import { Star, CornerDownLeft, Settings2, ArrowUpRight } from "lucide-react";
 
 const SAMPLES = [
@@ -10,15 +14,22 @@ const SAMPLES = [
 ];
 
 export default function SupplierSearchPage() {
-    const router = useRouter();
+    return (
+        <Suspense fallback={<div className="flex h-dvh" />}>
+            <SupplierChatPage />
+        </Suspense>
+    );
+}
 
+function SupplierHero({ sendMessage, setInput, chatId }: any) {
     const handleSample = (text: string) => {
-        router.push(`/?query=${encodeURIComponent(text)}`);
+
+        sendMessage({ role: "user", parts: [{ type: "text", text }] });
     };
 
     return (
-        <div className="flex flex-col h-dvh bg-background">
-            <div className="flex items-center justify-between border-b border-zinc-100 px-6 py-3">
+        <div className="flex flex-col h-dvh bg-background overflow-hidden w-full absolute top-0 left-0 hover:z-20">
+            <div className="flex items-center justify-between border-b border-zinc-100 px-6 py-3 shrink-0 bg-white z-10 w-full relative">
                 <span className="text-sm font-medium text-zinc-700">Multi-platform supplier search</span>
                 <div className="flex items-center gap-4">
                     <button className="flex items-center gap-1.5 text-sm text-zinc-500 hover:text-zinc-800 transition-colors">My lists <ArrowUpRight className="h-3.5 w-3.5" /></button>
@@ -34,7 +45,7 @@ export default function SupplierSearchPage() {
                 </div>
 
                 <div className="flex flex-col gap-5">
-                    <p className="text-zinc-900 font-medium text-base">Got it.</p>
+                    <p className="text-zinc-900 font-medium base">Got it.</p>
                     <p className="text-zinc-700 text-sm leading-relaxed">
                         Tell me what you need or{" "}
                         <span className="underline underline-offset-2 cursor-pointer hover:text-zinc-900">upload a product photo</span>
@@ -73,7 +84,7 @@ export default function SupplierSearchPage() {
                 </div>
             </div>
 
-            <div className="border-t border-zinc-100 px-6 py-4 bg-white">
+            <div className="border-t border-zinc-100 px-6 py-4 bg-white shrink-0">
                 <div className="max-w-3xl mx-auto">
                     <div className="flex items-center gap-3 rounded-2xl border border-zinc-200 bg-zinc-50/50 px-4 py-3">
                         <input
@@ -89,7 +100,12 @@ export default function SupplierSearchPage() {
                             <button className="flex items-center gap-1 text-xs text-zinc-400 hover:text-zinc-600">
                                 <Settings2 className="h-3.5 w-3.5" /> Fast
                             </button>
-                            <button className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-900 text-white hover:bg-zinc-700 transition-colors">
+                            <button className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-900 text-white hover:bg-zinc-700 transition-colors"
+                                onClick={() => {
+                                    const val = (document.querySelector('input[placeholder="Describe your needs..."]') as HTMLInputElement)?.value;
+                                    if (val?.trim()) handleSample(val.trim());
+                                }}
+                            >
                                 <ArrowUpRight className="h-3.5 w-3.5 -rotate-45" />
                             </button>
                         </div>
@@ -97,5 +113,25 @@ export default function SupplierSearchPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+function SupplierChatPage() {
+    const id = generateUUID();
+
+    return (
+        <>
+            <Chat
+                autoResume={false}
+                id={id}
+                initialChatModel={DEFAULT_CHAT_MODEL}
+                initialMessages={[]}
+                initialVisibilityType="private"
+                isReadonly={false}
+                renderCustomEmptyState={(props) => <SupplierHero {...props} />}
+                key={id}
+            />
+            <DataStreamHandler />
+        </>
     );
 }

@@ -91,57 +91,65 @@ function PureEditor({
   }, [onSaveContent]);
 
   useEffect(() => {
-    if (editorRef.current && content) {
-      const currentContent = buildContentFromDocument(
-        editorRef.current.state.doc
-      );
-
-      if (status === "streaming") {
-        const newDocument = buildDocumentFromContent(content);
-
-        const transaction = editorRef.current.state.tr.replaceWith(
-          0,
-          editorRef.current.state.doc.content.size,
-          newDocument.content
+    try {
+      if (editorRef.current && editorRef.current.state && content) {
+        const currentContent = buildContentFromDocument(
+          editorRef.current.state.doc
         );
 
-        transaction.setMeta("no-save", true);
-        editorRef.current.dispatch(transaction);
-        return;
+        if (status === "streaming") {
+          const newDocument = buildDocumentFromContent(content);
+
+          const transaction = editorRef.current.state.tr.replaceWith(
+            0,
+            editorRef.current.state.doc.content.size,
+            newDocument.content
+          );
+
+          transaction.setMeta("no-save", true);
+          editorRef.current.dispatch(transaction);
+          return;
+        }
+
+        if (currentContent !== content) {
+          const newDocument = buildDocumentFromContent(content);
+
+          const transaction = editorRef.current.state.tr.replaceWith(
+            0,
+            editorRef.current.state.doc.content.size,
+            newDocument.content
+          );
+
+          transaction.setMeta("no-save", true);
+          editorRef.current.dispatch(transaction);
+        }
       }
-
-      if (currentContent !== content) {
-        const newDocument = buildDocumentFromContent(content);
-
-        const transaction = editorRef.current.state.tr.replaceWith(
-          0,
-          editorRef.current.state.doc.content.size,
-          newDocument.content
-        );
-
-        transaction.setMeta("no-save", true);
-        editorRef.current.dispatch(transaction);
-      }
+    } catch (err) {
+      console.error("TextEditor streaming update error:", err);
     }
   }, [content, status]);
 
   useEffect(() => {
-    if (editorRef.current?.state.doc && content) {
-      const projectedSuggestions = projectWithPositions(
-        editorRef.current.state.doc,
-        suggestions
-      ).filter(
-        (suggestion) => suggestion.selectionStart && suggestion.selectionEnd
-      );
+    try {
+      if (editorRef.current?.state?.doc && content) {
+        const projectedSuggestions = projectWithPositions(
+          editorRef.current.state.doc,
+          suggestions
+        ).filter(
+          (suggestion) => suggestion.selectionStart && suggestion.selectionEnd
+        );
 
-      const decorations = createDecorations(
-        projectedSuggestions,
-        editorRef.current
-      );
+        const decorations = createDecorations(
+          projectedSuggestions,
+          editorRef.current
+        );
 
-      const transaction = editorRef.current.state.tr;
-      transaction.setMeta(suggestionsPluginKey, { decorations });
-      editorRef.current.dispatch(transaction);
+        const transaction = editorRef.current.state.tr;
+        transaction.setMeta(suggestionsPluginKey, { decorations });
+        editorRef.current.dispatch(transaction);
+      }
+    } catch (err) {
+      console.error("TextEditor suggestions error:", err);
     }
   }, [suggestions, content]);
 

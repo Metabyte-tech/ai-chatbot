@@ -6,11 +6,17 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
-export function IngestionUI() {
+interface IngestionUIProps {
+    onAuthCheck?: () => boolean;
+}
+
+export function IngestionUI({ onAuthCheck }: IngestionUIProps = {}) {
     const [url, setUrl] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     const handleIngest = async (isDeep: boolean) => {
+        if (onAuthCheck && !onAuthCheck()) return;
+
         if (!url) {
             toast.error("Please enter a URL");
             return;

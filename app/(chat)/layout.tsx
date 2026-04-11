@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import { AppSidebar } from "@/components/app-sidebar";
 import { DataStreamProvider } from "@/components/data-stream-provider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SelectedProductsProvider } from "@/lib/contexts/selected-products-context";
+import { ProductActionBar } from "@/components/product-action-bar";
 import { auth } from "../(auth)/auth";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -27,9 +29,14 @@ async function SidebarWrapper({ children }: { children: React.ReactNode }) {
   const isCollapsed = cookieStore.get("sidebar_state")?.value !== "true";
 
   return (
-    <SidebarProvider defaultOpen={!isCollapsed}>
-      <AppSidebar user={session?.user} />
-      <SidebarInset>{children}</SidebarInset>
-    </SidebarProvider>
+    <SelectedProductsProvider>
+      <SidebarProvider defaultOpen={!isCollapsed}>
+        <AppSidebar user={session?.user} />
+        <SidebarInset>
+          {children}
+          <ProductActionBar />
+        </SidebarInset>
+      </SidebarProvider>
+    </SelectedProductsProvider>
   );
 }

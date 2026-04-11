@@ -45,48 +45,56 @@ function PureCodeEditor({ content, onSaveContent, status }: EditorProps) {
   }, [content]);
 
   useEffect(() => {
-    if (editorRef.current) {
-      const updateListener = EditorView.updateListener.of((update) => {
-        if (update.docChanged) {
-          const transaction = update.transactions.find(
-            (tr) => !tr.annotation(Transaction.remote)
-          );
+    try {
+      if (editorRef.current && editorRef.current.state) {
+        const updateListener = EditorView.updateListener.of((update) => {
+          if (update.docChanged && update.state) {
+            const transaction = update.transactions.find(
+              (tr) => !tr.annotation(Transaction.remote)
+            );
 
-          if (transaction) {
-            const newContent = update.state.doc.toString();
-            onSaveContent(newContent, true);
+            if (transaction) {
+              const newContent = update.state.doc.toString();
+              onSaveContent(newContent, true);
+            }
           }
-        }
-      });
+        });
 
-      const currentSelection = editorRef.current.state.selection;
+        const currentSelection = editorRef.current.state.selection;
 
-      const newState = EditorState.create({
-        doc: editorRef.current.state.doc,
-        extensions: [basicSetup, python(), oneDark, updateListener],
-        selection: currentSelection,
-      });
+        const newState = EditorState.create({
+          doc: editorRef.current.state.doc,
+          extensions: [basicSetup, python(), oneDark, updateListener],
+          selection: currentSelection,
+        });
 
-      editorRef.current.setState(newState);
+        editorRef.current.setState(newState);
+      }
+    } catch (err) {
+      console.error("CodeEditor state setup error:", err);
     }
   }, [onSaveContent]);
 
   useEffect(() => {
-    if (editorRef.current && content) {
-      const currentContent = editorRef.current.state.doc.toString();
+    try {
+      if (editorRef.current && editorRef.current.state && content) {
+        const currentContent = editorRef.current.state.doc.toString();
 
-      if (status === "streaming" || currentContent !== content) {
-        const transaction = editorRef.current.state.update({
-          changes: {
-            from: 0,
-            to: currentContent.length,
-            insert: content,
-          },
-          annotations: [Transaction.remote.of(true)],
-        });
+        if (status === "streaming" || currentContent !== content) {
+          const transaction = editorRef.current.state.update({
+            changes: {
+              from: 0,
+              to: currentContent.length,
+              insert: content,
+            },
+            annotations: [Transaction.remote.of(true)],
+          });
 
-        editorRef.current.dispatch(transaction);
+          editorRef.current.dispatch(transaction);
+        }
       }
+    } catch (err) {
+      console.error("CodeEditor streaming update error:", err);
     }
   }, [content, status]);
 

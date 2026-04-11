@@ -39,6 +39,8 @@ export function SettingsModal({ isOpen, onClose, defaultTab = "account" }: Setti
     const { data: session } = useSession();
     const [activeTab, setActiveTab] = React.useState<SettingsTab>(defaultTab);
 
+    const [adminPassword, setAdminPassword] = React.useState("");
+
     React.useEffect(() => {
         if (isOpen && defaultTab) {
             setActiveTab(defaultTab);
@@ -97,16 +99,10 @@ export function SettingsModal({ isOpen, onClose, defaultTab = "account" }: Setti
                 {/* Content Area */}
                 <div className="flex-1 flex flex-col bg-white overflow-hidden relative">
                     {/* Header */}
-                    <div className="flex items-center justify-between px-8 py-6 border-b border-zinc-50">
+                    <div className="flex items-center px-8 py-6 border-b border-zinc-50">
                         <h2 className="text-lg font-bold tracking-tight text-zinc-900 capitalize">
                             {tabs.find(t => t.id === activeTab)?.label || activeTab}
                         </h2>
-                        <button
-                            onClick={onClose}
-                            className="p-2 rounded-full hover:bg-zinc-100 text-zinc-400 transition-colors"
-                        >
-                            <X size={20} />
-                        </button>
                     </div>
 
                     {/* Scrollable Content */}
@@ -437,8 +433,28 @@ export function SettingsModal({ isOpen, onClose, defaultTab = "account" }: Setti
                                         Import web pages directly into Retails Store's vector database. This allows the AI to search and reference specific data from these sources when answering your questions.
                                     </p>
                                 </div>
-                                <div className="bg-[#F9FAFB] rounded-2xl border border-zinc-100 p-2">
-                                    <IngestionUI />
+                                <div className="space-y-4 bg-[#F9FAFB] rounded-2xl border border-zinc-100 p-4">
+                                    <div className="flex flex-col gap-2 border-b border-zinc-200/50 pb-4">
+                                        <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+                                            Admin Authorization
+                                        </label>
+                                        <input
+                                            type="password"
+                                            placeholder="Enter admin password to unlock data sources"
+                                            value={adminPassword}
+                                            onChange={(e) => setAdminPassword(e.target.value)}
+                                            className="w-full bg-white border border-zinc-200 rounded-xl h-11 px-3 text-sm focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
+                                        />
+                                    </div>
+                                    <IngestionUI
+                                        onAuthCheck={() => {
+                                            if (adminPassword !== "admin123") {
+                                                toast.error("Unauthorized: Invalid admin password");
+                                                return false;
+                                            }
+                                            return true;
+                                        }}
+                                    />
                                 </div>
                                 <div className="pt-4 border-t border-zinc-100">
                                     <h4 className="text-sm font-bold text-zinc-900 mb-2">Memory Management</h4>
@@ -449,6 +465,10 @@ export function SettingsModal({ isOpen, onClose, defaultTab = "account" }: Setti
                                         variant="outline"
                                         className="rounded-xl border-red-100 text-red-600 hover:bg-red-50 hover:text-red-700 h-10 px-4 text-xs font-bold"
                                         onClick={async () => {
+                                            if (adminPassword !== "admin123") {
+                                                toast.error("Unauthorized: Invalid admin password");
+                                                return;
+                                            }
                                             try {
                                                 const response = await fetch("http://localhost:8000/clear", { method: "POST" });
                                                 if (response.ok) {
