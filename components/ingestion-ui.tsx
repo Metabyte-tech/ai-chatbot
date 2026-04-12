@@ -97,7 +97,7 @@ export function IngestionUI({ onAuthCheck }: IngestionUIProps = {}) {
             <div className="flex gap-3">
                 <Button
                     onClick={() => handleIngest(false)}
-                    disabled={isLoading || urlCount === 0}
+                    disabled={isLoading}
                     className={cn(
                         "flex-1 relative h-11 rounded-xl text-sm font-bold transition-all duration-300",
                         "bg-orange-50 text-orange-600 border border-orange-200",
@@ -112,7 +112,7 @@ export function IngestionUI({ onAuthCheck }: IngestionUIProps = {}) {
                 </Button>
                 <Button
                     onClick={() => handleIngest(true)}
-                    disabled={isLoading || urlCount === 0}
+                    disabled={isLoading}
                     className={cn(
                         "flex-1 relative h-11 rounded-xl text-sm font-bold transition-all duration-300",
                         "bg-purple-50 text-purple-600 border border-purple-200",
