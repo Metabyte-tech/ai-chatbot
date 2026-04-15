@@ -9,35 +9,27 @@ export async function POST(request: Request) {
 
     try {
         const body = await request.json();
+        const urls = body.urls;
 
-        // Handle both legacy {url} and new {urls} formats for backward compatibility
-        const isDeep = body.isDeep;
-        const urls = body.urls ? body.urls : (body.url ? [body.url] : []);
-
-        if (urls.length === 0) {
+        if (!urls || urls.length === 0) {
             return NextResponse.json({ detail: "No URL(s) provided" }, { status: 400 });
         }
 
         const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
-        // Always hit batch endpoints now since they accept arrays
-        const endpoint = isDeep ? "/crawl/deep/batch" : "/crawl/batch";
+        console.log(`[Admin Crawl Proxy] Forwarding tracked batch request for ${urls.length} URL(s)`);
 
-        console.log(`[Crawl Proxy] Forwarding ${isDeep ? 'deep ' : ''}request for ${urls.length} URL(s) to ${backendUrl}${endpoint}`);
-
-        const response = await fetch(`${backendUrl}${endpoint}`, {
+        const response = await fetch(`${backendUrl}/admin/crawl/batch`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ urls }),
         });
 
         const data = await response.json();
         return NextResponse.json(data, { status: response.status });
     } catch (error: any) {
-        console.error("[Crawl Proxy] Error:", error);
+        console.error("[Admin Crawl Proxy] Error:", error);
         return NextResponse.json(
-            { detail: "Backend scraping server is unreachable. Check if EC2 is running." },
+            { detail: "Backend scraping server is unreachable." },
             { status: 502 }
         );
     }

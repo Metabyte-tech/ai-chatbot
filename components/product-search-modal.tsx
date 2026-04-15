@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { Search, X, Image as ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,6 +47,9 @@ export function ProductSearchModal({ children }: ProductSearchModalProps) {
         }
     };
 
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+
     return (
         <>
             {/* Trigger */}
@@ -54,16 +58,16 @@ export function ProductSearchModal({ children }: ProductSearchModalProps) {
             </div>
 
             {/* Modal Overlay */}
-            {open && (
-                <>
+            {open && mounted && createPortal(
+                <div className="relative z-[9999]">
                     {/* Backdrop */}
                     <div
-                        className="fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px]"
+                        className="fixed inset-0 z-[9999] bg-black/40 backdrop-blur-sm"
                         onClick={handleClose}
                     />
 
                     {/* Dialog */}
-                    <div className="fixed left-1/2 top-1/3 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-[480px] mx-auto px-4">
+                    <div className="fixed left-1/2 top-1/3 z-[10000] -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl mx-auto px-4">
                         <div className="bg-white rounded-2xl shadow-2xl border border-zinc-100 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
                             {/* Header */}
                             <div className="flex items-center justify-between px-5 pt-5 pb-3">
@@ -87,7 +91,7 @@ export function ProductSearchModal({ children }: ProductSearchModalProps) {
                                     onChange={(e) => setQuery(e.target.value)}
                                     onKeyDown={handleKeyDown}
                                     placeholder="What are you looking for?"
-                                    rows={3}
+                                    rows={6}
                                     className="w-full resize-none text-sm text-zinc-700 placeholder-zinc-400 bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-400/30 focus:border-emerald-400 transition-all"
                                 />
 
@@ -112,7 +116,8 @@ export function ProductSearchModal({ children }: ProductSearchModalProps) {
                             </div>
                         </div>
                     </div>
-                </>
+                </div>,
+                document.body
             )}
         </>
     );
