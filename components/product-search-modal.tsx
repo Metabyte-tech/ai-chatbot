@@ -3,9 +3,11 @@
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
-import { Search, X, Image as ImageIcon } from "lucide-react";
+import { Search, X, Image as ImageIcon, Loader2, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { cn, generateUUID } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { generateUUID } from "@/lib/utils";
+import { AccioProductGrid } from "./accio-product-grid";
+import type { Product } from "./product-carousel";
 
 interface ProductSearchModalProps {
     children: React.ReactNode;
@@ -30,9 +32,10 @@ export function ProductSearchModal({ children }: ProductSearchModalProps) {
 
     const handleSearch = () => {
         if (!query.trim()) return;
-        // Encode the query and redirect to /search with it pre-filled as a query param
-        // The /search page will pick it up and directly send the message
-        const params = new URLSearchParams({ q: encodeURIComponent(query.trim()) });
+        const params = new URLSearchParams({
+            q: query.trim(),
+            mode: 'agent'
+        });
         router.push(`/search?${params.toString()}`);
         handleClose();
     };
@@ -67,7 +70,7 @@ export function ProductSearchModal({ children }: ProductSearchModalProps) {
                     />
 
                     {/* Dialog */}
-                    <div className="fixed left-1/2 top-1/3 z-[10000] -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl mx-auto px-4">
+                    <div className="fixed left-1/2 top-1/2 z-[10000] -translate-x-1/2 -translate-y-1/2 w-full max-w-xl mx-auto px-4">
                         <div className="bg-white rounded-2xl shadow-2xl border border-zinc-100 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
                             {/* Header */}
                             <div className="flex items-center justify-between px-5 pt-5 pb-3">
@@ -91,25 +94,22 @@ export function ProductSearchModal({ children }: ProductSearchModalProps) {
                                     onChange={(e) => setQuery(e.target.value)}
                                     onKeyDown={handleKeyDown}
                                     placeholder="What are you looking for?"
-                                    rows={6}
-                                    className="w-full resize-none text-sm text-zinc-700 placeholder-zinc-400 bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-400/30 focus:border-emerald-400 transition-all"
+                                    rows={5}
+                                    className="w-full resize-none text-sm text-zinc-700 placeholder-zinc-400 bg-zinc-50/50 border border-[#00D49C]/30 rounded-xl px-4 py-3 outline-none focus:border-[#00D49C] transition-all"
                                 />
 
                                 {/* Footer actions */}
                                 <div className="flex items-center justify-between mt-3">
-                                    <button
-                                        className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-600 transition-colors"
-                                        title="Upload image"
-                                    >
-                                        <ImageIcon className="h-4 w-4" />
-                                    </button>
+                                    <div className="flex items-center gap-1.5 p-1 hover:bg-zinc-100 rounded-md cursor-pointer transition-colors">
+                                        <ImageIcon className="h-4 w-4 text-zinc-400" />
+                                    </div>
 
                                     <Button
                                         onClick={handleSearch}
                                         disabled={!query.trim()}
-                                        className="h-8 px-5 rounded-lg bg-zinc-900 text-white text-xs font-semibold hover:bg-zinc-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                                        className="h-8 px-5 rounded-full bg-[#00D49C]/10 text-[#008F69] text-xs font-bold hover:bg-[#00D49C]/20 border border-[#00D49C]/20 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                                     >
-                                        <Search className="h-3.5 w-3.5 mr-1.5" />
+                                        <Search className="h-3.5 w-3.5 mr-1.5 font-bold" />
                                         Search
                                     </Button>
                                 </div>

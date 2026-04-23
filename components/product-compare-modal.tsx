@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
-import { X, Trash2, ExternalLink, Star, Award, TrendingDown, ShieldCheck } from "lucide-react";
+import { X, Trash2, ExternalLink, Star, Award, TrendingDown, ShieldCheck, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { type Product } from "@/components/product-carousel";
@@ -73,8 +73,33 @@ function parsePrice(p: any): number {
     return parseFloat(m[0].replace(/,/g, ""));
 }
 
+/** Makes URLs in text clickable */
+function linkifyText(text: string): React.ReactNode {
+    const urlRegex = /(https?:\/\/[^\s,]+)/g;
+    const parts = text.split(urlRegex);
+    return parts.map((part, i) =>
+        urlRegex.test(part) ? (
+            <a key={i} href={part} target="_blank" rel="noopener" className="text-emerald-600 underline hover:text-emerald-700 break-all">
+                {part}
+            </a>
+        ) : (
+            <React.Fragment key={i}>{part}</React.Fragment>
+        )
+    );
+}
+
+/** Returns the display price or a friendly fallback */
+function displayPrice(price: any): string {
+    const p = (price || "").toString().trim().toLowerCase();
+    if (p && p !== "check site" && p !== "request price" && p !== "request quote") {
+        return (price as string).trim();
+    }
+    return "Request Price";
+}
+
 export function ProductCompareModal({ open, onOpenChange }: ProductCompareModalProps) {
     const { selectedProducts, toggleProduct } = useSelectedProducts();
+    const [expandedDetails, setExpandedDetails] = useState<Record<number, boolean>>({});
 
     const prices = selectedProducts.map((p) => parsePrice(p.price));
     const minPrice = Math.min(...prices.filter((x) => isFinite(x)));
@@ -88,6 +113,10 @@ export function ProductCompareModal({ open, onOpenChange }: ProductCompareModalP
         { label: "Reviews", key: "rating_count" },
         { label: "Details", key: "details" },
     ];
+
+    const toggleDetails = (idx: number) => {
+        setExpandedDetails((prev) => ({ ...prev, [idx]: !prev[idx] }));
+    };
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
@@ -136,6 +165,13 @@ export function ProductCompareModal({ open, onOpenChange }: ProductCompareModalP
                                             )}
                                         </div>
 
+                                        {/* Product reference letter */}
+                                        <div className="absolute top-2 right-2 z-10">
+                                            <span className="bg-zinc-900/70 text-white text-[10px] font-bold px-2 py-0.5 rounded-full backdrop-blur-sm flex items-center justify-center">
+                                                Option {String.fromCharCode(65 + idx)}
+                                            </span>
+                                        </div>
+
                                         {/* Store gradient header */}
                                         <div className={`h-1.5 w-full bg-gradient-to-r ${storeGrad}`} />
 
@@ -156,7 +192,7 @@ export function ProductCompareModal({ open, onOpenChange }: ProductCompareModalP
                                         {/* Name + actions */}
                                         <div className="p-3 flex flex-col gap-2 flex-1">
                                             <p className="text-[12px] font-semibold text-zinc-800 line-clamp-2 leading-tight">{product.name}</p>
-                                            <div className="text-xl font-black text-emerald-600 leading-none">{product.price || "Check Site"}</div>
+                                            <div className="text-xl font-black text-emerald-600 leading-none">{displayPrice(product.price)}</div>
 
                                             <div className="mt-auto flex gap-2 pt-2">
                                                 <Button
@@ -191,14 +227,48 @@ export function ProductCompareModal({ open, onOpenChange }: ProductCompareModalP
                             </div>
 
                             <div className="divide-y divide-zinc-100">
+                                {/* Product Reference Header Row */}
+                                <div className="flex bg-zinc-100/50 border-b border-zinc-200 sticky top-0 z-10">
+                                    <div className="w-[200px] shrink-0 flex items-center px-6 py-2.5 border-r border-zinc-200 bg-zinc-100/80">
+                                        <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Attribute</span>
+                                    </div>
+                                    {selectedProducts.map((product, idx) => (
+                                        <div key={idx} className="w-[240px] flex items-center gap-2 px-5 py-2.5 border-r border-zinc-200 last:border-r-0 bg-zinc-100/80">
+                                            <span className="bg-zinc-800 text-white text-[9px] font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0">
+                                                {String.fromCharCode(65 + idx)}
+                                            </span>
+                                            <span className="text-[11px] font-bold text-zinc-800 line-clamp-1">{product.name}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
                                 {attrs.map((attr, attrIdx) => (
                                     <div
                                         key={attr.key}
-                                        className={`flex min-h-[52px] ${attrIdx % 2 === 0 ? "bg-white" : "bg-zinc-50/60"}`}
+                                        className={`flex ${attr.key === "details" ? "min-h-[52px]" : "min-h-[52px]"} ${attrIdx % 2 === 0 ? "bg-white" : "bg-zinc-50/60"}`}
                                     >
                                         {/* Label */}
                                         <div className="w-[200px] shrink-0 flex items-center px-6 py-3 border-r border-zinc-100">
-                                            <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wide">{attr.label}</span>
+                                            {attr.key === "details" ? (
+                                                <button
+                                                    onClick={() => {
+                                                        // Toggle all details at once
+                                                        const allExpanded = selectedProducts.every((_, i) => expandedDetails[i]);
+                                                        const next: Record<number, boolean> = {};
+                                                        selectedProducts.forEach((_, i) => { next[i] = !allExpanded; });
+                                                        setExpandedDetails(next);
+                                                    }}
+                                                    className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-600 uppercase tracking-wide hover:text-emerald-700 transition-colors cursor-pointer"
+                                                >
+                                                    {attr.label}
+                                                    {selectedProducts.every((_, i) => expandedDetails[i])
+                                                        ? <ChevronUp size={12} />
+                                                        : <ChevronDown size={12} />
+                                                    }
+                                                </button>
+                                            ) : (
+                                                <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wide">{attr.label}</span>
+                                            )}
                                         </div>
 
                                         {/* Values */}
@@ -215,12 +285,25 @@ export function ProductCompareModal({ open, onOpenChange }: ProductCompareModalP
                                                 const count = product.rating_count;
                                                 value = count ? (
                                                     <span className="text-xs text-zinc-600">{count} reviews</span>
-                                                ) : <span className="text-zinc-300 text-xs">—</span>;
+                                                ) : <span className="text-zinc-400 text-xs font-medium">N/A</span>;
                                             } else if (attr.key === "details") {
+                                                const details = (product as any).details || "—";
+                                                const isExpanded = expandedDetails[idx];
                                                 value = (
-                                                    <span className="text-[11px] text-zinc-500 leading-relaxed line-clamp-3">
-                                                        {(product as any).details || "—"}
-                                                    </span>
+                                                    <div className="flex flex-col gap-1 w-full">
+                                                        <button
+                                                            onClick={() => toggleDetails(idx)}
+                                                            className="flex items-center gap-1 text-[11px] text-emerald-600 font-semibold hover:text-emerald-700 transition-colors cursor-pointer text-left"
+                                                        >
+                                                            {isExpanded ? "Hide details" : "Show details"}
+                                                            {isExpanded ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
+                                                        </button>
+                                                        {isExpanded && (
+                                                            <span className="text-[11px] text-zinc-500 leading-relaxed animate-in fade-in slide-in-from-top-1 duration-200">
+                                                                {linkifyText(details)}
+                                                            </span>
+                                                        )}
+                                                    </div>
                                                 );
                                             } else if (attr.key === "brand") {
                                                 value = (
@@ -239,9 +322,10 @@ export function ProductCompareModal({ open, onOpenChange }: ProductCompareModalP
                                                     </Badge>
                                                 );
                                             } else if (attr.key === "price") {
+                                                const priceText = displayPrice(product.price);
                                                 value = (
                                                     <span className={`text-sm font-extrabold ${isBestPrice ? "text-emerald-600" : "text-zinc-800"}`}>
-                                                        {product.price || "Check Site"}
+                                                        {priceText}
                                                         {isBestPrice && <span className="ml-2 text-[10px] bg-emerald-100 text-emerald-700 rounded-full px-2 py-0.5 font-bold">Cheapest</span>}
                                                     </span>
                                                 );

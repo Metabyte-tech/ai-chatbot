@@ -9,6 +9,7 @@ import { useEffect, useRef, useState, type Dispatch, type SetStateAction } from 
 import useSWR, { useSWRConfig } from "swr";
 import { unstable_serialize } from "swr/infinite";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 import { ChatHeader } from "@/components/chat-header";
 import {
   AlertDialog,
@@ -49,6 +50,7 @@ export function Chat({
   isReadonly,
   autoResume,
   renderCustomEmptyState,
+  autoQuery,
 }: {
   id: string;
   initialMessages: ChatMessage[];
@@ -61,8 +63,11 @@ export function Chat({
     setInput: Dispatch<SetStateAction<string>>;
     chatId: string;
   }) => React.ReactNode;
+  autoQuery?: string;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
+  const isSearchPage = pathname === "/search";
 
   const { visibilityType } = useChatVisibility({
     chatId: id,
@@ -176,12 +181,13 @@ export function Chat({
           lastMessage?.role !== "user" ||
           request.messages.some((msg) =>
             msg.parts?.some((part) => {
-              const state = part && typeof part === 'object' && "state" in part ? (part as any).state : undefined;
+              if (!part || typeof part !== 'object' || !("state" in part)) return false;
+              const state = (part as any).state;
               return (
                 state === "approval-responded" || state === "output-denied"
               );
             })
-          );
+          ) || false;
 
         return {
           body: {
@@ -242,35 +248,44 @@ export function Chat({
     return sendMessage(...args);
   };
 
+  useEffect(() => {
+    if (typeof window !== "undefined" && isSearchPage) {
+      (window as any).__ACCIO_SEARCH = (text: string) => {
+        handleSendMessage({ role: "user", parts: [{ type: "text", text }] });
+      };
+    }
+    return () => {
+      if (typeof window !== "undefined") {
+        delete (window as any).__ACCIO_SEARCH;
+      }
+    };
+  }, [isSearchPage, handleSendMessage]);
+
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
   const templateIdParam = searchParams.get("template");
 
-  const [hasAppendedQuery, setHasAppendedQuery] = useState(false);
+  const hasAppendedRef = useRef(false);
   const [templateLoaded, setTemplateLoaded] = useState(false);
 
 
 
   useEffect(() => {
-    if (query && !hasAppendedQuery) {
+    const effectiveQuery = query || autoQuery;
+    if (effectiveQuery && !hasAppendedRef.current) {
+      hasAppendedRef.current = true;
+
+      // Change the URL bar WITHOUT triggering a Next.js navigation.
+      if (typeof window !== "undefined") {
+        window.history.replaceState({}, "", `/chat/${id}`);
+      }
+
       sendMessage({
         role: "user" as const,
-        parts: [{ type: "text", text: query }],
+        parts: [{ type: "text", text: effectiveQuery }],
       });
-
-      setHasAppendedQuery(true);
-
-      try {
-        if (typeof window !== "undefined" && window.history && window.history.state && !window.history.state.tree) {
-          window.location.replace(`/chat/${id}`);
-        } else {
-          router.replace(`/chat/${id}`, { scroll: false });
-        }
-      } catch (err) {
-        router.replace(`/chat/${id}`, { scroll: false });
-      }
     }
-  }, [query, sendMessage, hasAppendedQuery, id, router]);
+  }, [query, autoQuery, sendMessage, id]);
 
   const { data: votes } = useSWR<Vote[]>(
     messages.length >= 2 ? `/api/vote?chatId=${id}` : null,
@@ -453,11 +468,13 @@ export function Chat({
           )
         ) : (
           <>
-            <ChatHeader
-              chatId={id}
-              isReadonly={isReadonly}
-              selectedVisibilityType={initialVisibilityType}
-            />
+            {!isSearchPage && (
+              <ChatHeader
+                chatId={id}
+                isReadonly={isReadonly}
+                selectedVisibilityType={initialVisibilityType}
+              />
+            )}
             <Messages
               addToolApprovalResponse={addToolApprovalResponse}
               chatId={id}
@@ -470,27 +487,29 @@ export function Chat({
               status={status}
               votes={votes}
             />
-            <div className="sticky bottom-0 z-1 mx-auto flex w-full max-w-4xl gap-2 border-t-0 bg-background px-2 pb-3 md:px-4 md:pb-4">
-              {!isReadonly && (
-                <MultimodalInput
-                  attachments={attachments}
-                  chatId={id}
-                  input={input}
-                  messages={messages}
-                  onModelChange={setCurrentModelId}
-                  selectedModelId={currentModelId}
-                  selectedVisibilityType={visibilityType}
-                  sendMessage={handleSendMessage}
-                  setAttachments={setAttachments}
-                  setInput={setInput}
-                  setMessages={setMessages}
-                  status={status}
-                  stop={stop}
-                  onShowLogin={() => setLoginModalOpen(true)}
-                />
-              )}
-              <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
-            </div>
+            {!isSearchPage && (
+              <div className="sticky bottom-0 z-1 mx-auto flex w-full max-w-4xl gap-2 border-t-0 bg-background px-2 pb-3 md:px-4 md:pb-4">
+                {!isReadonly && (
+                  <MultimodalInput
+                    attachments={attachments}
+                    chatId={id}
+                    input={input}
+                    messages={messages}
+                    onModelChange={setCurrentModelId}
+                    selectedModelId={currentModelId}
+                    selectedVisibilityType={visibilityType}
+                    sendMessage={handleSendMessage}
+                    setAttachments={setAttachments}
+                    setInput={setInput}
+                    setMessages={setMessages}
+                    status={status}
+                    stop={stop}
+                    onShowLogin={() => setLoginModalOpen(true)}
+                  />
+                )}
+                <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
+              </div>
+            )}
           </>
         )}
 

@@ -225,7 +225,7 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                         )}
 
                                         <div className="text-lg font-black text-black mt-1 leading-none">
-                                            {product.price || "Check Price"}
+                                            {product.price || "Request Quote"}
                                         </div>
 
                                         <div className="text-[12px] text-zinc-700 mt-1">
