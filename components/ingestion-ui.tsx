@@ -75,6 +75,8 @@ export function IngestionUI({ onAuthCheck }: IngestionUIProps = {}) {
     const [batchDetailsMap, setBatchDetailsMap] = useState<Record<string, any>>({});
     const [isFetchingBatches, setIsFetchingBatches] = useState(false);
     const [isFetchingDetails, setIsFetchingDetails] = useState<string | null>(null);
+    const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const fetchBatches = useCallback(async () => {
         setIsFetchingBatches(true);
@@ -111,25 +113,32 @@ export function IngestionUI({ onAuthCheck }: IngestionUIProps = {}) {
         }
     };
 
-    const handleDeleteBatch = async (e: React.MouseEvent, batchId: string) => {
+    const handleDeleteBatch = (e: React.MouseEvent, batchId: string) => {
         e.stopPropagation();
-        if (!confirm("Are you sure you want to delete this crawl batch?")) return;
+        setConfirmDeleteId(batchId);
+    };
 
+    const confirmDelete = async () => {
+        if (!confirmDeleteId) return;
+        setIsDeleting(true);
         try {
-            const res = await fetch(`/api/admin/crawl/${batchId}`, {
+            const res = await fetch(`/api/admin/crawl/${confirmDeleteId}`, {
                 method: "DELETE",
             });
             if (res.ok) {
                 toast.success("Batch deleted successfully");
-                setBatches(prev => prev.filter(b => b.batch_id !== batchId));
-                setBatchDetailsMap(prev => { const m = { ...prev }; delete m[batchId]; return m; });
-                if (selectedBatch === batchId) setSelectedBatch(null);
+                setBatches(prev => prev.filter(b => b.batch_id !== confirmDeleteId));
+                setBatchDetailsMap(prev => { const m = { ...prev }; delete m[confirmDeleteId!]; return m; });
+                if (selectedBatch === confirmDeleteId) setSelectedBatch(null);
             } else {
                 toast.error("Failed to delete batch");
             }
-        } catch (e) {
-            console.error("Delete batch error:", e);
+        } catch (err) {
+            console.error("Delete batch error:", err);
             toast.error("Could not delete batch");
+        } finally {
+            setIsDeleting(false);
+            setConfirmDeleteId(null);
         }
     };
 
@@ -141,6 +150,49 @@ export function IngestionUI({ onAuthCheck }: IngestionUIProps = {}) {
 
     return (
         <div className="flex flex-col gap-4">
+            {/* Delete Confirmation Modal */}
+            {confirmDeleteId && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={() => setConfirmDeleteId(null)}>
+                    <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+                    <div
+                        className="relative bg-white rounded-2xl shadow-2xl border border-zinc-200 p-6 mx-4 w-full max-w-sm flex flex-col gap-4"
+                        onClick={e => e.stopPropagation()}
+                    >
+                        <div className="flex items-start gap-3">
+                            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-50 flex items-center justify-center">
+                                <Trash2 size={18} className="text-red-500" />
+                            </div>
+                            <div className="flex flex-col gap-1">
+                                <p className="text-sm font-semibold text-zinc-800">Delete Crawl Batch?</p>
+                                <p className="text-xs text-zinc-500">
+                                    This will permanently remove batch{" "}
+                                    <span className="font-mono font-bold text-zinc-700">
+                                        {confirmDeleteId.split("_").slice(1).join("_")}
+                                    </span>{" "}
+                                    and all its tracked URLs. This action cannot be undone.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex gap-2 justify-end">
+                            <button
+                                onClick={() => setConfirmDeleteId(null)}
+                                disabled={isDeleting}
+                                className="px-4 py-2 text-xs font-semibold rounded-xl border border-zinc-200 text-zinc-600 hover:bg-zinc-50 transition-colors disabled:opacity-50"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={confirmDelete}
+                                disabled={isDeleting}
+                                className="px-4 py-2 text-xs font-semibold rounded-xl bg-red-500 text-white hover:bg-red-600 transition-colors disabled:opacity-60 flex items-center gap-1.5"
+                            >
+                                {isDeleting ? <Loader2 size={12} className="animate-spin" /> : <Trash2 size={12} />}
+                                {isDeleting ? "Deleting…" : "Delete Batch"}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
             <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
                     <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
