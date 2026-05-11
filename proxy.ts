@@ -15,7 +15,6 @@ export default async function middleware(request: NextRequest) {
 
   if (
     pathname.startsWith("/api/auth") ||
-    pathname.startsWith("/api/templates") ||
     pathname.startsWith("/api/proxy/image")
   ) {
     return NextResponse.next();

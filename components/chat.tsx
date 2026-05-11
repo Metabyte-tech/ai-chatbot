@@ -28,7 +28,7 @@ import type { Vote } from "@/lib/db/schema";
 import { ChatSDKError } from "@/lib/errors";
 import type { Attachment, ChatMessage } from "@/lib/types";
 import { fetcher, fetchWithErrorHandlers, generateUUID } from "@/lib/utils";
-import { ChevronDown, Search, Sparkles, ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { Artifact } from "./artifact";
 import { useDataStream } from "./data-stream-provider";
 import { ArrowUpIcon } from "./icons";
@@ -86,71 +86,7 @@ export function Chat({
   const [showCreditCardAlert, setShowCreditCardAlert] = useState(false);
   const [currentModelId, setCurrentModelId] = useState(initialChatModel);
   const currentModelIdRef = useRef(currentModelId);
-  const [templateCategories, setTemplateCategories] = useState<any[]>([]);
-  const [selectedTemplate, setSelectedTemplate] = useState<any>(null);
-  const [agentPlan, setAgentPlan] = useState<string[]>([]);
-  const [isPlanning, setIsPlanning] = useState(false);
 
-  useEffect(() => {
-    async function fetchTemplates() {
-      try {
-        const res = await fetch("/api/templates");
-        const data = await res.json();
-        setTemplateCategories(data.categories || []);
-      } catch (e) {
-        console.error("Failed to fetch templates", e);
-      }
-    }
-    fetchTemplates();
-  }, []);
-
-  const handleTemplateClick = async (template: any) => {
-    openTemplateModal(template);
-  };
-
-  const openTemplateModal = async (template: any) => {
-    setSelectedTemplate(template);
-    setIsPlanning(true);
-    setAgentPlan([]); // Clear previous plan
-
-    try {
-      const res = await fetch("/api/plan", {
-        method: "POST",
-        body: JSON.stringify({
-          query: template.title,
-          template_id: template.id
-        }),
-      });
-      const data = await res.json();
-      setAgentPlan(data.plan || []);
-    } catch (e) {
-      console.error("Failed to generate plan", e);
-      setAgentPlan(["Analyze request", "Research data", "Generate report"]);
-    }
-  };
-
-  const startAgentTask = () => {
-    if (!selectedTemplate) return;
-
-    const subject = input || "latest market data";
-    const expertPrompt = selectedTemplate.prompt.replace("{query}", subject);
-
-    // Clear input to give visual feedback that task started
-    setInput("");
-
-    handleSendMessage({
-      role: "user",
-      parts: [{ type: "text", text: expertPrompt }]
-    }, {
-      body: {
-        template_id: selectedTemplate.id,
-        subject: subject
-      }
-    });
-
-    setIsPlanning(false);
-    setSelectedTemplate(null);
-  };
 
   useEffect(() => {
     currentModelIdRef.current = currentModelId;
@@ -197,7 +133,6 @@ export function Chat({
               : { message: lastMessage }),
             selectedChatModel: currentModelIdRef.current,
             selectedVisibilityType: visibilityType,
-            template_id: selectedTemplate?.id || searchParams.get("template"),
             ...request.body,
           },
         };
@@ -263,10 +198,8 @@ export function Chat({
 
   const searchParams = useSearchParams();
   const query = searchParams.get("query");
-  const templateIdParam = searchParams.get("template");
 
   const hasAppendedRef = useRef(false);
-  const [templateLoaded, setTemplateLoaded] = useState(false);
 
 
 
@@ -372,67 +305,7 @@ export function Chat({
               <div className="mt-8 flex flex-col items-center gap-3 relative z-10 w-full max-w-3xl px-4">
                 <div className="absolute inset-0 -top-8 bg-gradient-to-b from-teal-400/10 via-cyan-400/5 to-transparent blur-2xl -z-10 rounded-full" />
 
-                <div className="flex flex-wrap justify-center gap-2">
-                  <Button
-                    variant="outline"
-                    className="rounded-full bg-white border-zinc-200/50 shadow-sm hover:bg-zinc-50 hover:border-zinc-300 text-[13px] font-medium transition-all flex items-center h-[34px] px-3 gap-2"
-                    onClick={() => router.push("/search")}
-                  >
-                    <Search className="h-4 w-4 text-emerald-500" />
-                    <span className="text-zinc-700">Global product search</span>
-                  </Button>
 
-                  <Button
-                    variant="outline"
-                    className="rounded-full bg-white border-zinc-200/50 shadow-sm hover:bg-zinc-50 hover:border-zinc-300 text-[13px] font-medium transition-all flex items-center h-[34px] px-3 gap-2"
-                    onClick={() => router.push("/design-with-ai")}
-                  >
-                    <Sparkles className="h-4 w-4 text-emerald-500" />
-                    <span className="text-zinc-700">Design with AI</span>
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    className="rounded-full bg-white border-zinc-200/50 shadow-sm hover:bg-zinc-50 hover:border-zinc-300 text-[13px] font-medium transition-all h-[34px] px-4"
-                    onClick={() => {
-                      setInput("Scan TikTok for viral potential");
-                      handleSendMessage({ role: "user", parts: [{ type: "text", text: "Scan TikTok for viral potential" }] });
-                    }}
-                  >
-                    <span className="text-zinc-600">Scan TikTok for viral potential</span>
-                  </Button>
-                </div>
-
-                <div className="flex flex-wrap justify-center gap-2">
-                  <Button
-                    variant="outline"
-                    className="rounded-full bg-white border-zinc-200/50 shadow-sm hover:bg-zinc-50 hover:border-zinc-300 text-[13px] font-medium transition-all h-[34px] px-4"
-                    onClick={() => router.push("/supplier-search")}
-                  >
-                    <span className="text-zinc-600">Multi-platform supplier search</span>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="rounded-full bg-white border-zinc-200/50 shadow-sm hover:bg-zinc-50 hover:border-zinc-300 text-[13px] font-medium transition-all h-[34px] px-4"
-                    onClick={() => router.push("/analyze-bestsellers")}
-                  >
-                    <span className="text-zinc-600">Analyze bestsellers</span>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="rounded-full bg-white border-zinc-200/50 shadow-sm hover:bg-zinc-50 hover:border-zinc-300 text-[13px] font-medium transition-all h-[34px] px-4"
-                    onClick={() => router.push("/evaluate-market")}
-                  >
-                    <span className="text-zinc-600">Evaluate market potential</span>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="rounded-full bg-white border-zinc-200/50 shadow-sm hover:bg-zinc-50 hover:border-zinc-300 text-[13px] font-medium transition-all h-[34px] px-4"
-                    onClick={() => router.push("/discover-trends")}
-                  >
-                    <span className="text-zinc-600">Discover trends</span>
-                  </Button>
-                </div>
               </div>
 
               <div className="mt-12 flex w-full max-w-2xl justify-center z-10 px-4">
@@ -513,68 +386,7 @@ export function Chat({
           </>
         )}
 
-        {!renderCustomEmptyState && isHero && !isPlanning && (
-          <div className="w-full bg-zinc-50/50 dark:bg-zinc-900/50 min-h-screen">
-            <TemplateGrid
-              categories={templateCategories}
-              onTemplateClick={handleTemplateClick}
-            />
-          </div>
-        )}
 
-        {!renderCustomEmptyState && isHero && isPlanning && (
-          <div className="flex flex-col items-center justify-center min-h-dvh w-full px-4 animate-in fade-in zoom-in duration-300">
-            <div className="w-full max-w-2xl bg-white rounded-3xl shadow-xl border border-zinc-100 p-8 flex flex-col gap-6">
-              <div className="flex items-center gap-3 text-emerald-600 font-semibold mb-2">
-                <Sparkles className="h-5 w-5" />
-                <span>Agent Task Planning</span>
-              </div>
-
-              <h2 className="text-2xl font-bold text-zinc-900">{selectedTemplate?.title}</h2>
-              <p className="text-zinc-500">{selectedTemplate?.description}</p>
-
-              <div className="flex flex-col gap-4 mt-4">
-                <p className="text-sm font-bold text-zinc-400 uppercase tracking-wider">Execution Plan</p>
-                {agentPlan.length === 0 ? (
-                  <div className="flex flex-col gap-3">
-                    {[1, 2, 3].map(i => (
-                      <div key={i} className="h-4 bg-zinc-100 animate-pulse rounded-full w-full" />
-                    ))}
-                    <p className="text-xs text-zinc-400 italic mt-2 animate-pulse">Thinking through your request to create the most effective approach...</p>
-                  </div>
-                ) : (
-                  <div className="flex flex-col gap-3">
-                    {agentPlan.map((step, i) => (
-                      <div key={i} className="flex items-start gap-4 p-3 rounded-xl bg-zinc-50 border border-zinc-100/50">
-                        <div className="h-5 w-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
-                          {i + 1}
-                        </div>
-                        <span className="text-zinc-700 font-medium leading-tight">{step}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="flex items-center justify-between mt-6 pt-6 border-t border-zinc-100">
-                <Button
-                  variant="ghost"
-                  className="rounded-xl text-zinc-500 hover:text-zinc-900"
-                  onClick={() => setIsPlanning(false)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  className="rounded-xl px-8 bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-12 shadow-lg shadow-emerald-200"
-                  disabled={agentPlan.length === 0}
-                  onClick={startAgentTask}
-                >
-                  Start Agent Mode Task
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
       <Artifact
@@ -629,67 +441,3 @@ export function Chat({
   );
 }
 
-function TemplateGrid({ categories, onTemplateClick }: { categories: any[], onTemplateClick: (t: any) => void }) {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-
-  const filteredCategories = selectedCategory === "All"
-    ? categories
-    : categories.filter(c => c.name === selectedCategory);
-
-  if (!categories || categories.length === 0) return null;
-
-  const categoryNames = ["All", ...categories.map(c => c.name)];
-
-  return (
-    <div className="flex flex-col gap-10 w-full max-w-7xl mx-auto py-20 px-4">
-      <div className="flex flex-col items-center gap-4 text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-zinc-900">Expert Agent Templates</h2>
-        <div className="flex flex-wrap justify-center gap-2 mt-4">
-          {categoryNames.map(name => (
-            <Button
-              key={name}
-              variant={selectedCategory === name ? "default" : "outline"}
-              className={`rounded-full px-5 h-9 text-sm font-semibold transition-all ${selectedCategory === name
-                ? "bg-zinc-900 text-white shadow-md"
-                : "bg-white text-zinc-600 hover:bg-zinc-50"
-                }`}
-              onClick={() => setSelectedCategory(name)}
-            >
-              {name}
-            </Button>
-          ))}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {filteredCategories.flatMap(cat => cat.templates).map((template: any) => (
-          <div
-            key={template.id}
-            className="group relative flex flex-col gap-4 p-6 rounded-3xl bg-white border border-zinc-100 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08)] transition-all cursor-pointer ring-1 ring-zinc-200/50 hover:ring-emerald-500/30"
-            onClick={() => onTemplateClick(template)}
-          >
-            <div className="flex items-center justify-between">
-              <div className="px-2.5 py-0.5 rounded-full bg-zinc-100 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">
-                {template.id.split('_')[0]}
-              </div>
-              <div className="h-8 w-8 rounded-full bg-emerald-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <ArrowRight className="h-4 w-4 text-emerald-600" />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <h4 className="font-bold text-zinc-900 leading-tight pr-4">{template.title}</h4>
-              <p className="text-zinc-500 text-xs leading-relaxed line-clamp-2">{template.description}</p>
-            </div>
-
-            <div className="mt-4 pt-4 border-t border-zinc-50">
-              <span className="text-[11px] font-bold text-emerald-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                View Result <ArrowRight className="h-3 w-3" />
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}

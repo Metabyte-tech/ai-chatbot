@@ -224,17 +224,24 @@ export async function POST(request: Request) {
           const resultText = data.response;
           const messageId = generateId();
 
-          // Stream the result text as if it were coming from an LLM
+          // Stream the result text in chunks to prevent Vercel AI SDK stream buffer drops on massive payloads
           dataStream.write({
             type: "text-start",
             id: messageId,
           });
 
-          dataStream.write({
-            type: "text-delta",
-            delta: resultText,
-            id: messageId,
-          });
+          // Write in ~2KB chunks
+          const chunkSize = 2048;
+          for (let i = 0; i < resultText.length; i += chunkSize) {
+            const chunk = resultText.substring(i, i + chunkSize);
+            dataStream.write({
+              type: "text-delta",
+              delta: chunk,
+              id: messageId,
+            });
+            // tiny delay to ensure proper network flushing
+            await new Promise((resolve) => setTimeout(resolve, 5));
+          }
 
           if (titlePromise) {
             titlePromise

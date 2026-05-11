@@ -2,11 +2,6 @@ import { auth } from "@/app/(auth)/auth";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-    const session = await auth();
-    if (!session?.user) {
-        return NextResponse.json({ detail: "Unauthorized" }, { status: 401 });
-    }
-
     try {
         const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
         const response = await fetch(`${backendUrl}/admin/crawl/batches`, {
