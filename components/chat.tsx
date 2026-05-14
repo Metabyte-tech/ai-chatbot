@@ -41,6 +41,7 @@ import { UserMenu } from "./user-menu";
 import { Button } from "./ui/button";
 import { ProductCarousel } from "./product-carousel";
 import type { VisibilityType } from "./visibility-selector";
+import { CategoryGrid } from "./category-grid";
 
 export function Chat({
   id,
@@ -302,39 +303,12 @@ export function Chat({
                 <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
               </div>
 
-              <div className="mt-8 flex flex-col items-center gap-3 relative z-10 w-full max-w-3xl px-4">
-                <div className="absolute inset-0 -top-8 bg-gradient-to-b from-teal-400/10 via-cyan-400/5 to-transparent blur-2xl -z-10 rounded-full" />
-
-
-              </div>
-
-              <div className="mt-12 flex w-full max-w-2xl justify-center z-10 px-4">
-                <div className="group relative flex w-full max-w-[560px] items-center rounded-2xl bg-white shadow-[0_2px_20px_-4px_rgba(0,0,0,0.05)] border border-zinc-100/80 p-1.5 pr-6 transition-all hover:shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)] cursor-pointer overflow-hidden">
-                  <div className="flex items-center gap-4 relative z-10 w-full">
-                    <div className="h-16 w-40 rounded-xl bg-gradient-to-br from-emerald-400 via-teal-300 to-cyan-300 flex flex-col items-center justify-center overflow-hidden relative shrink-0">
-                      <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
-                      <div className="flex gap-1.5 mb-1.5 z-10">
-                        <div className="w-5 h-5 rounded-full bg-white shadow-sm flex items-center justify-center">
-                          <div className="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
-                        </div>
-                        <div className="w-5 h-5 rounded-full bg-white/90 shadow-sm flex items-center justify-center">
-                          <div className="w-2 h-2 rounded-full bg-rose-400"></div>
-                        </div>
-                        <div className="w-8 h-4 mt-0.5 rounded-full bg-white/70 shadow-sm"></div>
-                      </div>
-                      <div className="w-24 h-2 rounded-full bg-white/50 z-10"></div>
-                    </div>
-                    <div className="flex flex-col gap-0.5 flex-1 py-1">
-                      <h3 className="font-semibold text-zinc-900 text-[15px] leading-tight">The AI agent platform built for real business</h3>
-                      <p className="text-[13px] text-zinc-500 leading-[1.3] pr-4">Beyond chat, a proactive agent team that run real business from store operations to sourcing.</p>
-                    </div>
-                    <ArrowRight className="h-5 w-5 text-zinc-300 group-hover:text-zinc-500 group-hover:translate-x-1 transition-all shrink-0" />
-                  </div>
-                </div>
-              </div>
+              <CategoryGrid
+                onQuery={(text) => handleSendMessage({ role: 'user', parts: [{ type: 'text', text }] })}
+              />
 
               <div className="absolute bottom-12 text-xs text-muted-foreground/50 flex flex-col items-center gap-2 cursor-pointer hover:text-muted-foreground transition-colors group">
-                <span>Scroll down or click to view examples</span>
+                <span>Explore universal categories above</span>
                 <ChevronDown className="h-4 w-4 animate-bounce" />
               </div>
             </div>

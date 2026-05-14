@@ -102,6 +102,17 @@ export function ProductGrid({ products, onDelete }: ProductGridProps) {
                                 alt={product.name}
                                 className="group-hover:scale-105 transition-transform duration-500 object-contain p-2"
                             />
+
+                            {/* NEW: Store Source Badge */}
+                            {product.source && (
+                                <div className="absolute bottom-2 left-2 z-10">
+                                    <Badge className="bg-black/80 backdrop-blur-md text-white border-none text-[9px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1 shadow-sm">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                        {product.source}
+                                    </Badge>
+                                </div>
+                            )}
+
                             <div className="absolute top-2 right-2 flex flex-col gap-2 z-10">
                                 {onDelete ? (
                                     <Button

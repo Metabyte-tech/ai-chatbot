@@ -190,7 +190,9 @@ export async function POST(request: Request) {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                message: message?.role === "user" ? message.parts.map(p => p && p.type === 'text' ? (p as any).text : '').join(' ') : (messages as any)?.[(messages as any).length - 1]?.parts.map((p: any) => p && p.type === 'text' ? p.text : '').join(' ')
+                message: message?.role === "user" ? message.parts.map(p => p && p.type === 'text' ? (p as any).text : '').join(' ') : (messages as any)?.[(messages as any).length - 1]?.parts.map((p: any) => p && p.type === 'text' ? p.text : '').join(' '),
+                region: requestHints.country || "Global",
+                location: requestHints.city || "",
               }),
               signal: controller.signal
             });
