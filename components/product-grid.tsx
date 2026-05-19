@@ -46,9 +46,15 @@ function sanitizeUrl(url: string, isImage: boolean = false) {
     return trimmed;
 }
 
-function ProductImage({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
+function ProductImage({ src, alt, category, className = "" }: { src: string; alt: string; category?: string; className?: string }) {
     const [imgSrc, setImgSrc] = useState(src);
     const [triedRaw, setTriedRaw] = useState(false);
+
+    const getFallback = (cat?: string) => {
+        const slug = (cat || "fashion").toLowerCase().replace(/ & /g, '-').replace(/\s+/g, '-');
+        const pngs = ['baby-kids', 'electronics', 'home-kitchen', 'fashion', 'beauty-health', 'sports-outdoors'];
+        return pngs.includes(slug) ? `/images/categories/${slug}.png` : `/images/categories/${slug}.jpg`;
+    };
 
     return (
         <Image
@@ -59,6 +65,7 @@ function ProductImage({ src, alt, className = "" }: { src: string; alt: string; 
             className={`object-cover ${className}`}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onError={() => {
+                if (imgSrc.includes('categories')) return;
                 if (imgSrc.includes('/api/proxy/image') && !triedRaw) {
                     try {
                         const urlParams = new URL(imgSrc, window.location.origin).searchParams;
@@ -68,11 +75,9 @@ function ProductImage({ src, alt, className = "" }: { src: string; alt: string; 
                             setImgSrc(originalUrl);
                             return;
                         }
-                    } catch (e) {
-                        // ignore parsing error
-                    }
+                    } catch (e) {}
                 }
-                setImgSrc("https://placehold.co/600x600?text=No+Image");
+                setImgSrc(getFallback(category));
             }}
         />
     );
@@ -100,6 +105,7 @@ export function ProductGrid({ products, onDelete }: ProductGridProps) {
                             <ProductImage
                                 src={sanitizeUrl(product.image_url, true)}
                                 alt={product.name}
+                                category={product.category}
                                 className="group-hover:scale-105 transition-transform duration-500 object-contain p-2"
                             />
 
@@ -186,19 +192,23 @@ export function ProductGrid({ products, onDelete }: ProductGridProps) {
                                 {product.price || "Check Price"}
                             </div>
 
-                            <div className="text-[12px] text-zinc-700 mt-1">
-                                Min. order: {product.moq || "1 piece"}
-                            </div>
+                            {product.moq && (
+                                <div className="text-[12px] text-zinc-700 mt-1">
+                                    Min. order: {product.moq}
+                                </div>
+                            )}
 
                             <div className="mt-auto pt-3 flex flex-col gap-0.5">
                                 <div className="flex items-center gap-1.5">
                                     <div className="h-4 w-4 rounded-full border border-zinc-200 flex items-center justify-center bg-zinc-50 flex-shrink-0" />
                                     <span className="text-[11px] text-zinc-500 underline truncate hover:text-emerald-600 transition-colors">
-                                        {product.brand || "Supplier"}
+                                        {product.brand || product.source || "Supplier"}
                                     </span>
                                 </div>
                                 <div className="text-[11px] text-zinc-500 pl-5.5">
-                                    {product.supplier_years || "1 yr"} &middot; {product.location || "CN"} &middot; <span className="font-bold text-black">{product.rating_avg || "5.0"}</span>/5.0
+                                    {product.supplier_years ? `${product.supplier_years} · ` : ""}
+                                    {product.location ? `${product.location} · ` : ""}
+                                    <span className="font-bold text-black">{product.rating_avg || "5.0"}</span>/5.0
                                 </div>
                             </div>
                         </div>
@@ -215,12 +225,10 @@ export function ProductGrid({ products, onDelete }: ProductGridProps) {
                             <div className="md:w-1/2 relative h-[300px] md:h-full bg-zinc-100 flex items-center justify-center p-8">
                                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-cyan-50/50 -z-10" />
                                 <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-lg border-4 border-white">
-                                    <Image
+                                    <ProductImage
                                         src={sanitizeUrl(selectedProduct.image_url, true)}
                                         alt={selectedProduct.name}
-                                        fill
-                                        unoptimized
-                                        className="object-contain p-4"
+                                        category={selectedProduct.category}
                                     />
                                 </div>
                             </div>

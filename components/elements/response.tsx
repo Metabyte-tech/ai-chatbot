@@ -50,9 +50,11 @@ export function Response({ className, children, ...props }: ResponseProps) {
         }
         products = JSON.parse(fixedContent);
         if (!Array.isArray(products)) products = [products];
+        console.log(`[Response] Parsed product_carousel: ${products.length} products`);
       }
     } catch (e) {
       // Incomplete JSON during streaming
+      console.warn('[Response] product_carousel JSON parse error:', e);
     }
 
     if (products.length > 0) {
@@ -98,9 +100,11 @@ export function Response({ className, children, ...props }: ResponseProps) {
           }
           products = JSON.parse(fixedGridContent);
           if (!Array.isArray(products)) products = [products];
+          console.log(`[Response] Parsed product_grid: ${products.length} products`);
         }
       } catch (e) {
         // Incomplete JSON during streaming
+        console.warn('[Response] product_grid JSON parse error:', e);
       }
 
       if (products.length > 0) {

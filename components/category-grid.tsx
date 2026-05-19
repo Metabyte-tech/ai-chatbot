@@ -124,7 +124,7 @@ export function CategoryGrid({ onQuery }: { onQuery: (query: string) => void }) 
                                     category.items.slice(0, 3).map((item, idx) => (
                                         <div
                                             key={item.url}
-                                            className="absolute rounded-[1.5rem] overflow-hidden border-4 border-white shadow-xl transition-all group-hover:scale-105 duration-700 ease-out"
+                                            className="absolute rounded-[1.5rem] overflow-hidden border-4 border-white shadow-xl transition-all group-hover:scale-105 duration-700 ease-out bg-zinc-100"
                                             style={{
                                                 left: `${idx * 20}%`,
                                                 top: `${idx * 12}px`,
@@ -137,16 +137,29 @@ export function CategoryGrid({ onQuery }: { onQuery: (query: string) => void }) 
                                             <img
                                                 src={item.image_url}
                                                 alt={item.name}
-                                                className="w-full h-full object-cover bg-zinc-100"
+                                                className="w-full h-full object-cover"
+                                                loading="lazy"
                                                 onError={(e) => {
-                                                    (e.target as HTMLImageElement).src = `https://placehold.co/400x400?text=${category.name}`;
+                                                    const img = e.target as HTMLImageElement;
+                                                    if (img.src.includes('categories')) return; // Avoid infinite loop
+                                                    const slug = category.slug;
+                                                    const pngs = ['baby-kids', 'electronics', 'home-kitchen', 'fashion', 'beauty-health', 'sports-outdoors'];
+                                                    img.src = pngs.includes(slug) ? `/images/categories/${slug}.png` : `/images/categories/${slug}.jpg`;
                                                 }}
                                             />
                                         </div>
                                     ))
                                 ) : (
-                                    <div className="w-full h-full bg-zinc-50 rounded-[1.5rem] flex items-center justify-center border-2 border-dashed border-zinc-100">
-                                        <Skeleton className="w-full h-full rounded-[1.5rem]" />
+                                    <div className="w-full h-full bg-zinc-50 rounded-[1.5rem] overflow-hidden border border-zinc-100">
+                                        <img 
+                                            src={['baby-kids', 'electronics', 'home-kitchen', 'fashion', 'beauty-health', 'sports-outdoors'].includes(category.slug) ? `/images/categories/${category.slug}.png` : `/images/categories/${category.slug}.jpg`}
+                                            alt={category.name}
+                                            className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                                            onError={(e) => {
+                                                const img = e.target as HTMLImageElement;
+                                                img.style.display = 'none'; // If even hero fails, hide it
+                                            }}
+                                        />
                                     </div>
                                 )}
                             </div>

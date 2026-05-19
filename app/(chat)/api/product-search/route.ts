@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+                id: req.nextUrl.searchParams.get("id") || "default_search_session",
                 message: query.trim(),
             }),
             // Allow up to 30 seconds for the backend to respond

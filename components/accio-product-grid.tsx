@@ -136,20 +136,25 @@ export function AccioProductGrid({ products }: AccioProductGridProps) {
                                 {product.price && !["check site", "request price", "request quote"].includes(product.price.toLowerCase().trim()) ? product.price : "Request Price"}
                             </div>
 
-                            <div className="text-[10px] text-zinc-500 mt-1">
-                                Min. order: {product.moq || "10 pieces"}
+                            {product.moq && (
+                                <div className="text-[12px] text-zinc-700 mt-1">
+                                    Min. order: {product.moq}
+                                </div>
+                            )}
+
+                            <div className="mt-auto pt-3 flex flex-col gap-0.5">
+                                <div className="flex items-center gap-1.5">
+                                    <div className="h-4 w-4 rounded-full border border-zinc-200 flex items-center justify-center bg-zinc-50 flex-shrink-0" />
+                                    <span className="text-[11px] text-zinc-500 underline truncate hover:text-emerald-600 transition-colors">
+                                        {product.brand || product.source || "Supplier"}
+                                    </span>
+                                </div>
+                                <div className="text-[11px] text-zinc-500 pl-5.5">
+                                    Verified · {product.supplier_years ? `${product.supplier_years} · ` : ""}
+                                    {product.location ? `${product.location} · ` : ""}
+                                    <span className="font-bold text-black">{product.rating_avg || "4.8"}</span>/5.0
+                                </div>
                             </div>
-
-                            {/* Supplier Details */}
-                            <div className="mt-1 flex flex-col gap-1">
-                                <div className="text-[9.5px] text-zinc-500 underline truncate w-full decoration-zinc-300">
-                                    {product.brand || "Verified Supplier Co., Ltd."}
-                                </div>
-                                <div className="flex items-center gap-1 text-[9px] text-zinc-500 whitespace-nowrap overflow-hidden text-ellipsis">
-                                    <CheckCircle2 className="w-[10px] h-[10px] text-blue-500 flex-shrink-0" />
-                                    Verified &middot; {product.supplier_years || "3 yrs"} &middot; CN &middot; {product.rating_avg || "4.8"}/5.0
-                                </div>
-
                                 <Button
                                     variant="outline"
                                     size="sm"
@@ -164,8 +169,7 @@ export function AccioProductGrid({ products }: AccioProductGridProps) {
                                     {product.rating_count || "100+"} store reviews
                                 </div>
                             </div>
-                        </div>
-                    </Card>
+                        </Card>
                 ))}
             </div>
 
