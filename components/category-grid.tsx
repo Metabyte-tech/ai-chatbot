@@ -46,7 +46,7 @@ export function CategoryGrid({ onQuery }: { onQuery: (query: string) => void }) 
     useEffect(() => {
         async function fetchCategories() {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'}/api/categories`);
+                const res = await fetch(`/api/categories`);
                 const data = await res.json();
                 setCategories(data.categories || []);
             } catch (err) {
