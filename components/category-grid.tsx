@@ -46,7 +46,7 @@ export function CategoryGrid({ onQuery }: { onQuery: (query: string) => void }) 
     useEffect(() => {
         async function fetchCategories() {
             try {
-                const res = await fetch(`/api/categories`);
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'}/api/categories`);
                 const data = await res.json();
                 setCategories(data.categories || []);
             } catch (err) {
@@ -151,7 +151,7 @@ export function CategoryGrid({ onQuery }: { onQuery: (query: string) => void }) 
                                     ))
                                 ) : (
                                     <div className="w-full h-full bg-zinc-50 rounded-[1.5rem] overflow-hidden border border-zinc-100">
-                                        <img 
+                                        <img
                                             src={['baby-kids', 'electronics', 'home-kitchen', 'fashion', 'beauty-health', 'sports-outdoors'].includes(category.slug) ? `/images/categories/${category.slug}.png` : `/images/categories/${category.slug}.jpg`}
                                             alt={category.name}
                                             className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
