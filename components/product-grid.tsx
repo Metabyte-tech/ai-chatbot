@@ -36,7 +36,15 @@ function sanitizeUrl(url: string, isImage: boolean = false) {
             trimmed.includes("placehold.co");
 
         if (!isInternal && trimmed.startsWith("http")) {
-            return `/api/proxy/image?url=${encodeURIComponent(trimmed)}`;
+            // Do NOT proxy external CDNs that block servers (Amazon, Flipkart, Walmart)
+            const bypassProxy = trimmed.includes("media-amazon.com") || 
+                               trimmed.includes("flipkart") || 
+                               trimmed.includes("walmart") || 
+                               trimmed.includes("amazon.in") ||
+                               trimmed.includes("amazon.com");
+            if (!bypassProxy) {
+                return `/api/proxy/image?url=${encodeURIComponent(trimmed)}`;
+            }
         }
     }
 
