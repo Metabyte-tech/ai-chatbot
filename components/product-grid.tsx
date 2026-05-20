@@ -48,21 +48,22 @@ function sanitizeUrl(url: string, isImage: boolean = false) {
         }
     }
 
-    if (trimmed.startsWith("http")) return trimmed;
+    if (trimmed.startsWith("http") || trimmed.startsWith("data:image")) return trimmed;
     if (trimmed.startsWith("//")) return `https:${trimmed}`;
     if (trimmed.includes(".") && !trimmed.includes(" ")) return `https://${trimmed}`;
     return trimmed;
 }
 
 function ProductImage({ src, alt, category, className = "" }: { src: string; alt: string; category?: string; className?: string }) {
-    const [imgSrc, setImgSrc] = useState(src);
-    const [triedRaw, setTriedRaw] = useState(false);
-
     const getFallback = (cat?: string) => {
         const slug = (cat || "fashion").toLowerCase().replace(/ & /g, '-').replace(/\s+/g, '-');
         const pngs = ['baby-kids', 'electronics', 'home-kitchen', 'fashion', 'beauty-health', 'sports-outdoors'];
         return pngs.includes(slug) ? `/images/categories/${slug}.png` : `/images/categories/${slug}.jpg`;
     };
+
+    const initialSrc = (!src || src.includes('placehold.co')) ? getFallback(category) : src;
+    const [imgSrc, setImgSrc] = useState(initialSrc);
+    const [triedRaw, setTriedRaw] = useState(false);
 
     return (
         <Image
@@ -94,13 +95,14 @@ function ProductImage({ src, alt, category, className = "" }: { src: string; alt
 export function ProductGrid({ products, onDelete }: ProductGridProps) {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const { toggleProduct, isSelected } = useSelectedProducts();
+    const [visibleCount, setVisibleCount] = useState(8);
 
     if (!products || products.length === 0) return null;
 
     return (
         <div className="w-full py-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                {products.map((product, index) => (
+                {products.slice(0, visibleCount).map((product, index) => (
                     <Card
                         key={`${product.name}-${index}`}
                         className={cn(
@@ -223,6 +225,17 @@ export function ProductGrid({ products, onDelete }: ProductGridProps) {
                     </Card>
                 ))}
             </div>
+
+            {products.length > visibleCount && (
+                <div className="flex justify-center mt-8">
+                    <Button 
+                        onClick={() => setVisibleCount(prev => prev + 8)}
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full px-8 py-3 shadow-md font-semibold flex items-center gap-2 transition-all hover:scale-105 active:scale-95 duration-200"
+                    >
+                        Load More Products
+                    </Button>
+                </div>
+            )}
 
             {/* Product Detail Dialog (Reusing existing logic) */}
             <Dialog open={!!selectedProduct} onOpenChange={(open) => !open && setSelectedProduct(null)}>
