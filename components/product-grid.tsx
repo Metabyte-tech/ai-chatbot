@@ -226,14 +226,25 @@ export function ProductGrid({ products, onDelete }: ProductGridProps) {
                 ))}
             </div>
 
-            {products.length > visibleCount && (
-                <div className="flex justify-center mt-8">
-                    <Button 
-                        onClick={() => setVisibleCount(prev => prev + 8)}
-                        className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full px-8 py-3 shadow-md font-semibold flex items-center gap-2 transition-all hover:scale-105 active:scale-95 duration-200"
-                    >
-                        Load More Products
-                    </Button>
+            {(products.length > visibleCount || visibleCount > 8) && (
+                <div className="flex justify-center gap-4 mt-8">
+                    {visibleCount > 8 && (
+                        <Button 
+                            onClick={() => setVisibleCount(8)}
+                            variant="outline"
+                            className="border-zinc-300 hover:bg-zinc-50 text-zinc-700 rounded-full px-8 py-3 font-semibold transition-all hover:scale-105 active:scale-95 duration-200"
+                        >
+                            View Less
+                        </Button>
+                    )}
+                    {products.length > visibleCount && (
+                        <Button 
+                            onClick={() => setVisibleCount(prev => prev + 8)}
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full px-8 py-3 shadow-md font-semibold transition-all hover:scale-105 active:scale-95 duration-200"
+                        >
+                            Load More Products
+                        </Button>
+                    )}
                 </div>
             )}
 
