@@ -144,6 +144,9 @@ export function Chat({
     },
     onFinish: () => {
       mutate(unstable_serialize(getChatHistoryPaginationKey));
+      if (typeof window !== "undefined" && (pathname === "/" || pathname === "/search")) {
+        window.history.replaceState({}, "", `/chat/${id}`);
+      }
     },
     onError: (error) => {
       if (error instanceof ChatSDKError) {

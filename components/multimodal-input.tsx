@@ -159,8 +159,6 @@ function PureMultimodalInput({
       return;
     }
 
-    window.history.pushState({}, "", `/chat/${chatId}`);
-
     sendMessage({
       role: "user",
       parts: [
